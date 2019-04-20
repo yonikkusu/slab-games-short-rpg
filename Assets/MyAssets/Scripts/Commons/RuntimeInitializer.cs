@@ -18,5 +18,8 @@ public class RuntimeInitializer
         // シーンマネージャー
         var sceneManager = GameObject.Instantiate(Resources.Load("Prefabs/Commons/SceneManager"));
         GameObject.DontDestroyOnLoad(sceneManager);
+        // サウンドマネージャー
+        var soundManager = GameObject.Instantiate(Resources.Load("Prefabs/Commons/SoundManager"));
+        GameObject.DontDestroyOnLoad(soundManager);
     }
 }
