@@ -17,7 +17,14 @@ public class TitleManager : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Start()
     {
-        // スタートボタンタップでメインメニュー画面へ遷移
-        startButton.onClick.AddListener(() => SceneManager.Instance.LoadScene(Scene.MainMenu));
+        // スタートボタンタップ時
+        startButton.onClick.AddListener(() => {
+            // タップ音を鳴らす
+            SoundManager.Instance.PlaySe(Se.Tap);
+            // メインメニュー画面へ遷移
+            SceneManager.Instance.LoadScene(Scene.MainMenu);
+        });
+        // BGMを鳴らす
+        SoundManager.Instance.PlayBgm(Bgm.Title);
     }
 }
