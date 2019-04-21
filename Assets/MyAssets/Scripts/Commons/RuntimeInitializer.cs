@@ -21,5 +21,8 @@ public class RuntimeInitializer
         // サウンドマネージャー
         var soundManager = GameObject.Instantiate(Resources.Load("Prefabs/Commons/SoundManager"));
         GameObject.DontDestroyOnLoad(soundManager);
+        // セーブマネージャー
+        var saveManager = GameObject.Instantiate(Resources.Load("Prefabs/Commons/SaveManager"));
+        GameObject.DontDestroyOnLoad(saveManager);
     }
 }
