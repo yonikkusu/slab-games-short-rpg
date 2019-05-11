@@ -29,6 +29,16 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 
     //--------------------------------------------------------------------------/
     /// <summary>
+    /// BGMを停止する
+    /// </summary>
+    //--------------------------------------------------------------------------/
+    public void StopBgm()
+    {
+        bgmSource.Stop();
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
     /// SEを再生する
     /// </summary>
     /// <param name="seName">SE名</param>
