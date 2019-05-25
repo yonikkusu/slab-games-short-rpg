@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class player : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public float speed = 30;
     Animator anim;
+
+    private void Awake()
+    {
+        
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -42,16 +47,6 @@ public class player : MonoBehaviour
         }
 
     }
-
-    /*
-    void OnCollisionEnter( Collision collision )
-    {
-        SceneManager.LoadScene("battle_Scene");
-        Debug.Log("Load Scene");
-        Debug.Log(collision.gameObject.name);
-    }
-    */
-
     
     private void OnTriggerEnter2D( Collider2D other )
     {
