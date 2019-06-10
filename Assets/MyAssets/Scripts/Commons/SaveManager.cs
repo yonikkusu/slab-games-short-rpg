@@ -222,4 +222,5 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
 public enum SaveKey
 {
     TestData,
+    PlayerData,
 }

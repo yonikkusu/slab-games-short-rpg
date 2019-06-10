@@ -24,5 +24,8 @@ public class RuntimeInitializer
         // セーブマネージャー
         var saveManager = GameObject.Instantiate(Resources.Load("Prefabs/Commons/SaveManager"));
         GameObject.DontDestroyOnLoad(saveManager);
+        // プレイヤーマネージャー
+        var player = GameObject.Instantiate(Resources.Load("Prefabs/Commons/Player"));
+        GameObject.DontDestroyOnLoad(player);
     }
 }
