@@ -24,6 +24,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     //--------------------------------------------------------------------------/
     public void PlayBgm(Bgm bgmName)
     {
+        StopBgm();
         bgmSource.PlayOneShot(bgmClips[(int)bgmName]);
     }
 
