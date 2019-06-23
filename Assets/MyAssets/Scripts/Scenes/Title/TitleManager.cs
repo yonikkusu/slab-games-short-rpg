@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class TitleManager : MonoBehaviour
 {
     [SerializeField] private Button startButton;
+    [SerializeField] private StartMenuPanel startMenuPanel;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -21,10 +22,14 @@ public class TitleManager : MonoBehaviour
         startButton.onClick.AddListener(() => {
             // タップ音を鳴らす
             SoundManager.Instance.PlaySe(Se.Tap);
-            // メインメニュー画面へ遷移
-            SceneManager.Instance.LoadScene(Scene.MainMenu);
+            // スタートメニューを開く
+            startMenuPanel.gameObject.SetActive(true);
         });
+
         // BGMを鳴らす
         SoundManager.Instance.PlayBgm(Bgm.Title);
+
+        // 最初はスタートメニューを閉じておく
+        startMenuPanel.gameObject.SetActive(false);
     }
 }
