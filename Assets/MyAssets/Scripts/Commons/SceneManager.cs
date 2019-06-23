@@ -7,6 +7,9 @@
 //--------------------------------------------------------------------------/
 public class SceneManager : SingletonMonoBehaviour<SceneManager>
 {
+    /// <summary>現在表示しているシーン</summary>
+    public Scene CurrentScene { get; private set; }
+
     //--------------------------------------------------------------------------/
     /// <summary>
     /// シーンを読み込む
@@ -16,6 +19,7 @@ public class SceneManager : SingletonMonoBehaviour<SceneManager>
     public void LoadScene(Scene scene)
     {
         SceneManagement.SceneManager.LoadSceneAsync(scene.ToString());
+        CurrentScene = scene;
     }
 }
 
@@ -28,4 +32,5 @@ public enum Scene
 {
 	Title,
 	MainMenu,
+    Field,
 }
