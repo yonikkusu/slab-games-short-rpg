@@ -34,8 +34,7 @@ public class SaveLoadButton : MonoBehaviour
             // ロードならデータをロードして該当シーンに遷移
             else if(type == SaveLoadPanelType.Load) {
                 Player.Instance.Load(index);
-                // TODO: 該当シーンに遷移
-                SceneManager.Instance.LoadScene(Scene.MainMenu);
+                SceneManager.Instance.LoadScene((Scene)Player.Instance.CurrentData.LastScene);
             }
         });
     }

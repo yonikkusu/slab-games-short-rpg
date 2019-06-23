@@ -14,6 +14,9 @@ public class PlayerCamera : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        // プレイヤーの位置をセットする
+        var playerData = Player.Instance.CurrentData;
+        player.transform.position = new Vector2(playerData.PlayerPositionX, playerData.PlayerPositionY);
     }
 
     //--------------------------------------------------------------------------/
