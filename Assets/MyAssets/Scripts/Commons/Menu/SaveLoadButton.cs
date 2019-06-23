@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 //--------------------------------------------------------------------------/
 /// <summary>
-/// セーブボタン
+/// セーブロードボタン
 /// </summary>
 //--------------------------------------------------------------------------/
-public class SaveButton : MonoBehaviour
+public class SaveLoadButton : MonoBehaviour
 {
     [SerializeField] private Button button;
     [SerializeField] private Text playerName;
@@ -15,6 +15,7 @@ public class SaveButton : MonoBehaviour
     [SerializeField] private Text playTime;
 
     private int index;
+    private SaveLoadPanelType type;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -25,8 +26,17 @@ public class SaveButton : MonoBehaviour
     {
         button.onClick.AddListener(() => {
             SoundManager.Instance.PlaySe(Se.Tap);
-            Player.Instance.Save(index);
-            updateView(Player.Instance.CurrentData);
+            // セーブならデータをセーブしてパネル表示を更新
+            if(type == SaveLoadPanelType.Save) {
+                Player.Instance.Save(index);
+                updateView(Player.Instance.CurrentData);
+            }
+            // ロードならデータをロードして該当シーンに遷移
+            else if(type == SaveLoadPanelType.Load) {
+                Player.Instance.Load(index);
+                // TODO: 該当シーンに遷移
+                SceneManager.Instance.LoadScene(Scene.MainMenu);
+            }
         });
     }
 
@@ -41,6 +51,14 @@ public class SaveButton : MonoBehaviour
         this.index = index;
         updateView(Player.Instance.GetSaveData(index));
     }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// ボタンタイプを設定する
+    /// </summary>
+    /// <param name="type">ボタンタイプ</param>
+    //--------------------------------------------------------------------------/
+    public void SetButtonType(SaveLoadPanelType type) => this.type = type;
 
     //--------------------------------------------------------------------------/
     /// <summary>

@@ -11,7 +11,7 @@ public class MenuPanel : MonoBehaviour
 {
     [SerializeField] private Button saveButton;
     [SerializeField] private Button titleButton;
-    [SerializeField] private GameObject savePanel;
+    [SerializeField] private SaveLoadPanel saveLoadPanel;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -22,11 +22,11 @@ public class MenuPanel : MonoBehaviour
     {
         saveButton.onClick.AddListener(() => {
             SoundManager.Instance.PlaySe(Se.Tap);
-            savePanel.gameObject.SetActive(true);
+            saveLoadPanel.Show(SaveLoadPanelType.Save);
         });
         titleButton.onClick.AddListener(() => {
             SoundManager.Instance.PlaySe(Se.Tap);
         });
-        savePanel.SetActive(false);
+        saveLoadPanel.gameObject.SetActive(false);
     }
 }
