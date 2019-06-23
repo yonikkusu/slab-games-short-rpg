@@ -26,6 +26,7 @@ public class MenuPanel : MonoBehaviour
         });
         titleButton.onClick.AddListener(() => {
             SoundManager.Instance.PlaySe(Se.Tap);
+            SceneManager.Instance.LoadScene(Scene.Title);
         });
         saveLoadPanel.gameObject.SetActive(false);
     }
