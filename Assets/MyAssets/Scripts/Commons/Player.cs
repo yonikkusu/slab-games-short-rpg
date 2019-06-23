@@ -24,6 +24,12 @@ public class Player : SingletonMonoBehaviour<Player>
         public long LastPlayDate;
         /// <summary>プレイ時間</summary>
         public long PlayTime;
+        /// <summary>最後にいたシーン</summary>
+        public int LastScene;
+        /// <summary>プレイヤー位置X</summary>
+        public float PlayerPositionX;
+        /// <summary>プレイヤー位置Y</summary>
+        public float PlayerPositionY;
 
         //--------------------------------------------------------------------------/
         /// <summary>
@@ -37,6 +43,9 @@ public class Player : SingletonMonoBehaviour<Player>
             FirstPlayDate = GameUtility.GetUnixTime();
             LastPlayDate = FirstPlayDate;
             PlayTime = 0;
+            LastScene = (int)Scene.Field;
+            PlayerPositionX = 0f;
+            PlayerPositionY = 0f;
         }
     }
 
@@ -69,6 +78,13 @@ public class Player : SingletonMonoBehaviour<Player>
         var currentDate = GameUtility.GetUnixTime();
         CurrentData.PlayTime = currentDate - CurrentData.FirstPlayDate;
         CurrentData.LastPlayDate = currentDate;
+        // 最後にいたシーン
+        CurrentData.LastScene = (int)SceneManager.Instance.CurrentScene;
+        // キャラクター位置情報
+        var player = GameObject.FindGameObjectWithTag("Player");
+        CurrentData.PlayerPositionX = player.transform.position.x;
+        CurrentData.PlayerPositionY = player.transform.position.y;
+
         SaveManager.Instance.SetClass<SaveData>(SaveKey.PlayerData, CurrentData, saveFileIndex.ToString());
         SaveManager.Instance.Save();
     }
