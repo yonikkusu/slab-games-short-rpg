@@ -8,8 +8,8 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------/
 public class TitleManager : MonoBehaviour
 {
-    [SerializeField] private Button startButton;
-    [SerializeField] private StartMenuPanel startMenuPanel;
+    [SerializeField] private Button startButton = default;
+    [SerializeField] private StartMenuPanel startMenuPanel = default;
 
     //--------------------------------------------------------------------------/
     /// <summary>

@@ -10,7 +10,7 @@ public class PlayerAnimation : MonoBehaviour
     /// <summary>アニメーション速度</summary>
     private const float speed = 30f;
 
-    [SerializeField] private Rigidbody2D rigidBody;
+    [SerializeField] private Rigidbody2D rigidBody = default;
 
     private Animator anim;
 

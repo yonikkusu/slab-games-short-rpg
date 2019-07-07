@@ -11,10 +11,10 @@ using UnityEngine;
 //--------------------------------------------------------------------------/
 public class SoundManager : SingletonMonoBehaviour<SoundManager>
 {
-    [SerializeField] private AudioSource bgmSource;
-    [SerializeField] private AudioSource seSource;
-    [SerializeField] private AudioClip[] bgmClips;
-    [SerializeField] private AudioClip[] seClips;
+    [SerializeField] private AudioSource bgmSource = default;
+    [SerializeField] private AudioSource seSource = default;
+    [SerializeField] private AudioClip[] bgmClips = default;
+    [SerializeField] private AudioClip[] seClips = default;
 
     //--------------------------------------------------------------------------/
     /// <summary>

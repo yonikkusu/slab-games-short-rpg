@@ -8,9 +8,9 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------/
 public class SaveLoadPanel : MonoBehaviour
 {
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Text information;
-    [SerializeField] private SaveLoadButton[] saveLoadButtons;
+    [SerializeField] private Button closeButton = default;
+    [SerializeField] private Text information = default;
+    [SerializeField] private SaveLoadButton[] saveLoadButtons = default;
 
     //--------------------------------------------------------------------------/
     /// <summary>

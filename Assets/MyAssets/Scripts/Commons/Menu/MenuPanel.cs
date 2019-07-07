@@ -9,9 +9,9 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------/
 public class MenuPanel : MonoBehaviour
 {
-    [SerializeField] private Button saveButton;
-    [SerializeField] private Button titleButton;
-    [SerializeField] private SaveLoadPanel saveLoadPanel;
+    [SerializeField] private Button saveButton = default;
+    [SerializeField] private Button titleButton = default;
+    [SerializeField] private SaveLoadPanel saveLoadPanel = default;
 
     //--------------------------------------------------------------------------/
     /// <summary>

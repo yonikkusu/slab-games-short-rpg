@@ -9,10 +9,10 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------/
 public class SaveLoadButton : MonoBehaviour
 {
-    [SerializeField] private Button button;
-    [SerializeField] private Text playerName;
-    [SerializeField] private Text playDate;
-    [SerializeField] private Text playTime;
+    [SerializeField] private Button button = default;
+    [SerializeField] private Text playerName = default;
+    [SerializeField] private Text playDate = default;
+    [SerializeField] private Text playTime = default;
 
     private int index;
     private SaveLoadPanelType type;

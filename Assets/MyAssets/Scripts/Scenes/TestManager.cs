@@ -45,11 +45,11 @@ public class TestManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private Button saveButton;
-    [SerializeField] private Button loadButton;
-    [SerializeField] private Button deleteButton;
-    [SerializeField] private Text playerDataText;
-    [SerializeField] private TextAsset playerData;
+    [SerializeField] private Button saveButton = default;
+    [SerializeField] private Button loadButton = default;
+    [SerializeField] private Button deleteButton = default;
+    [SerializeField] private Text playerDataText = default;
+    [SerializeField] private TextAsset playerData = default;
 
     //--------------------------------------------------------------------------/
     /// <summary>
