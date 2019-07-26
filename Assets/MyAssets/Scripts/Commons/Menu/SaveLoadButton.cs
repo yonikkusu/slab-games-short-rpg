@@ -65,7 +65,7 @@ public class SaveLoadButton : MonoBehaviour
     /// </summary>
     /// <param name="playData">表示するセーブデータ</param>
     //--------------------------------------------------------------------------/
-    private void updateView(Player.SaveData saveData)
+    private void updateView(SaveData saveData)
     {
         // データがないなら表示をリセットする
         if(saveData == null) {

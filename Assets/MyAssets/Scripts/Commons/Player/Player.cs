@@ -9,47 +9,7 @@ using UnityEngine;
 //--------------------------------------------------------------------------/
 public class Player : SingletonMonoBehaviour<Player>
 {
-    //--------------------------------------------------------------------------/
-    /// <summary>
-    /// セーブデータ
-    /// </summary>
-    //--------------------------------------------------------------------------/
-    public class SaveData
-    {
-        /// <summary>プレイヤー名</summary>
-        public string Name;
-        /// <summary>最初のプレイ日時</summary>
-        public long FirstPlayDate;
-        /// <summary>最終プレイ日時</summary>
-        public long LastPlayDate;
-        /// <summary>プレイ時間</summary>
-        public long PlayTime;
-        /// <summary>最後にいたシーン</summary>
-        public int LastScene;
-        /// <summary>プレイヤー位置X</summary>
-        public float PlayerPositionX;
-        /// <summary>プレイヤー位置Y</summary>
-        public float PlayerPositionY;
-
-        //--------------------------------------------------------------------------/
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        /// <param name="name">プレイヤー名</param>
-        //--------------------------------------------------------------------------/
-        public SaveData(string name = "")
-        {
-            Name = name;
-            FirstPlayDate = GameUtility.GetUnixTime();
-            LastPlayDate = FirstPlayDate;
-            PlayTime = 0;
-            LastScene = (int)Scene.Field;
-            PlayerPositionX = 0f;
-            PlayerPositionY = 0f;
-        }
-    }
-
-    // 現在使っているプレイヤーデータ
+    /// <summary>現在使っているプレイヤーデータ</summary>
     public SaveData CurrentData { get; private set; }
 
     //--------------------------------------------------------------------------/
