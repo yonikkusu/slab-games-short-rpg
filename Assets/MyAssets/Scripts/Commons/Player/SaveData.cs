@@ -9,6 +9,7 @@ using UnityEngine;
 [Serializable]
 public class SaveData
 {
+    // 直接参照可能なデータ
     /// <summary>プレイヤー名</summary>
     [SerializeField] public string Name;
     /// <summary>最初のプレイ日時</summary>
@@ -23,6 +24,12 @@ public class SaveData
     [SerializeField] public float PlayerPositionX;
     /// <summary>プレイヤー位置Y</summary>
     [SerializeField] public float PlayerPositionY;
+
+    // 直接参照しないデータ
+    /// <summary>スイッチフラグリスト</summary>
+    [SerializeField] public SwitchFlag[] SwitchFlagList;
+    /// <summary>カウントフラグリスト</summary>
+    [SerializeField] public CountFlag[] CountFlagList;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -39,5 +46,61 @@ public class SaveData
         LastScene = (int)Scene.Field;
         PlayerPositionX = 0f;
         PlayerPositionY = 0f;
+        SwitchFlagList = new SwitchFlag[0];
+        CountFlagList = new CountFlag[0];
+    }
+}
+
+//--------------------------------------------------------------------------/
+/// <summary>
+/// スイッチフラグ
+/// </summary>
+//--------------------------------------------------------------------------/
+[Serializable]
+public struct SwitchFlag
+{
+    /// <summary>キー</summary>
+    [SerializeField] public string Key;
+    /// <summary>値</summary>
+    [SerializeField] public bool Value;
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="key">キー</param>
+    /// <param name="value">セットする値</param>
+    //--------------------------------------------------------------------------/
+    public SwitchFlag(string key, bool value)
+    {
+        Key = key;
+        Value = value;
+    }
+}
+
+//--------------------------------------------------------------------------/
+/// <summary>
+/// カウントフラグ
+/// </summary>
+//--------------------------------------------------------------------------/
+[Serializable]
+public struct CountFlag
+{
+    /// <summary>キー</summary>
+    [SerializeField] public string Key;
+    /// <summary>値</summary>
+    [SerializeField] public int Value;
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="key">キー</param>
+    /// <param name="value">セットする値</param>
+    //--------------------------------------------------------------------------/
+    public CountFlag(string key, int value)
+    {
+        Key = key;
+        Value = value;
     }
 }

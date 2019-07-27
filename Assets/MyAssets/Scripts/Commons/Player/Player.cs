@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 //--------------------------------------------------------------------------/
@@ -11,6 +11,8 @@ public class Player : SingletonMonoBehaviour<Player>
 {
     /// <summary>現在使っているプレイヤーデータ</summary>
     public SaveData CurrentData { get; private set; }
+    /// <summary>フラグマネージャー</summary>
+    public FlagManager FlagManager { get; private set; }
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -21,6 +23,7 @@ public class Player : SingletonMonoBehaviour<Player>
     public void Create(string name)
     {
         CurrentData = new SaveData(name);
+        FlagManager = new FlagManager();
     }
 
     //--------------------------------------------------------------------------/
@@ -44,6 +47,9 @@ public class Player : SingletonMonoBehaviour<Player>
         var player = GameObject.FindGameObjectWithTag("Player");
         CurrentData.PlayerPositionX = player.transform.position.x;
         CurrentData.PlayerPositionY = player.transform.position.y;
+        // スイッチフラグ、カウントフラグ
+        CurrentData.SwitchFlagList = FlagManager.GetSwitchList();
+        CurrentData.CountFlagList = FlagManager.GetCountList();
 
         SaveManager.Instance.SetClass<SaveData>(SaveKey.PlayerData, CurrentData, saveFileIndex.ToString());
         SaveManager.Instance.Save();
@@ -62,6 +68,10 @@ public class Player : SingletonMonoBehaviour<Player>
         if(loadData == null) return;
 
         CurrentData = loadData;
+
+        // スイッチフラグ、カウントフラグをセット
+        FlagManager.SetSwitchList(CurrentData.SwitchFlagList);
+        FlagManager.SetCountList(CurrentData.CountFlagList);
     }
 
     //--------------------------------------------------------------------------/
