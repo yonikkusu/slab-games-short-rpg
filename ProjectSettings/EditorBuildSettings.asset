@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MyAssets/Scenes/Field.unity
     guid: c242cb86289652345b95b6f840601b0a
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/GrassMap.unity
+    guid: 2005fb495ab952e4cb642c316bfd8b51
   m_configObjects: {}

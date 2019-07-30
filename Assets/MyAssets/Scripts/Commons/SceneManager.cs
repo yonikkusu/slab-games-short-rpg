@@ -33,4 +33,5 @@ public enum Scene
 	Title,
 	MainMenu,
     Field,
+    GrassMap,
 }
