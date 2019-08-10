@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 //--------------------------------------------------------------------------/
 /// <summary>
-/// プレイヤー マネージャー
+/// プレイヤーデータ
 /// </summary>
 //--------------------------------------------------------------------------/
-public class Player : SingletonMonoBehaviour<Player>
+public class PlayerData : SingletonMonoBehaviour<PlayerData>
 {
     /// <summary>現在使っているプレイヤーデータ</summary>
     public SaveData CurrentData { get; private set; }

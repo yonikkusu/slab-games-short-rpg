@@ -28,13 +28,13 @@ public class SaveLoadButton : MonoBehaviour
             SoundManager.Instance.PlaySe(Se.Tap);
             // セーブならデータをセーブしてパネル表示を更新
             if(type == SaveLoadPanelType.Save) {
-                Player.Instance.Save(index);
-                updateView(Player.Instance.CurrentData);
+                PlayerData.Instance.Save(index);
+                updateView(PlayerData.Instance.CurrentData);
             }
             // ロードならデータをロードして該当シーンに遷移
             else if(type == SaveLoadPanelType.Load) {
-                Player.Instance.Load(index);
-                SceneManager.Instance.LoadScene((Scene)Player.Instance.CurrentData.LastScene);
+                PlayerData.Instance.Load(index);
+                SceneManager.Instance.LoadScene((Scene)PlayerData.Instance.CurrentData.LastScene);
             }
         });
     }
@@ -48,7 +48,7 @@ public class SaveLoadButton : MonoBehaviour
     public void SetData(int index)
     {
         this.index = index;
-        updateView(Player.Instance.GetSaveData(index));
+        updateView(PlayerData.Instance.GetSaveData(index));
     }
 
     //--------------------------------------------------------------------------/

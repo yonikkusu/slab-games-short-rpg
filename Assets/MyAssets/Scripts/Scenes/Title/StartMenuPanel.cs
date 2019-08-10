@@ -24,7 +24,7 @@ public class StartMenuPanel : MonoBehaviour
         newGameButton.onClick.AddListener(() => {
             SoundManager.Instance.PlaySe(Se.Tap);
             // プレイヤーデータ作成
-            Player.Instance.Create("マサタカ");
+            PlayerData.Instance.Create("マサタカ");
             // TODO: 物語の最初の画面へ遷移
             SceneManager.Instance.LoadScene(Scene.GrassMap);
         });
