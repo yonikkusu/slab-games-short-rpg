@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 9080586755053303180}
   - component: {fileID: 9080586755053303183}
   m_Layer: 0
-  m_Name: PlayerCharacter
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,3 +420,4 @@ MonoBehaviour:
   rigidBody: {fileID: 9080586755053303181}
   mainText: {fileID: 3546768174493819869}
   mainTextPanel: {fileID: 3610682781934485375}
+  anim: {fileID: 9080586755053303178}
