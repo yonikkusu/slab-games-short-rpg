@@ -1,7 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//--------------------------------------------------------------------------/
+/// <summary>
+/// プレイヤーカメラ
+/// </summary>
+//--------------------------------------------------------------------------/
 public class PlayerCamera : MonoBehaviour
 {
     private GameObject player;
@@ -14,7 +17,10 @@ public class PlayerCamera : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        // プレイヤーの位置をセットする
+        // プレイヤーの位置をセットする(データがないならデバッグ用に作成する)
+        if(PlayerData.Instance.CurrentData == null) {
+            PlayerData.Instance.Create("デバッグプレイヤー");
+        }
         var playerData = PlayerData.Instance.CurrentData;
         player.transform.position = new Vector2(playerData.PlayerPositionX, playerData.PlayerPositionY);
     }
