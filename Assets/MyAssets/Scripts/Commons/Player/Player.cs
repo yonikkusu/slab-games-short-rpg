@@ -86,6 +86,8 @@ public class Player : MonoBehaviour
                 currentDirection = DIRECTOIN.DOWN;
             }
 
+            // 床イベントチェック
+            mapScene.CheckFloorEvents(transform.position);
         }
     }
 }
