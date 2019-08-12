@@ -418,6 +418,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 9080586755053303181}
-  mainText: {fileID: 3546768174493819869}
-  mainTextPanel: {fileID: 3610682781934485375}
   anim: {fileID: 9080586755053303178}
