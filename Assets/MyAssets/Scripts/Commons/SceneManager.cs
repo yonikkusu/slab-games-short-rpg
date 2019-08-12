@@ -30,8 +30,8 @@ public class SceneManager : SingletonMonoBehaviour<SceneManager>
 //--------------------------------------------------------------------------/
 public enum Scene
 {
-	Title,
-	MainMenu,
+    Title,
+    MainMenu,
     Field,
     GrassMap,
 }
