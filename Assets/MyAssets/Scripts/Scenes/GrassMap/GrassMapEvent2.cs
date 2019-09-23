@@ -15,6 +15,6 @@ public class GrassMapEvent2 : MapEvent
     //--------------------------------------------------------------------------/
     protected override void onStepped()
     {
-        SceneManager.Instance.LoadScene(Scene.Field);
+        SceneManagerExtension.LoadScene(SceneName.Field);
     }
 }

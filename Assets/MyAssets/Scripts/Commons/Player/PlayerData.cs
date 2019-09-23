@@ -40,7 +40,7 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
         CurrentData.PlayTime = currentDate - CurrentData.FirstPlayDate;
         CurrentData.LastPlayDate = currentDate;
         // 最後にいたシーン
-        CurrentData.LastScene = (int)SceneManager.Instance.CurrentScene;
+        CurrentData.LastScene = (int)SceneManagerExtension.GetCurrentSceneName();
         // キャラクター位置情報
         var player = GameObject.FindGameObjectWithTag("Player");
         CurrentData.PlayerPositionX = player.transform.position.x;

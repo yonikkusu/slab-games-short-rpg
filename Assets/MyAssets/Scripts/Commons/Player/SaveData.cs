@@ -43,7 +43,7 @@ public class SaveData
         FirstPlayDate = GameUtility.GetUnixTime();
         LastPlayDate = FirstPlayDate;
         PlayTime = 0;
-        LastScene = (int)Scene.Field;
+        LastScene = (int)SceneName.Field;
         PlayerPositionX = 0f;
         PlayerPositionY = 0f;
         SwitchFlagList = new SwitchFlag[0];

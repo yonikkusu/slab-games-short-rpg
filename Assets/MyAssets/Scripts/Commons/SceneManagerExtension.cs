@@ -1,25 +1,29 @@
-﻿using SceneManagement = UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 
 //--------------------------------------------------------------------------/
 /// <summary>
-/// シーンマネージャー
+/// シーンマネージャー 拡張
 /// </summary>
 //--------------------------------------------------------------------------/
-public class SceneManager : SingletonMonoBehaviour<SceneManager>
+public class SceneManagerExtension
 {
-    /// <summary>現在表示しているシーン</summary>
-    public Scene CurrentScene { get; private set; }
-
     //--------------------------------------------------------------------------/
     /// <summary>
     /// シーンを読み込む
     /// </summary>
     /// <param name="scene">読み込むシーン名</param>
     //--------------------------------------------------------------------------/
-    public void LoadScene(Scene scene)
+    public static void LoadScene(SceneName scene) => SceneManager.LoadSceneAsync(scene.ToString());
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// アクティブなシーンを取得する
+    /// </summary>
+    //--------------------------------------------------------------------------/
+    public static SceneName GetCurrentSceneName()
     {
-        SceneManagement.SceneManager.LoadSceneAsync(scene.ToString());
-        CurrentScene = scene;
+        var scene = SceneManager.GetActiveScene();
+        return scene.IsValid() ? scene.name.ToEnum<SceneName>() : SceneName.None;
     }
 }
 
@@ -28,8 +32,9 @@ public class SceneManager : SingletonMonoBehaviour<SceneManager>
 /// シーン名
 /// </summary>
 //--------------------------------------------------------------------------/
-public enum Scene
+public enum SceneName
 {
+    None,
     Title,
     MainMenu,
     Field,
