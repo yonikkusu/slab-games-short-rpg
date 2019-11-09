@@ -70,8 +70,7 @@ public class Player : MonoBehaviour
 
         // 移動中なら下記の処理を行う
         if(direction != Vector2.zero) {
-            // アニメーショントリガー
-            // プレイヤー向き取得
+            // 歩行アニメーション
             if(direction.x < 0) {
                 anim.SetTrigger("left");
                 currentDirection = DIRECTOIN.LEFT;
