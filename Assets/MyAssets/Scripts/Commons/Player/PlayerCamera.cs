@@ -14,7 +14,7 @@ public class PlayerCamera : MonoBehaviour
     /// 起動時処理
     /// </summary>
     //--------------------------------------------------------------------------/
-    void Start()
+    void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         // プレイヤーの位置をセットする(データがないならデバッグ用に作成する)
