@@ -11,6 +11,8 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
     public SaveData CurrentData { get; private set; }
     /// <summary>フラグマネージャー</summary>
     public FlagManager FlagManager { get; private set; }
+    /// <summary>アイテムマネージャー</summary>
+    public ItemManager ItemManager { get; private set; }
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -22,6 +24,7 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
     {
         CurrentData = new SaveData(name);
         FlagManager = new FlagManager();
+        ItemManager = new ItemManager();
     }
 
     //--------------------------------------------------------------------------/
@@ -48,6 +51,8 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
         // スイッチフラグ、カウントフラグ
         CurrentData.SwitchFlagList = FlagManager.GetSwitchList();
         CurrentData.CountFlagList = FlagManager.GetCountList();
+        // 所持アイテム
+        CurrentData.ItemIds = ItemManager.GetItemIdList();
 
         SaveManager.Instance.SetClass<SaveData>(SaveKey.PlayerData, CurrentData, saveFileIndex.ToString());
         SaveManager.Instance.Save();
@@ -70,6 +75,9 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
         // スイッチフラグ、カウントフラグをセット
         FlagManager.SetSwitchList(CurrentData.SwitchFlagList);
         FlagManager.SetCountList(CurrentData.CountFlagList);
+
+        // 所持アイテムIDリストをもとにアイテムマネージャーを初期化
+        ItemManager = new ItemManager(CurrentData.ItemIds);
     }
 
     //--------------------------------------------------------------------------/
@@ -84,5 +92,16 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
         if(!SaveManager.Instance.HasKey(SaveKey.PlayerData, index.ToString())) return null;
 
         return SaveManager.Instance.GetClass<SaveData>(SaveKey.PlayerData, new SaveData(), index.ToString());
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// 指定されたファイル番号のセーブデータを取得する
+    /// </summary>
+    /// <param name="index">セーブファイル番号</param>
+    //--------------------------------------------------------------------------/
+    public void AddItem(ItemID itemId)
+    {
+        ItemManager.AddItem(itemId);
     }
 }

@@ -14,10 +14,6 @@ public class ItemManager
 
     // アイテムデータ一覧
     private ItemDataList itemDataList;
-    // 選択中アイテム
-    private ItemData selectedItem => PossessionItemList[selectedIndex];
-    // 選択中アイテムインデックス
-    private int selectedIndex;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -29,6 +25,19 @@ public class ItemManager
     {
         itemDataList = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList");
         PossessionItemList = itemIds?.Select(itemId => itemDataList.ItemList[itemId]).ToList() ?? new List<ItemData>();
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// アイテムを使用する
+    /// </summary>
+    /// <param name="index">使用するアイテムのIndex</param>
+    //--------------------------------------------------------------------------/
+    public void UseItem(int index)
+    {
+        var item = PossessionItemList[index];
+        Debug.Log($"{item.Name}を使用した");
+        PossessionItemList.Remove(item);
     }
 
     //--------------------------------------------------------------------------/

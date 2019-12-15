@@ -30,6 +30,8 @@ public class SaveData
     [SerializeField] public SwitchFlag[] SwitchFlagList;
     /// <summary>カウントフラグリスト</summary>
     [SerializeField] public CountFlag[] CountFlagList;
+    /// <summary>所持アイテムIDリスト</summary>
+    [SerializeField] public int[] ItemIds;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -46,6 +48,7 @@ public class SaveData
         LastScene = (int)SceneName.Field;
         PlayerPositionX = 0f;
         PlayerPositionY = 0f;
+        ItemIds = new int[0];
         SwitchFlagList = new SwitchFlag[0];
         CountFlagList = new CountFlag[0];
     }
