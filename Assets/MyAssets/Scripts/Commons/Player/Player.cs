@@ -23,8 +23,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator anim = default;
     [SerializeField] private ItemPanel itemPanel = default;
 
+    /// <summary>現在のシーン</summary>
     private MapSceneBase mapScene;
+    /// <summary>現在の向き</summary>
     private DIRECTOIN currentDirection;
+
+    private static Vector3 startPosition;
+    private static DIRECTOIN startDirection;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -34,6 +39,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         mapScene = FindObjectOfType<MapSceneBase>();
+        transform.position = startPosition;
+        moveAnimation(startDirection);
     }
 
     //--------------------------------------------------------------------------/
@@ -79,22 +86,31 @@ public class Player : MonoBehaviour
         if(direction != Vector2.zero) {
             // 歩行アニメーション
             if(direction.x < 0) {
-                anim.SetTrigger("left");
-                currentDirection = DIRECTOIN.LEFT;
+                moveAnimation(DIRECTOIN.LEFT);
             } else if(direction.x > 0) {
-                anim.SetTrigger("right");
-                currentDirection = DIRECTOIN.RIGHT;
+                moveAnimation(DIRECTOIN.RIGHT);
             } else if(direction.y > 0) {
-                anim.SetTrigger("up");
-                currentDirection = DIRECTOIN.UP;
+                moveAnimation(DIRECTOIN.UP);
             } else if(direction.y < 0) {
-                anim.SetTrigger("down");
-                currentDirection = DIRECTOIN.DOWN;
+                moveAnimation(DIRECTOIN.DOWN);
             }
 
             // 床イベントチェック
             mapScene.CheckFloorEvents(transform.position);
         }
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// プレイヤーの開始位置と向きをセットする
+    /// </summary>
+    /// <param name="position">開始位置</param>
+    /// <param name="direction">向き</param>
+    //--------------------------------------------------------------------------/
+    public static void SetStartPotisionAndDirection(Vector2 position, DIRECTOIN direction)
+    {
+        startPosition = new Vector3(position.x, position.y, 0f);
+        startDirection = direction;
     }
 
     //--------------------------------------------------------------------------/
@@ -107,5 +123,35 @@ public class Player : MonoBehaviour
     {
         PlayerData.Instance.AddItem((ItemID)itemId);
         itemPanel.UpdateItemList();
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// 移動アニメーションを行う
+    /// </summary>
+    /// <param name="direction">移動する向き</param>
+    //--------------------------------------------------------------------------/
+    private void moveAnimation(DIRECTOIN direction)
+    {
+        switch(direction) {
+            case DIRECTOIN.LEFT:
+                anim.SetTrigger("left");
+                currentDirection = DIRECTOIN.LEFT;
+                break;
+            case DIRECTOIN.RIGHT:
+                anim.SetTrigger("right");
+                currentDirection = DIRECTOIN.RIGHT;
+                break;
+            case DIRECTOIN.UP:
+                anim.SetTrigger("up");
+                currentDirection = DIRECTOIN.UP;
+                break;
+            case DIRECTOIN.DOWN:
+                anim.SetTrigger("down");
+                currentDirection = DIRECTOIN.DOWN;
+                break;
+            default:
+                break;
+        }
     }
 }
