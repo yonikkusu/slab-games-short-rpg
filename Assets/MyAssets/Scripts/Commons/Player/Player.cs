@@ -36,11 +36,9 @@ public class Player : MonoBehaviour
     /// 起動時処理
     /// </summary>
     //--------------------------------------------------------------------------/
-    void Start()
+    void Awake()
     {
         mapScene = FindObjectOfType<MapSceneBase>();
-        transform.position = startPosition;
-        moveAnimation(startDirection);
     }
 
     //--------------------------------------------------------------------------/
@@ -98,6 +96,19 @@ public class Player : MonoBehaviour
             // 床イベントチェック
             mapScene.CheckFloorEvents(transform.position);
         }
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    /// <param name="offsetPosition">オフセット位置</param>
+    //--------------------------------------------------------------------------/
+    public void Initialize(Vector3 offsetPosition)
+    {
+        // 開始位置を設定
+        transform.position = offsetPosition + startPosition;
+        moveAnimation(startDirection);
     }
 
     //--------------------------------------------------------------------------/
