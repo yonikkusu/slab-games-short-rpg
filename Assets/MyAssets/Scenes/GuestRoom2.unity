@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 208176015}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39329fc8598225945bccb5eab5e8b7d6, type: 3}
+  m_Script: {fileID: 11500000, guid: b806779ff66fd2e4ea9cad8f6d7e9d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mapEvents:
@@ -836,7 +836,7 @@ GameObject:
   - component: {fileID: 909444657}
   - component: {fileID: 909444656}
   m_Layer: 5
-  m_Name: ToCorridor2F
+  m_Name: To2F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventCoord: {x: 4.5, y: -1.5}
   sceneName: 5
-  destinationCoord: {x: -5.5, y: 12.5}
+  destinationCoord: {x: -5.5, y: 5.5}
   playerDirection: 1
 --- !u!114 &909444657
 MonoBehaviour:

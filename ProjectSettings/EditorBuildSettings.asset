@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MyAssets/Scenes/GrassMap.unity
     guid: 2005fb495ab952e4cb642c316bfd8b51
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/Corridor2F.unity
+    guid: caca3d2b232895c449689292e620d16e
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/GuestRoom1.unity
+    guid: b44ba3c99a4662a4c82b1a0f0f008aa2
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/GuestRoom2.unity
+    guid: c7d3dbc761397bf4a956a578d917478d
   m_configObjects: {}

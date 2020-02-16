@@ -39,4 +39,9 @@ public enum SceneName
     MainMenu,
     Field,
     GrassMap,
+    Corridor2F,
+    GuestRoom1,
+    GuestRoom2,
+    GuestRoom3,
+    GuestRoom4,
 }
