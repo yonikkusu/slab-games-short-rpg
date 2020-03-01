@@ -45,7 +45,7 @@ public class SaveData
         FirstPlayDate = GameUtility.GetUnixTime();
         LastPlayDate = FirstPlayDate;
         PlayTime = 0;
-        LastScene = (int)SceneName.Field;
+        LastScene = (int)SceneName.GuestRoom1;
         PlayerPositionX = 0f;
         PlayerPositionY = 0f;
         ItemIds = new int[0];
