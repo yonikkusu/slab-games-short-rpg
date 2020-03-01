@@ -1,6 +1,4 @@
-﻿//#define DEBUG_LOG
-
-using UnityEngine;
+﻿using UnityEngine;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -26,7 +24,6 @@ public class MapSceneBase : MonoBehaviour
         defaultTransformPos = transform.position;
         transform.position = OffScreenPos;
     }
-
 
     //--------------------------------------------------------------------------/
     /// <summary>
