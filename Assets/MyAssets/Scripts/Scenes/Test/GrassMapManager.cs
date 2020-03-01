@@ -1,20 +1,17 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
-//--------------------------------------------------------------------------/
+﻿//--------------------------------------------------------------------------/
 /// <summary>
-/// GrassMap イベント2
+/// 外マップ画面マネージャー
 /// </summary>
 //--------------------------------------------------------------------------/
-public class GrassMapEvent2 : MapEvent
+public class GrassMapManager : MapSceneBase
 {
     //--------------------------------------------------------------------------/
     /// <summary>
-    /// 踏まれた時の処理
+    /// 起動時処理
     /// </summary>
     //--------------------------------------------------------------------------/
-    protected override void onStepped()
+    void Start()
     {
-        SceneManagerExtension.LoadScene(SceneName.Field);
+        startCommonInitialize();
     }
 }

@@ -9,13 +9,7 @@ EditorBuildSettings:
     path: Assets/MyAssets/Scenes/Title.unity
     guid: 8863771b5ba156a4fa5277bf8a8116c2
   - enabled: 1
-    path: Assets/MyAssets/Scenes/MainMenu.unity
-    guid: 2f8c528e71f27cc43acfdd55fee2b72d
-  - enabled: 1
-    path: Assets/MyAssets/Scenes/Field.unity
-    guid: c242cb86289652345b95b6f840601b0a
-  - enabled: 1
-    path: Assets/MyAssets/Scenes/GrassMap.unity
+    path: Assets/MyAssets/Scenes/Test/GrassMap.unity
     guid: 2005fb495ab952e4cb642c316bfd8b51
   - enabled: 1
     path: Assets/MyAssets/Scenes/Corridor2F.unity
