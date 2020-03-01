@@ -15,14 +15,8 @@ public class RuntimeInitializer
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void InitializeBeforeSceneLoad()
     {
-        // サウンドマネージャー
-        var soundManager = GameObject.Instantiate(Resources.Load("Prefabs/Commons/SoundManager"));
-        GameObject.DontDestroyOnLoad(soundManager);
-        // セーブマネージャー
-        var saveManager = GameObject.Instantiate(Resources.Load("Prefabs/Commons/SaveManager"));
-        GameObject.DontDestroyOnLoad(saveManager);
-        // プレイヤーデータ
-        var playerData = GameObject.Instantiate(Resources.Load("Prefabs/Commons/PlayerData"));
-        GameObject.DontDestroyOnLoad(playerData);
+        // 各マネージャーが付いてるPrefabをDontDestroyOnLoadに加える
+        var dontDestroyObjects = GameObject.Instantiate(Resources.Load("Prefabs/Commons/DontDestroyObjects"));
+        GameObject.DontDestroyOnLoad(dontDestroyObjects);
     }
 }
