@@ -14,6 +14,19 @@ public class FlagManager
     /// <summary>カウントフラグのDictionary</summary>
     private Dictionary<string, int> countFlagDictionay = new Dictionary<string, int>();
 
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="switchFlagList">初期化に使うスイッチフラグリスト</param>
+    /// <param name="countFlagList">初期化に使うカウントフラグリスト</param>
+    //--------------------------------------------------------------------------/
+    public FlagManager(SwitchFlag[] switchFlagList = null, CountFlag[] countFlagList = null)
+    {
+        SetSwitchList(switchFlagList);
+        SetCountList(countFlagList);
+    }
+
     #region SwitchFlag
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -66,6 +79,8 @@ public class FlagManager
     //--------------------------------------------------------------------------/
     public void SetSwitchList(SwitchFlag[] switchFlagList)
     {
+        if(switchFlagList == null) { return; }
+
         switchFlagDictionay.Clear();
         foreach(var switchFlag in switchFlagList) {
             switchFlagDictionay[switchFlag.Key] = switchFlag.Value;
@@ -125,6 +140,8 @@ public class FlagManager
     //--------------------------------------------------------------------------/
     public void SetCountList(CountFlag[] countFlagList)
     {
+        if(countFlagList == null) { return; }
+
         countFlagDictionay.Clear();
         foreach(var countFlag in countFlagList) {
             countFlagDictionay[countFlag.Key] = countFlag.Value;

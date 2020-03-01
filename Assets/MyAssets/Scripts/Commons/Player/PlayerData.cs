@@ -72,9 +72,8 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
 
         CurrentData = loadData;
 
-        // スイッチフラグ、カウントフラグをセット
-        FlagManager.SetSwitchList(CurrentData.SwitchFlagList);
-        FlagManager.SetCountList(CurrentData.CountFlagList);
+        // スイッチフラグリスト、カウントフラグリストをもとにフラグマネージャーを初期化
+        FlagManager = new FlagManager(CurrentData.SwitchFlagList, CurrentData.CountFlagList);
 
         // 所持アイテムIDリストをもとにアイテムマネージャーを初期化
         ItemManager = new ItemManager(CurrentData.ItemIds);
