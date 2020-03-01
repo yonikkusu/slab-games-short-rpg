@@ -36,8 +36,6 @@ public enum SceneName
 {
     None,
     Title,
-    MainMenu,
-    Field,
     GrassMap,
     Corridor2F,
     GuestRoom1,
