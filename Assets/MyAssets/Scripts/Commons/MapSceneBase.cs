@@ -8,9 +8,9 @@
 public class MapSceneBase : MonoBehaviour
 {
     private readonly Vector3 OffScreenPos = new Vector3(0f, 5000f, 0f);
-    [SerializeField] private Player player;
-    [SerializeField] private MapEvent[] mapEvents = default;
+    [SerializeField] private Player player = default;
 
+    private MapEvent[] mapEvents;
     private Vector3 defaultTransformPos;
 
     //--------------------------------------------------------------------------/
@@ -23,6 +23,9 @@ public class MapSceneBase : MonoBehaviour
         // 初期化完了まで一旦画面外に退避させる
         defaultTransformPos = transform.position;
         transform.position = OffScreenPos;
+
+        // シーン上に配置されてるマップイベントを全て取得する
+        mapEvents = FindObjectsOfType<MapEvent>();
     }
 
     //--------------------------------------------------------------------------/
