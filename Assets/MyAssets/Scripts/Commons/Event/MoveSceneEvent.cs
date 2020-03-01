@@ -9,7 +9,7 @@ public class MoveSceneEvent : MapEvent
 {
     [SerializeField] private SceneName sceneName = default;
     [SerializeField] private Vector2 destinationCoord = default;
-    [SerializeField] private Player.DIRECTOIN playerDirection = default;
+    [SerializeField] private Player.DIRECTION playerDirection = default;
 
     //--------------------------------------------------------------------------/
     /// <summary>

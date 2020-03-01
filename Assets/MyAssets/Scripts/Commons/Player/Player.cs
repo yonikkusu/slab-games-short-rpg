@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private const float PLAYER_SPEED = 10f;
 
     /// <summary> プレイヤーの向き</summary>
-    public enum DIRECTOIN {
+    public enum DIRECTION {
         LEFT,
         RIGHT,
         UP,
@@ -26,10 +26,10 @@ public class Player : MonoBehaviour
     /// <summary>現在のシーン</summary>
     private MapSceneBase mapScene;
     /// <summary>現在の向き</summary>
-    private DIRECTOIN currentDirection;
+    private DIRECTION currentDirection;
 
     private static Vector3 startPosition;
-    private static DIRECTOIN startDirection;
+    private static DIRECTION startDirection;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -57,16 +57,16 @@ public class Player : MonoBehaviour
         // 調べるイベントチェック
         if(Input.GetKeyDown(KeyCode.Return)) {
             switch(currentDirection) {
-                case DIRECTOIN.LEFT:
+                case DIRECTION.LEFT:
                     mapScene.CheckInspectEvents(new Vector2(transform.position.x - 1, transform.position.y));
                     break;
-                case DIRECTOIN.RIGHT:
+                case DIRECTION.RIGHT:
                     mapScene.CheckInspectEvents(new Vector2(transform.position.x + 1, transform.position.y));
                     break;
-                case DIRECTOIN.UP:
+                case DIRECTION.UP:
                     mapScene.CheckInspectEvents(new Vector2(transform.position.x, transform.position.y + 1));
                     break;
-                case DIRECTOIN.DOWN:
+                case DIRECTION.DOWN:
                     mapScene.CheckInspectEvents(new Vector2(transform.position.x, transform.position.y - 1));
                     break;
                 default:
@@ -84,13 +84,13 @@ public class Player : MonoBehaviour
         if(direction != Vector2.zero) {
             // 歩行アニメーション
             if(direction.x < 0) {
-                moveAnimation(DIRECTOIN.LEFT);
+                moveAnimation(DIRECTION.LEFT);
             } else if(direction.x > 0) {
-                moveAnimation(DIRECTOIN.RIGHT);
+                moveAnimation(DIRECTION.RIGHT);
             } else if(direction.y > 0) {
-                moveAnimation(DIRECTOIN.UP);
+                moveAnimation(DIRECTION.UP);
             } else if(direction.y < 0) {
-                moveAnimation(DIRECTOIN.DOWN);
+                moveAnimation(DIRECTION.DOWN);
             }
 
             // 床イベントチェック
@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
     /// <param name="position">開始位置</param>
     /// <param name="direction">向き</param>
     //--------------------------------------------------------------------------/
-    public static void SetStartPotisionAndDirection(Vector2 position, DIRECTOIN direction)
+    public static void SetStartPotisionAndDirection(Vector2 position, DIRECTION direction)
     {
         startPosition = new Vector3(position.x, position.y, 0f);
         startDirection = direction;
@@ -142,24 +142,24 @@ public class Player : MonoBehaviour
     /// </summary>
     /// <param name="direction">移動する向き</param>
     //--------------------------------------------------------------------------/
-    private void moveAnimation(DIRECTOIN direction)
+    private void moveAnimation(DIRECTION direction)
     {
         switch(direction) {
-            case DIRECTOIN.LEFT:
+            case DIRECTION.LEFT:
                 anim.SetTrigger("left");
-                currentDirection = DIRECTOIN.LEFT;
+                currentDirection = DIRECTION.LEFT;
                 break;
-            case DIRECTOIN.RIGHT:
+            case DIRECTION.RIGHT:
                 anim.SetTrigger("right");
-                currentDirection = DIRECTOIN.RIGHT;
+                currentDirection = DIRECTION.RIGHT;
                 break;
-            case DIRECTOIN.UP:
+            case DIRECTION.UP:
                 anim.SetTrigger("up");
-                currentDirection = DIRECTOIN.UP;
+                currentDirection = DIRECTION.UP;
                 break;
-            case DIRECTOIN.DOWN:
+            case DIRECTION.DOWN:
                 anim.SetTrigger("down");
-                currentDirection = DIRECTOIN.DOWN;
+                currentDirection = DIRECTION.DOWN;
                 break;
             default:
                 break;
