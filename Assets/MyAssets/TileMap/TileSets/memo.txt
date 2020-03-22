@@ -1,5 +1,6 @@
-1. magick convert -crop (切り取りサイズ）＋（切り取り場所の左上座標）出力ファイル名
-　　　　　　　　　　　　　24x24            +540+700
+1. magick convert 入力ファイル -crop (切り取りサイズ）＋（切り取り場所の左上座標）出力ファイル名
+　　　　　　　　　　                  　　24x24                +540+700
+magick convert a.png -crop 24x24+540+700 out.png
 
 2. magick convert 入力ファイル -strip 出力ファイル
 - 入力ファイルのEXIF情報を除去する

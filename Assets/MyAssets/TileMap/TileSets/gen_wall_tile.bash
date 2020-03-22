@@ -1,4 +1,5 @@
 #!/bin/bash
+#$1: 対象のディレクトリ
 
 # 画像切り抜き
 magick convert $1/$1.png -crop 24x24 $1/croped%02d.png
