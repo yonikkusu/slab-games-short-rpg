@@ -12,12 +12,24 @@ EditorBuildSettings:
     path: Assets/MyAssets/Scenes/Test/GrassMap.unity
     guid: 2005fb495ab952e4cb642c316bfd8b51
   - enabled: 1
-    path: Assets/MyAssets/Scenes/Corridor2F.unity
+    path: Assets/MyAssets/Scenes/2F/Corridor2F.unity
     guid: caca3d2b232895c449689292e620d16e
   - enabled: 1
-    path: Assets/MyAssets/Scenes/GuestRoom1.unity
+    path: Assets/MyAssets/Scenes/2F/GuestRoom1.unity
     guid: b44ba3c99a4662a4c82b1a0f0f008aa2
   - enabled: 1
-    path: Assets/MyAssets/Scenes/GuestRoom2.unity
+    path: Assets/MyAssets/Scenes/2F/GuestRoom2.unity
     guid: c7d3dbc761397bf4a956a578d917478d
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/2F/GuestRoom3.unity
+    guid: fcc1cb5cea8588042bba059ff9e5e361
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/2F/GuestRoom4.unity
+    guid: 473c5aea564958244aaf588601a5fb62
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/2F/Bedroom.unity
+    guid: 2698511e191e2064797430789e042e01
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/2F/Study.unity
+    guid: d0cbbf8a37e9b06498e42280a7d16deb
   m_configObjects: {}
