@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MyAssets/Scenes/2F/Study.unity
     guid: d0cbbf8a37e9b06498e42280a7d16deb
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/2F/KidsRoom.unity
+    guid: ff610d6b13b5d5f4a8443b051ae94992
   m_configObjects: {}
