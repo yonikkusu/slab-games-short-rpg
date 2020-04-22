@@ -42,4 +42,7 @@ public enum SceneName
     GuestRoom2,
     GuestRoom3,
     GuestRoom4,
+    BedRoom,
+    Study,
+    KidsRoom,
 }
