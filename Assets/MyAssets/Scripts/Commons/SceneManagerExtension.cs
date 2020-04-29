@@ -45,4 +45,8 @@ public enum SceneName
     BedRoom,
     Study,
     KidsRoom,
+    Corridor1F,
+    DoressingRoom,
+    BathRoom,
+    Toilet,
 }
