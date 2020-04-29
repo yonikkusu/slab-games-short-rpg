@@ -3065,7 +3065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventCoord: {x: 27.5, y: 1.5}
   sceneName: 12
-  destinationCoord: {x: 10, y: 10}
+  destinationCoord: {x: -5.5, y: 1.5}
   playerDirection: 1
 --- !u!114 &1423302870
 MonoBehaviour:
@@ -5989,12 +5989,12 @@ PrefabInstance:
     - target: {fileID: 9080586755053303176, guid: 81834ce128a33514f8d65f3fe0667b3a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.55
+      value: -1.24
       objectReference: {fileID: 0}
     - target: {fileID: 9080586755053303176, guid: 81834ce128a33514f8d65f3fe0667b3a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.48
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: 9080586755053303176, guid: 81834ce128a33514f8d65f3fe0667b3a,
         type: 3}
