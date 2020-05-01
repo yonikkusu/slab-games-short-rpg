@@ -50,4 +50,5 @@ public enum SceneName
     BathRoom,
     Toilet,
     Dining,
+    SekkanRoom,
 }

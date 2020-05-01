@@ -3155,8 +3155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventCoord: {x: 27.5, y: -9.5}
-  sceneName: 9
-  destinationCoord: {x: -4.5, y: -1.5}
+  sceneName: 16
+  destinationCoord: {x: -6.5, y: 1.5}
   playerDirection: 1
 --- !u!114 &1392286375
 MonoBehaviour:
