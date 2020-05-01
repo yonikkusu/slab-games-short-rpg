@@ -45,6 +45,9 @@ EditorBuildSettings:
     path: Assets/MyAssets/Scenes/1F/DoressingRoom.unity
     guid: e794c379e6782f745a0af607d5e70482
   - enabled: 1
-    path: Assets/MyAssets/Scenes/1F/Toilet1.unity
+    path: Assets/MyAssets/Scenes/1F/Toilet.unity
     guid: 35d7811af5e13f349ba67b9127664fe2
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/1F/Dining.unity
+    guid: 2ea96f8ba5beedd4586c9d71746568c6
   m_configObjects: {}

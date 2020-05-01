@@ -49,4 +49,5 @@ public enum SceneName
     DoressingRoom,
     BathRoom,
     Toilet,
+    Dining,
 }
