@@ -51,4 +51,5 @@ public enum SceneName
     Toilet,
     Dining,
     SekkanRoom,
+    Library,
 }
