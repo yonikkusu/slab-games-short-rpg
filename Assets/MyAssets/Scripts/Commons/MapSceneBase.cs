@@ -7,7 +7,8 @@
 //--------------------------------------------------------------------------/
 public class MapSceneBase : MonoBehaviour
 {
-    private readonly Vector3 OffScreenPos = new Vector3(0f, 5000f, 0f);
+    /// <summary>画面外座標</summary>
+    public static readonly Vector3 OffScreenPos = new Vector3(0f, 5000f, 0f);
     [SerializeField] private Player player = default;
 
     private MapEvent[] mapEvents;
@@ -36,7 +37,7 @@ public class MapSceneBase : MonoBehaviour
     protected void startCommonInitialize()
     {
         // プレイヤーの初期位置を設定
-        player.Initialize(OffScreenPos);
+        player.Initialize();
 
         // 画面位置をもとに戻す
         transform.position = defaultTransformPos;

@@ -102,12 +102,11 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 初期化
     /// </summary>
-    /// <param name="offsetPosition">オフセット位置</param>
     //--------------------------------------------------------------------------/
-    public void Initialize(Vector3 offsetPosition)
+    public void Initialize()
     {
         // 開始位置を設定
-        transform.position = offsetPosition + startPosition;
+        transform.position = MapSceneBase.OffScreenPos + startPosition;
         moveAnimation(startDirection);
     }
 
