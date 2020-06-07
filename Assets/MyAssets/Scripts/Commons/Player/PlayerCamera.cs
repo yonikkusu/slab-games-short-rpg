@@ -22,7 +22,6 @@ public class PlayerCamera : MonoBehaviour
             PlayerData.Instance.Create("デバッグプレイヤー");
         }
         var playerData = PlayerData.Instance.CurrentData;
-        player.transform.position = new Vector2(playerData.PlayerPositionX, playerData.PlayerPositionY);
     }
 
     //--------------------------------------------------------------------------/

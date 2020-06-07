@@ -33,6 +33,9 @@ public class SaveData
     /// <summary>所持アイテムIDリスト</summary>
     [SerializeField] public int[] ItemIds;
 
+    /// <summary>プレイヤーの座標</summary>
+    public Vector2 PlayerPosition => new Vector2(PlayerPositionX, PlayerPositionY);
+
     //--------------------------------------------------------------------------/
     /// <summary>
     /// コンストラクタ
@@ -46,8 +49,8 @@ public class SaveData
         LastPlayDate = FirstPlayDate;
         PlayTime = 0;
         LastScene = (int)SceneName.GuestRoom1;
-        PlayerPositionX = 0f;
-        PlayerPositionY = 0f;
+        PlayerPositionX = 0.5f;
+        PlayerPositionY = 0.5f;
         ItemIds = new int[0];
         SwitchFlagList = new SwitchFlag[0];
         CountFlagList = new CountFlag[0];

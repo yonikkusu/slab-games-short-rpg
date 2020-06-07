@@ -26,7 +26,8 @@ public class StartMenuPanel : MonoBehaviour
             // プレイヤーデータ作成
             PlayerData.Instance.Create("マサタカ");
             // TODO: 物語の最初の画面へ遷移
-            SceneManagerExtension.LoadScene(SceneName.GuestRoom1);
+            var parameter = new MapSceneParameter(PlayerData.Instance.CurrentData.PlayerPosition, Player.DIRECTION.DOWN);
+            SceneManagerExtension.LoadScene(SceneName.GuestRoom1, parameter);
         });
 
         // コンテニューボタン

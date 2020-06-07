@@ -7,13 +7,21 @@
 //--------------------------------------------------------------------------/
 public class SceneManagerExtension
 {
+    /// <summary>シーンパラメータ</summary>
+    public static MapSceneParameter SceneParameter;
+
     //--------------------------------------------------------------------------/
     /// <summary>
     /// シーンを読み込む
     /// </summary>
     /// <param name="scene">読み込むシーン名</param>
+    /// <param name="parameter">読み込み時に使うパラメータ</param>
     //--------------------------------------------------------------------------/
-    public static void LoadScene(SceneName scene) => SceneManager.LoadSceneAsync(scene.ToString());
+    public static void LoadScene(SceneName scene, MapSceneParameter paramter = null)
+    {
+        SceneParameter = paramter;
+        SceneManager.LoadSceneAsync(scene.ToString());
+    }
 
     //--------------------------------------------------------------------------/
     /// <summary>

@@ -18,7 +18,7 @@ public class MoveSceneEvent : MapEvent
     //--------------------------------------------------------------------------/
     protected override void onStepped()
     {
-        Player.SetStartPotisionAndDirection(destinationCoord, playerDirection);
-        SceneManagerExtension.LoadScene(sceneName);
+        var parameter = new MapSceneParameter(destinationCoord, playerDirection);
+        SceneManagerExtension.LoadScene(sceneName, parameter);
     }
 }

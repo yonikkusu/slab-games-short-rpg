@@ -7,7 +7,9 @@
 //--------------------------------------------------------------------------/
 public class MapSceneBase : MonoBehaviour
 {
-    private readonly Vector3 OffScreenPos = new Vector3(0f, 5000f, 0f);
+    /// <summary>画面外座標</summary>
+    public static readonly Vector3 OffScreenPos = new Vector3(0f, 5000f, 0f);
+
     [SerializeField] private Player player = default;
 
     private MapEvent[] mapEvents;
@@ -20,23 +22,18 @@ public class MapSceneBase : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Awake()
     {
+        // シーン上に配置されてるマップイベントを全て取得する
+        mapEvents = FindObjectsOfType<MapEvent>();
+
         // 初期化完了まで一旦画面外に退避させる
         defaultTransformPos = transform.position;
         transform.position = OffScreenPos;
-
-        // シーン上に配置されてるマップイベントを全て取得する
-        mapEvents = FindObjectsOfType<MapEvent>();
-    }
-
-    //--------------------------------------------------------------------------/
-    /// <summary>
-    /// 初期化開始
-    /// </summary>
-    //--------------------------------------------------------------------------/
-    protected void startCommonInitialize()
-    {
-        // プレイヤーの初期位置を設定
-        player.Initialize(OffScreenPos);
+        
+        // プレイヤーの初期位置設定
+        var parameter = SceneManagerExtension.SceneParameter;
+        if(parameter != null) {
+            player.Initialize(parameter.StartPosition, parameter.StartDirection);
+        }
 
         // 画面位置をもとに戻す
         transform.position = defaultTransformPos;
@@ -72,5 +69,31 @@ public class MapSceneBase : MonoBehaviour
         foreach(var mapEvent in mapEvents) {
             mapEvent.CheckFloorEvent(playerPosition);
         }
+    }
+}
+
+//--------------------------------------------------------------------------/
+/// <summary>
+/// マップシーン読み込み時に使うパラメータ
+/// </summary>
+//--------------------------------------------------------------------------/
+public class MapSceneParameter
+{
+    /// <summary>プレイヤーの初期位置</summary>
+    public Vector2 StartPosition { get; private set; }
+    /// <summary>プレイヤーの初期方向</summary>
+    public Player.DIRECTION StartDirection { get; private set; }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="position">プレイヤーの初期位置</param>
+    /// <param name="direction">プレイヤーの初期方向</param>
+    //--------------------------------------------------------------------------/
+    public MapSceneParameter(Vector2 position, Player.DIRECTION direction)
+    {
+        StartPosition = position;
+        StartDirection = direction;
     }
 }
