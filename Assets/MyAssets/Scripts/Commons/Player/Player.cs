@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using UniRx.Async;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -8,11 +8,12 @@ using UnityEngine.UI;
 //--------------------------------------------------------------------------/
 public class Player : MonoBehaviour
 {
-    /// <summary>アニメーション速度</summary>
-    private const float PLAYER_SPEED = 10f;
+    /// <summary> 移動アニメーションのフレーム数(2の累乗にする必要がある)</summary>
+    private const int MOVE_ANIMATION_FRAME = 4;
 
     /// <summary> プレイヤーの向き</summary>
     public enum DIRECTION {
+        NONE,
         LEFT,
         RIGHT,
         UP,
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour
     /// <summary>現在の向き</summary>
     private DIRECTION currentDirection;
 
+    // 移動処理中か
+    private bool isMoving;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -46,11 +49,8 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Update()
     {
-        // プレイヤーの移動
-        var x = Input.GetAxisRaw("Horizontal");
-        var y = Input.GetAxisRaw("Vertical");
-        var direction = new Vector2(x, y).normalized;
-        rigidBody.velocity = direction * PLAYER_SPEED;
+        // キャラクターの移動チェック
+        checkMoveAsync().Forget();
 
         // 調べるイベントチェック
         if(Input.GetKeyDown(KeyCode.Return)) {
@@ -77,23 +77,6 @@ public class Player : MonoBehaviour
             PlayerData.Instance.ItemManager.UseItem(itemPanel.CurrentItemIndex);
             itemPanel.UpdateItemList();
         }
-
-        // 移動中なら下記の処理を行う
-        if(direction != Vector2.zero) {
-            // 歩行アニメーション
-            if(direction.x < 0) {
-                moveAnimation(DIRECTION.LEFT);
-            } else if(direction.x > 0) {
-                moveAnimation(DIRECTION.RIGHT);
-            } else if(direction.y > 0) {
-                moveAnimation(DIRECTION.UP);
-            } else if(direction.y < 0) {
-                moveAnimation(DIRECTION.DOWN);
-            }
-
-            // 床イベントチェック
-            mapScene.CheckFloorEvents(transform.position);
-        }
     }
 
     //--------------------------------------------------------------------------/
@@ -111,19 +94,6 @@ public class Player : MonoBehaviour
 
     //--------------------------------------------------------------------------/
     /// <summary>
-    /// プレイヤーの開始位置と向きをセットする
-    /// </summary>
-    /// <param name="position">開始位置</param>
-    /// <param name="direction">向き</param>
-    //--------------------------------------------------------------------------/
-    public static void SetStartPotisionAndDirection(Vector2 position, DIRECTION direction)
-    {
-        startPosition = new Vector3(position.x, position.y, 0f);
-        startDirection = direction;
-    }
-
-    //--------------------------------------------------------------------------/
-    /// <summary>
     /// アイテムを所持品に追加する
     /// </summary>
     /// <param name="itemId">追加するアイテムID</param>
@@ -136,28 +106,111 @@ public class Player : MonoBehaviour
 
     //--------------------------------------------------------------------------/
     /// <summary>
+    /// 移動可能なら移動する
+    /// </summary>
+    /// <param name="direction">方向Vector</param>
+    //--------------------------------------------------------------------------/
+    private async UniTask checkMoveAsync()
+    {
+        // 移動中なら何もしない
+        if(isMoving) return;
+
+        // 入力データから移動方向を求める
+        var directionVector = getDirectionVector();
+        var direction = getDirection(directionVector);
+
+        // 移動キーが押されてないなら何もしない
+        if(direction == DIRECTION.NONE) return;
+
+        // 移動処理
+        isMoving = true;
+        var movedPosition = rigidBody.position + directionVector;
+        var prevPosition = rigidBody.position;
+        var i = 0;
+        while(true) {
+            moveAnimation(direction);
+            rigidBody.MovePosition(rigidBody.position + (directionVector / MOVE_ANIMATION_FRAME));
+            await UniTask.DelayFrame(1);
+            if(isFinishedMove()) break;
+            prevPosition = rigidBody.position;
+            i++;
+        }
+
+        // 床イベントチェック
+        mapScene.CheckFloorEvents(transform.position);
+
+        // 移動中フラグを下ろす
+        isMoving = false;
+
+        // 移動終了したか
+        bool isFinishedMove()
+        {
+            var currentPosition = rigidBody.position;
+            // 目的地についたらtrue
+            if(float.Equals(prevPosition.x, currentPosition.x)
+            && float.Equals(prevPosition.y, currentPosition.y)) return true;
+            // 目的地よりも過ぎていた場合もtrue
+            if(direction == DIRECTION.LEFT) return currentPosition.x <= movedPosition.x;
+            if(direction == DIRECTION.RIGHT) return currentPosition.x >= movedPosition.x;
+            if(direction == DIRECTION.UP) return currentPosition.y >= movedPosition.y;
+            if(direction == DIRECTION.DOWN) return currentPosition.y <= movedPosition.y;
+            return false;
+        }
+    }
+
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// 入力データから方向ベクトルを取得する
+    /// </summary>
+    /// <returns>方向Vector</returns>
+    //--------------------------------------------------------------------------/
+    private Vector2 getDirectionVector()
+    {
+        var x = Input.GetAxisRaw("Horizontal");
+        var y = Input.GetAxisRaw("Vertical");
+        return new Vector2(x, y).normalized;
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// 移動方向を取得する(斜めは無効)
+    /// </summary>
+    /// <<param name="directionVector">移動ベクトル</param>
+    /// <returns>移動方向</returns>
+    //--------------------------------------------------------------------------/
+    private DIRECTION getDirection(Vector2 directionVector)
+    {
+        if(directionVector == Vector2.left) return DIRECTION.LEFT;
+        if(directionVector == Vector2.right) return DIRECTION.RIGHT;
+        if(directionVector == Vector2.up) return DIRECTION.UP;
+        if(directionVector == Vector2.down) return DIRECTION.DOWN;
+
+        return DIRECTION.NONE;
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
     /// 移動アニメーションを行う
     /// </summary>
-    /// <param name="direction">移動する向き</param>
+    /// <param name="direction">移動方向</param>
     //--------------------------------------------------------------------------/
     private void moveAnimation(DIRECTION direction)
     {
+        currentDirection = direction;
+
         switch(direction) {
             case DIRECTION.LEFT:
                 anim.SetTrigger("left");
-                currentDirection = DIRECTION.LEFT;
                 break;
             case DIRECTION.RIGHT:
                 anim.SetTrigger("right");
-                currentDirection = DIRECTION.RIGHT;
                 break;
             case DIRECTION.UP:
                 anim.SetTrigger("up");
-                currentDirection = DIRECTION.UP;
                 break;
             case DIRECTION.DOWN:
                 anim.SetTrigger("down");
-                currentDirection = DIRECTION.DOWN;
                 break;
             default:
                 break;
