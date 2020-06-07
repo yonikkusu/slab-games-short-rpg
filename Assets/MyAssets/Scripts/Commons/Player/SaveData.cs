@@ -33,6 +33,9 @@ public class SaveData
     /// <summary>所持アイテムIDリスト</summary>
     [SerializeField] public int[] ItemIds;
 
+    /// <summary>プレイヤーの座標</summary>
+    public Vector2 PlayerPosition => new Vector2(PlayerPositionX, PlayerPositionY);
+
     //--------------------------------------------------------------------------/
     /// <summary>
     /// コンストラクタ
