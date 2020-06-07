@@ -49,8 +49,8 @@ public class SaveData
         LastPlayDate = FirstPlayDate;
         PlayTime = 0;
         LastScene = (int)SceneName.GuestRoom1;
-        PlayerPositionX = 0f;
-        PlayerPositionY = 0f;
+        PlayerPositionX = 0.5f;
+        PlayerPositionY = 0.5f;
         ItemIds = new int[0];
         SwitchFlagList = new SwitchFlag[0];
         CountFlagList = new CountFlag[0];
