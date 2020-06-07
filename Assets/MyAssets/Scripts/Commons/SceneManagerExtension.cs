@@ -52,4 +52,6 @@ public enum SceneName
     Dining,
     SekkanRoom,
     Library,
+    Garden,
+    Kitchen,
 }
