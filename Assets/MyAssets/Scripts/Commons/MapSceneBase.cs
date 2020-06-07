@@ -22,23 +22,18 @@ public class MapSceneBase : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Awake()
     {
+        // シーン上に配置されてるマップイベントを全て取得する
+        mapEvents = FindObjectsOfType<MapEvent>();
+
         // 初期化完了まで一旦画面外に退避させる
         defaultTransformPos = transform.position;
         transform.position = OffScreenPos;
-
-        // シーン上に配置されてるマップイベントを全て取得する
-        mapEvents = FindObjectsOfType<MapEvent>();
-    }
-
-    //--------------------------------------------------------------------------/
-    /// <summary>
-    /// 初期化開始
-    /// </summary>
-    //--------------------------------------------------------------------------/
-    protected void startCommonInitialize()
-    {
-        // プレイヤーの初期位置を設定
-        player.Initialize();
+        
+        // プレイヤーの初期位置設定
+        var parameter = SceneManagerExtension.SceneParameter;
+        if(parameter != null) {
+            player.Initialize(parameter.StartPosition, parameter.StartDirection);
+        }
 
         // 画面位置をもとに戻す
         transform.position = defaultTransformPos;

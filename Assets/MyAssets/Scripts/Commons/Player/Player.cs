@@ -28,8 +28,6 @@ public class Player : MonoBehaviour
     /// <summary>現在の向き</summary>
     private DIRECTION currentDirection;
 
-    private static Vector3 startPosition;
-    private static DIRECTION startDirection;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -102,10 +100,11 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 初期化
     /// </summary>
+    /// <param name="startPosition">初期位置</param>
+    /// <param name="startDirection">初期方向</param>
     //--------------------------------------------------------------------------/
-    public void Initialize()
+    public void Initialize(Vector3 startPosition, DIRECTION startDirection)
     {
-        // 開始位置を設定
         transform.position = MapSceneBase.OffScreenPos + startPosition;
         moveAnimation(startDirection);
     }
