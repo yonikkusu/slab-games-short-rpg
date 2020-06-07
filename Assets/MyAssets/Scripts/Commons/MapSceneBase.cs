@@ -37,6 +37,9 @@ public class MapSceneBase : MonoBehaviour
 
         // 画面位置をもとに戻す
         transform.position = defaultTransformPos;
+#if DEBUG_LOG
+        Debug.Log($"位置({checkedPosition.x}, {checkedPosition.y})");
+#endif
     }
 
     //--------------------------------------------------------------------------/

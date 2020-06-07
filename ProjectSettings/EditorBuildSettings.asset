@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MyAssets/Scenes/Title.unity
+    path: Assets/MyAssets/Scenes/1F/Title.unity
     guid: 8863771b5ba156a4fa5277bf8a8116c2
   - enabled: 1
     path: Assets/MyAssets/Scenes/Test/GrassMap.unity
@@ -35,4 +35,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MyAssets/Scenes/2F/KidsRoom.unity
     guid: ff610d6b13b5d5f4a8443b051ae94992
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/1F/Corridor1F.unity
+    guid: 56b0b508369d1db4c8cbaf6f087aa474
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/1F/BathRoom.unity
+    guid: f90647bab1d4193479658537da677673
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/1F/DoressingRoom.unity
+    guid: e794c379e6782f745a0af607d5e70482
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/1F/Toilet.unity
+    guid: 35d7811af5e13f349ba67b9127664fe2
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/1F/Dining.unity
+    guid: 2ea96f8ba5beedd4586c9d71746568c6
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/1F/SekkanRoom.unity
+    guid: 0ebe654392fac9c48a597f83c56ee301
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/1F/Garden.unity
+    guid: 3b5d4a080124b0645a3897b783dd1fe9
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/1F/Kitchen.unity
+    guid: 2d4ac6409a4f44447a275be59c3437fc
   m_configObjects: {}
