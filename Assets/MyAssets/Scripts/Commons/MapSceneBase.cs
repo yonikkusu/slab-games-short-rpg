@@ -9,6 +9,7 @@ public class MapSceneBase : MonoBehaviour
 {
     /// <summary>画面外座標</summary>
     public static readonly Vector3 OffScreenPos = new Vector3(0f, 5000f, 0f);
+
     [SerializeField] private Player player = default;
 
     private MapEvent[] mapEvents;
@@ -73,5 +74,31 @@ public class MapSceneBase : MonoBehaviour
         foreach(var mapEvent in mapEvents) {
             mapEvent.CheckFloorEvent(playerPosition);
         }
+    }
+}
+
+//--------------------------------------------------------------------------/
+/// <summary>
+/// マップシーン読み込み時に使うパラメータ
+/// </summary>
+//--------------------------------------------------------------------------/
+public class MapSceneParameter
+{
+    /// <summary>プレイヤーの初期位置</summary>
+    public Vector2 StartPosition { get; private set; }
+    /// <summary>プレイヤーの初期方向</summary>
+    public Player.DIRECTION StartDirection { get; private set; }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="position">プレイヤーの初期位置</param>
+    /// <param name="direction">プレイヤーの初期方向</param>
+    //--------------------------------------------------------------------------/
+    public MapSceneParameter(Vector2 position, Player.DIRECTION direction)
+    {
+        StartPosition = position;
+        StartDirection = direction;
     }
 }
