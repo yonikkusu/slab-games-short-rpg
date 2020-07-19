@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UniRx.Async;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -41,6 +42,9 @@ public class MapSceneBase : MonoBehaviour
 
         // BGM再生
         SoundManager.Instance.PlayBgm(bgm);
+
+        // 画面フェードイン
+        DisplayManager.Instance.FadeInDisplayAsync().Forget();
 
 #if DEBUG_LOG
         Debug.Log($"位置({checkedPosition.x}, {checkedPosition.y})");

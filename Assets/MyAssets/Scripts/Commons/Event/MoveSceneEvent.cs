@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UniRx.Async;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -19,6 +20,6 @@ public class MoveSceneEvent : MapEvent
     protected override void onStepped()
     {
         var parameter = new MapSceneParameter(destinationCoord, playerDirection);
-        SceneManagerExtension.LoadScene(sceneName, parameter);
+        SceneManagerExtension.LoadSceneAsync(sceneName, parameter).Forget();
     }
 }

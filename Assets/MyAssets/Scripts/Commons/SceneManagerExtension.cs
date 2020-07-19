@@ -1,4 +1,5 @@
 ﻿using UnityEngine.SceneManagement;
+using UniRx.Async;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -17,10 +18,13 @@ public class SceneManagerExtension
     /// <param name="scene">読み込むシーン名</param>
     /// <param name="parameter">読み込み時に使うパラメータ</param>
     //--------------------------------------------------------------------------/
-    public static void LoadScene(SceneName scene, MapSceneParameter paramter = null)
+    public static async UniTask LoadSceneAsync(SceneName scene, MapSceneParameter paramter = null)
     {
+        // 画面フェードアウト
+        await DisplayManager.Instance.FadeOutDisplayAsync();
+        // シーン遷移
         SceneParameter = paramter;
-        SceneManager.LoadSceneAsync(scene.ToString());
+        await SceneManager.LoadSceneAsync(scene.ToString());
     }
 
     //--------------------------------------------------------------------------/
