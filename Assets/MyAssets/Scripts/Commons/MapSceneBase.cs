@@ -11,6 +11,7 @@ public class MapSceneBase : MonoBehaviour
     public static readonly Vector3 OffScreenPos = new Vector3(0f, 5000f, 0f);
 
     [SerializeField] private Player player = default;
+    [SerializeField] private Bgm bgm = Bgm.Title;
 
     private MapEvent[] mapEvents;
     private Vector3 defaultTransformPos;
@@ -37,6 +38,10 @@ public class MapSceneBase : MonoBehaviour
 
         // 画面位置をもとに戻す
         transform.position = defaultTransformPos;
+
+        // BGM再生
+        SoundManager.Instance.PlayBgm(bgm);
+
 #if DEBUG_LOG
         Debug.Log($"位置({checkedPosition.x}, {checkedPosition.y})");
 #endif
