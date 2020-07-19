@@ -24,6 +24,9 @@ public class MapSceneBase : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Awake()
     {
+        // メニューボタンを表示する
+        DisplayManager.Instance.SetActiveMenu(true);
+
         // シーン上に配置されてるマップイベントを全て取得する
         mapEvents = FindObjectsOfType<MapEvent>();
 

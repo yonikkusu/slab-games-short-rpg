@@ -18,6 +18,9 @@ public class TitleManager : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Start()
     {
+        // メニューボタンを非表示にする
+        DisplayManager.Instance.SetActiveMenu(false);
+
         // スタートボタンタップ時
         startButton.onClick.AddListener(() => {
             // タップ音を鳴らす
