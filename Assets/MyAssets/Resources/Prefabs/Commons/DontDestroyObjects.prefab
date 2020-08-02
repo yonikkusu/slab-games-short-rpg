@@ -2520,6 +2520,7 @@ MonoBehaviour:
   seSource: {fileID: 5209827587738210043}
   bgmClips:
   - {fileID: 8300000, guid: d8469a227a6a66d4285e06913dd34797, type: 3}
+  - {fileID: 8300000, guid: 36a029e86dcc06a499027241a7874857, type: 3}
   seClips:
   - {fileID: 8300000, guid: d578db6432fb4534eada68d4a197c0b9, type: 3}
 --- !u!1 &2568605934933999554

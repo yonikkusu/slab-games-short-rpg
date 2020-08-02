@@ -107,6 +107,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 public enum Bgm
 {
     Title,
+    House,
 }
 
 //--------------------------------------------------------------------------/
