@@ -11,6 +11,9 @@ public class SceneManagerExtension
     /// <summary>シーンパラメータ</summary>
     public static MapSceneParameter SceneParameter;
 
+    /// <summary>シーン遷移中か</summary>
+    public static bool IsMoving;
+
     //--------------------------------------------------------------------------/
     /// <summary>
     /// シーンを読み込む
@@ -20,11 +23,13 @@ public class SceneManagerExtension
     //--------------------------------------------------------------------------/
     public static async UniTask LoadSceneAsync(SceneName scene, MapSceneParameter paramter = null)
     {
+        IsMoving = true;
         // 画面フェードアウト
         await DisplayManager.Instance.FadeOutDisplayAsync();
         // シーン遷移
         SceneParameter = paramter;
         await SceneManager.LoadSceneAsync(scene.ToString());
+        IsMoving = false;
     }
 
     //--------------------------------------------------------------------------/

@@ -112,8 +112,8 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------/
     private async UniTask checkMoveAsync()
     {
-        // 移動中なら何もしない
-        if(isMoving) return;
+        // 移動中またはシーン移動中なら何もしない
+        if(isMoving || SceneManagerExtension.IsMoving) return;
 
         // 入力データから移動方向を求める
         var directionVector = getDirectionVector();
