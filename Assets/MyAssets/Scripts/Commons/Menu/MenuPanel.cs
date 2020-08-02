@@ -1,6 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UniRx.Async;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -26,7 +26,7 @@ public class MenuPanel : MonoBehaviour
         });
         titleButton.onClick.AddListener(() => {
             SoundManager.Instance.PlaySe(Se.Tap);
-            SceneManagerExtension.LoadScene(SceneName.Title);
+            SceneManagerExtension.LoadSceneAsync(SceneName.Title).Forget();
         });
         saveLoadPanel.gameObject.SetActive(false);
     }

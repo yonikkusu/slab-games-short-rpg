@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx.Async;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -35,7 +36,7 @@ public class SaveLoadButton : MonoBehaviour
             else if(type == SaveLoadPanelType.Load) {
                 PlayerData.Instance.Load(index);
                 var parameter = new MapSceneParameter(PlayerData.Instance.CurrentData.PlayerPosition, Player.DIRECTION.DOWN);
-                SceneManagerExtension.LoadScene((SceneName)PlayerData.Instance.CurrentData.LastScene, parameter);
+                SceneManagerExtension.LoadSceneAsync((SceneName)PlayerData.Instance.CurrentData.LastScene, parameter).Forget();
             }
         });
     }

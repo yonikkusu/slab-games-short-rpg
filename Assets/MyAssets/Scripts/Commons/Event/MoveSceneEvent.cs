@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UniRx.Async;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -15,10 +16,12 @@ public class MoveSceneEvent : MapEvent
     /// <summary>
     /// 踏まれた時の処理
     /// </summary>
+    /// <param name="playerModel">プレイヤー情報</param>
     //--------------------------------------------------------------------------/
-    protected override void onStepped()
+    protected override void onStepped(IReadOnlyPlayerModel playerModel)
     {
-        var parameter = new MapSceneParameter(destinationCoord, playerDirection);
-        SceneManagerExtension.LoadScene(sceneName, parameter);
+        var direction = playerDirection == Player.DIRECTION.NONE ? playerModel.CurrentDirection : playerDirection;
+        var parameter = new MapSceneParameter(destinationCoord, direction);
+        SceneManagerExtension.LoadSceneAsync(sceneName, parameter).Forget();
     }
 }

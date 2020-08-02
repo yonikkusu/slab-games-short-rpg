@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UniRx.Async;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -11,6 +12,7 @@ public class MapSceneBase : MonoBehaviour
     public static readonly Vector3 OffScreenPos = new Vector3(0f, 5000f, 0f);
 
     [SerializeField] private Player player = default;
+    [SerializeField] private Bgm bgm = Bgm.Title;
 
     private MapEvent[] mapEvents;
     private Vector3 defaultTransformPos;
@@ -22,6 +24,9 @@ public class MapSceneBase : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Awake()
     {
+        // メニューボタンを表示する
+        DisplayManager.Instance.SetActiveMenu(true);
+
         // シーン上に配置されてるマップイベントを全て取得する
         mapEvents = FindObjectsOfType<MapEvent>();
 
@@ -33,10 +38,19 @@ public class MapSceneBase : MonoBehaviour
         var parameter = SceneManagerExtension.SceneParameter;
         if(parameter != null) {
             player.Initialize(parameter.StartPosition, parameter.StartDirection);
+        } else {
+            player.Initialize(new Vector2(0.5f, 0.5f), Player.DIRECTION.DOWN);
         }
 
         // 画面位置をもとに戻す
         transform.position = defaultTransformPos;
+
+        // BGM再生
+        SoundManager.Instance.PlayBgm(bgm);
+
+        // 画面フェードイン
+        DisplayManager.Instance.FadeInDisplayAsync().Forget();
+
 #if DEBUG_LOG
         Debug.Log($"位置({checkedPosition.x}, {checkedPosition.y})");
 #endif
@@ -62,15 +76,15 @@ public class MapSceneBase : MonoBehaviour
     /// <summary>
     /// 床イベントを発動させるかチェックする
     /// </summary>
-    /// <param name="playerPosition">プレイヤーの位置</param>
+    /// <param name="playerModel">プレイヤー情報</param>
     //--------------------------------------------------------------------------/
-    public void CheckFloorEvents(Vector2 playerPosition)
+    public void CheckFloorEvents(IReadOnlyPlayerModel playerModel)
     {
 #if DEBUG_LOG
-        Debug.Log($"踏んだ位置({playerPosition.x}, {playerPosition.y})");
+        Debug.Log($"踏んだ位置({playerModel.CurrentPosition.x}, {playerModel.CurrentPosition.y})");
 #endif
         foreach(var mapEvent in mapEvents) {
-            mapEvent.CheckFloorEvent(playerPosition);
+            mapEvent.CheckFloorEvent(playerModel);
         }
     }
 }

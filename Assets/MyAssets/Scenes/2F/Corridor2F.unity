@@ -165,7 +165,7 @@ MonoBehaviour:
   eventCoord: {x: 22.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: 22.5, y: -4.5}
-  playerDirection: 3
+  playerDirection: 0
 --- !u!114 &102208499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +238,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -7, y: -2}
+  m_AnchoredPosition: {x: -6, y: -2}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &195130338
@@ -253,9 +253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -6.5, y: -1.5}
+  eventCoord: {x: -5.5, y: -1.5}
   sceneName: 6
-  destinationCoord: {x: 3.5, y: -1.5}
+  destinationCoord: {x: 2.5, y: -1.5}
   playerDirection: 0
 --- !u!114 &195130339
 MonoBehaviour:
@@ -437,7 +437,7 @@ MonoBehaviour:
   eventCoord: {x: -0.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: -0.5, y: -4.5}
-  playerDirection: 3
+  playerDirection: 0
 --- !u!114 &1084958820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +528,7 @@ MonoBehaviour:
   eventCoord: {x: 20.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: 20.5, y: -4.5}
-  playerDirection: 3
+  playerDirection: 0
 --- !u!114 &1149335032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,9 +597,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -6.5, y: 5.5}
+  eventCoord: {x: -5.5, y: 5.5}
   sceneName: 5
-  destinationCoord: {x: 3.5, y: -1.5}
+  destinationCoord: {x: 2.5, y: -1.5}
   playerDirection: 0
 --- !u!114 &1174739765
 MonoBehaviour:
@@ -654,7 +654,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -7, y: 5}
+  m_AnchoredPosition: {x: -6, y: 5}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &1195525278
@@ -710,7 +710,7 @@ MonoBehaviour:
   eventCoord: {x: 21.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: 21.5, y: -4.5}
-  playerDirection: 3
+  playerDirection: 0
 --- !u!114 &1195525281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,7 +801,7 @@ MonoBehaviour:
   eventCoord: {x: -1.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: -1.5, y: -4.5}
-  playerDirection: 3
+  playerDirection: 0
 --- !u!114 &1195962765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3503,7 +3503,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 28, y: 10}
+  m_AnchoredPosition: {x: 28, y: 9}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1370553144
@@ -3518,10 +3518,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 28.5, y: 10.5}
+  eventCoord: {x: 28.5, y: 9.5}
   sceneName: 10
-  destinationCoord: {x: -0.5, y: -5.5}
-  playerDirection: 2
+  destinationCoord: {x: -0.5, y: -4.5}
+  playerDirection: 0
 --- !u!114 &1370553145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3594,7 +3594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 27, y: -10}
+  m_AnchoredPosition: {x: 26, y: -10}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1392286374
@@ -3609,10 +3609,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 27.5, y: -9.5}
+  eventCoord: {x: 26.5, y: -9.5}
   sceneName: 9
-  destinationCoord: {x: -4.5, y: -1.5}
-  playerDirection: 1
+  destinationCoord: {x: -3.5, y: -1.5}
+  playerDirection: 0
 --- !u!114 &1392286375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3685,7 +3685,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 27, y: -1}
+  m_AnchoredPosition: {x: 26, y: -1}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1423302869
@@ -3700,10 +3700,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 27.5, y: -0.5}
+  eventCoord: {x: 26.5, y: -0.5}
   sceneName: 8
-  destinationCoord: {x: -4.5, y: -2.5}
-  playerDirection: 1
+  destinationCoord: {x: -3.5, y: -2.5}
+  playerDirection: 0
 --- !u!114 &1423302870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7001,7 +7001,7 @@ MonoBehaviour:
   eventCoord: {x: 0.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: 0.5, y: -4.5}
-  playerDirection: 3
+  playerDirection: 0
 --- !u!114 &1881259392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7169,7 +7169,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -7, y: -9}
+  m_AnchoredPosition: {x: -6, y: -9}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1940201658
@@ -7184,9 +7184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -6.5, y: -8.5}
+  eventCoord: {x: -5.5, y: -8.5}
   sceneName: 7
-  destinationCoord: {x: 3.5, y: -1.5}
+  destinationCoord: {x: 2.5, y: -1.5}
   playerDirection: 0
 --- !u!114 &1940201659
 MonoBehaviour:
@@ -8073,7 +8073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -7, y: 12}
+  m_AnchoredPosition: {x: -6, y: 12}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1976188938
@@ -8125,9 +8125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -6.5, y: 12.5}
+  eventCoord: {x: -5.5, y: 12.5}
   sceneName: 4
-  destinationCoord: {x: 3.5, y: -1.5}
+  destinationCoord: {x: 2.5, y: -1.5}
   playerDirection: 0
 --- !u!1 &2028686407
 GameObject:
@@ -8176,3 +8176,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1803528882}
+  bgm: 1

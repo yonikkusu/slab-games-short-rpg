@@ -1,6 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UniRx.Async;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -27,7 +27,7 @@ public class StartMenuPanel : MonoBehaviour
             PlayerData.Instance.Create("マサタカ");
             // TODO: 物語の最初の画面へ遷移
             var parameter = new MapSceneParameter(PlayerData.Instance.CurrentData.PlayerPosition, Player.DIRECTION.DOWN);
-            SceneManagerExtension.LoadScene(SceneName.GuestRoom1, parameter);
+            SceneManagerExtension.LoadSceneAsync(SceneName.GuestRoom1, parameter).Forget();
         });
 
         // コンテニューボタン
