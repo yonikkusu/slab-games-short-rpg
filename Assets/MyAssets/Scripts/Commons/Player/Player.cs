@@ -26,8 +26,9 @@ public class Player : MonoBehaviour
 
     /// <summary>現在のシーン</summary>
     private MapSceneBase mapScene;
-    /// <summary>現在の向き</summary>
-    private DIRECTION currentDirection;
+
+    // プレイヤー情報
+    private PlayerModel playerModel;
 
     // 移動処理中か
     private bool isMoving;
@@ -54,7 +55,7 @@ public class Player : MonoBehaviour
 
         // 調べるイベントチェック
         if(Input.GetKeyDown(KeyCode.Return)) {
-            switch(currentDirection) {
+            switch(playerModel.CurrentDirection) {
                 case DIRECTION.LEFT:
                     mapScene.CheckInspectEvents(new Vector2(transform.position.x - 1, transform.position.y));
                     break;
@@ -88,8 +89,9 @@ public class Player : MonoBehaviour
     //--------------------------------------------------------------------------/
     public void Initialize(Vector3 startPosition, DIRECTION startDirection)
     {
+        playerModel = new PlayerModel(startPosition, startDirection);
         transform.position = MapSceneBase.OffScreenPos + startPosition;
-        moveAnimation(startDirection);
+        move(startDirection, startPosition);
     }
 
     //--------------------------------------------------------------------------/
@@ -128,8 +130,7 @@ public class Player : MonoBehaviour
         var prevPosition = rigidBody.position;
         var i = 0;
         while(true) {
-            moveAnimation(direction);
-            rigidBody.MovePosition(rigidBody.position + (directionVector / MOVE_ANIMATION_FRAME));
+            move(direction, rigidBody.position + (directionVector / MOVE_ANIMATION_FRAME));
             await UniTask.DelayFrame(1);
             if(isFinishedMove()) break;
             prevPosition = rigidBody.position;
@@ -137,7 +138,7 @@ public class Player : MonoBehaviour
         }
 
         // 床イベントチェック
-        mapScene.CheckFloorEvents(transform.position);
+        mapScene.CheckFloorEvents(playerModel);
 
         // 移動中フラグを下ろす
         isMoving = false;
@@ -191,13 +192,27 @@ public class Player : MonoBehaviour
 
     //--------------------------------------------------------------------------/
     /// <summary>
+    /// 移動する
+    /// </summary>
+    /// <param name="direction">移動方向</param>
+    /// <param name="movePosition">移動座標</param>
+    //--------------------------------------------------------------------------/
+    private void move(DIRECTION direction, Vector2 movePosition)
+    {
+        moveAnimation(direction);
+        rigidBody.MovePosition(movePosition);
+        playerModel.UpdatePosition(movePosition);
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
     /// 移動アニメーションを行う
     /// </summary>
     /// <param name="direction">移動方向</param>
     //--------------------------------------------------------------------------/
     private void moveAnimation(DIRECTION direction)
     {
-        currentDirection = direction;
+        playerModel.UpdateDirection(direction);
 
         switch(direction) {
             case DIRECTION.LEFT:

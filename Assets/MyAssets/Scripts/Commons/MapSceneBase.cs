@@ -76,15 +76,15 @@ public class MapSceneBase : MonoBehaviour
     /// <summary>
     /// 床イベントを発動させるかチェックする
     /// </summary>
-    /// <param name="playerPosition">プレイヤーの位置</param>
+    /// <param name="playerModel">プレイヤー情報</param>
     //--------------------------------------------------------------------------/
-    public void CheckFloorEvents(Vector2 playerPosition)
+    public void CheckFloorEvents(IReadOnlyPlayerModel playerModel)
     {
 #if DEBUG_LOG
-        Debug.Log($"踏んだ位置({playerPosition.x}, {playerPosition.y})");
+        Debug.Log($"踏んだ位置({playerModel.CurrentPosition.x}, {playerModel.CurrentPosition.y})");
 #endif
         foreach(var mapEvent in mapEvents) {
-            mapEvent.CheckFloorEvent(playerPosition);
+            mapEvent.CheckFloorEvent(playerModel);
         }
     }
 }

@@ -26,13 +26,12 @@ public class MapEvent : MonoBehaviour
     /// <summary>
     /// 床イベントを発動させるかチェックする
     /// </summary>
-    /// <param name="playerPosition">プレイヤーの位置</param>
-    /// <returns></returns>
+    /// <param name="playerModel">プレイヤー情報</param>
     //--------------------------------------------------------------------------/
-    public void CheckFloorEvent(Vector2 playerPosition)
+    public void CheckFloorEvent(IReadOnlyPlayerModel playerModel)
     {
-        if(isSamePosition(playerPosition)) {
-            onStepped();
+        if(isSamePosition(playerModel.CurrentPosition)) {
+            onStepped(playerModel);
         }
     }
 
@@ -47,8 +46,9 @@ public class MapEvent : MonoBehaviour
     /// <summary>
     /// 踏まれた時の処理(継承先で中身を定義する)
     /// </summary>
+    /// <param name="playerModel">プレイヤー情報</param>
     //--------------------------------------------------------------------------/
-    protected virtual void onStepped() { }
+    protected virtual void onStepped(IReadOnlyPlayerModel playerModel) { }
 
     //--------------------------------------------------------------------------/
     /// <summary>
