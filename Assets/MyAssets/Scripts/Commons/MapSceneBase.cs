@@ -50,10 +50,6 @@ public class MapSceneBase : MonoBehaviour
 
         // 画面フェードイン
         DisplayManager.Instance.FadeInDisplayAsync().Forget();
-
-#if DEBUG_LOG
-        Debug.Log($"位置({checkedPosition.x}, {checkedPosition.y})");
-#endif
     }
 
     //--------------------------------------------------------------------------/
