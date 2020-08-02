@@ -38,6 +38,8 @@ public class MapSceneBase : MonoBehaviour
         var parameter = SceneManagerExtension.SceneParameter;
         if(parameter != null) {
             player.Initialize(parameter.StartPosition, parameter.StartDirection);
+        } else {
+            player.Initialize(new Vector2(0.5f, 0.5f), Player.DIRECTION.DOWN);
         }
 
         // 画面位置をもとに戻す
