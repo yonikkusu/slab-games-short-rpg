@@ -24,6 +24,11 @@ public class MapSceneBase : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Awake()
     {
+        // プレイヤーデータがないならデバッグ用に作成する
+        if(PlayerData.Instance.CurrentData == null) {
+            PlayerData.Instance.Create("デバッグプレイヤー");
+        }
+
         // メニューボタンを表示する
         DisplayManager.Instance.SetActiveMenu(true);
 
