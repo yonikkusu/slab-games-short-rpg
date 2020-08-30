@@ -51,6 +51,24 @@ public class ItemPanel : MonoBehaviour
            selectFrame.transform.SetParent(itemImageList[CurrentItemIndex].transform);
            selectFrame.transform.localPosition = new Vector3();
         }
+
+        // アイテム使用キーが押された場合
+        if(Input.GetKeyDown(KeyCode.I)) {
+            PlayerData.Instance.ItemManager.UseItem(CurrentItemIndex);
+            UpdateItemList();
+        }
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// アイテムを所持品に追加する
+    /// </summary>
+    /// <param name="itemId">追加するアイテムID</param>
+    //--------------------------------------------------------------------------/
+    public void AddItem(int itemId)
+    {
+        PlayerData.Instance.AddItem((ItemID)itemId);
+        UpdateItemList();
     }
 
     //--------------------------------------------------------------------------/
@@ -60,7 +78,7 @@ public class ItemPanel : MonoBehaviour
     //--------------------------------------------------------------------------/
     public void UpdateItemList()
     {
-        var possessionItemList = PlayerData.Instance.ItemManager.PossessionItemList;
+        var possessionItemList = PlayerData.Instance.ItemManager?.PossessionItemList;
 
         if(possessionItemList == null) return;
 

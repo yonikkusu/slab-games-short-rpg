@@ -29,8 +29,9 @@ public class MapSceneBase : MonoBehaviour
             PlayerData.Instance.Create("デバッグプレイヤー");
         }
 
-        // メニューボタンを表示する
+        // メニューボタンとアイテムパネルを表示する
         DisplayManager.Instance.SetActiveMenu(true);
+        DisplayManager.Instance.SetActiveItemPanel(true);
 
         // シーン上に配置されてるマップイベントを全て取得する
         mapEvents = FindObjectsOfType<MapEvent>();

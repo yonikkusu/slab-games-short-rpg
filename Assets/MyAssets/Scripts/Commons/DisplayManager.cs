@@ -11,6 +11,7 @@ public class DisplayManager : SingletonMonoBehaviour<DisplayManager>
 {
     [SerializeField] private Image fadeImage = default;
     [SerializeField] private GameObject menuObject = default;
+    [SerializeField] private GameObject itemPanelObject = default;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -52,9 +53,17 @@ public class DisplayManager : SingletonMonoBehaviour<DisplayManager>
 
     //--------------------------------------------------------------------------/
     /// <summary>
-    /// メニューの表示/非表示を切り替える
+    /// メニューボタンの表示/非表示を切り替える
     /// </summary>
     /// <param name="value">表示するならtrue、非表示ならfalse</param>
     //--------------------------------------------------------------------------/
     public void SetActiveMenu(bool value) => menuObject.SetActive(value);
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// アイテムパネルの表示/非表示を切り替える
+    /// </summary>
+    /// <param name="value">表示するならtrue、非表示ならfalse</param>
+    //--------------------------------------------------------------------------/
+    public void SetActiveItemPanel(bool value) => itemPanelObject.SetActive(value);
 }
