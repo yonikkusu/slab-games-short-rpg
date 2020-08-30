@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UniRx.Async;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -34,5 +35,8 @@ public class TitleManager : MonoBehaviour
 
         // 最初はスタートメニューを閉じておく
         startMenuPanel.gameObject.SetActive(false);
+
+        // 画面フェードイン
+        DisplayManager.Instance.FadeInDisplayAsync().Forget();
     }
 }
