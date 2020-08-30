@@ -5939,8 +5939,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1511141860554214361}
-  menuObject: {fileID: 5496869487834106068}
-  itemPanelObject: {fileID: 207642147249507378}
+  menu: {fileID: 8264624124857731518}
+  itemPanel: {fileID: 7221088014751340358}
 --- !u!1 &6210792661538340857
 GameObject:
   m_ObjectHideFlags: 0

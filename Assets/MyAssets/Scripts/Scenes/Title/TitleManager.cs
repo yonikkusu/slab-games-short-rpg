@@ -19,8 +19,8 @@ public class TitleManager : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Start()
     {
-        // メニューボタンを非表示にする
-        DisplayManager.Instance.SetActiveMenu(false);
+        // インゲームで使う表示物を非表示にする
+        DisplayManager.Instance.HideInGameDisplayObjects();
 
         // スタートボタンタップ時
         startButton.onClick.AddListener(() => {

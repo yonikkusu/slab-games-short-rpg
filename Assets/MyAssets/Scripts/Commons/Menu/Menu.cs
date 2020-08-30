@@ -24,11 +24,21 @@ public class Menu : MonoBehaviour
             SoundManager.Instance.PlaySe(Se.Tap);
             toggle();
         });
-        menuButton.gameObject.SetActive(true);
         backgroundButton.onClick.AddListener(() => {
             SoundManager.Instance.PlaySe(Se.Tap);
             toggle();
         });
+        Initialize();
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    //--------------------------------------------------------------------------/
+    public void Initialize()
+    {
+        menuButton.gameObject.SetActive(true);
         backgroundButton.gameObject.SetActive(false);
         menuPanel.SetActive(false);
     }
