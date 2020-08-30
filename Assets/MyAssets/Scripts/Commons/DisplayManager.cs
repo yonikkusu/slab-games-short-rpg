@@ -15,6 +15,21 @@ public class DisplayManager : SingletonMonoBehaviour<DisplayManager>
 
     //--------------------------------------------------------------------------/
     /// <summary>
+    /// 起動時処理
+    /// </summary>
+    //--------------------------------------------------------------------------/
+    protected override void Awake()
+    {
+        base.Awake();
+
+        // 各オブジェクトの表示状態を初期化
+        fadeImage.gameObject.SetActive(true);
+        menuObject.SetActive(false);
+        itemPanelObject.SetActive(false);
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
     /// 画面をフェードアウトする
     /// </summary>
     /// <param name="frame">フェードさせるフレーム数</param>
