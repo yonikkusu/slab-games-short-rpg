@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1494367464}
+  bgm: 1
 --- !u!4 &238475812
 Transform:
   m_ObjectHideFlags: 0
@@ -427,7 +428,7 @@ MonoBehaviour:
   eventCoord: {x: 5.5, y: -7.5}
   sceneName: 11
   destinationCoord: {x: -5.5, y: -8.5}
-  playerDirection: 1
+  playerDirection: 0
 --- !u!114 &411453833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,7 +519,7 @@ MonoBehaviour:
   eventCoord: {x: 1.5, y: 9.5}
   sceneName: 19
   destinationCoord: {x: 1.5, y: -3.5}
-  playerDirection: 2
+  playerDirection: 0
 --- !u!114 &607732181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1879,7 +1880,7 @@ MonoBehaviour:
   eventCoord: {x: 5.5, y: 5.5}
   sceneName: 11
   destinationCoord: {x: -5.5, y: 3.5}
-  playerDirection: 1
+  playerDirection: 0
 --- !u!114 &1287756393
 MonoBehaviour:
   m_ObjectHideFlags: 0
