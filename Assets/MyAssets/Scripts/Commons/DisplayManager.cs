@@ -74,6 +74,7 @@ public class DisplayManager : SingletonMonoBehaviour<DisplayManager>
     public void ShowInGameDisplayObjects()
     {
         menu.Initialize();
+        itemPanel.Initialize();
         menu.gameObject.SetActive(true);
         itemPanel.gameObject.SetActive(true);
     }
