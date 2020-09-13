@@ -17,5 +17,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: e5e4097c055b82e4abc31378bfaad7a9, type: 3}
   - name: "\u672C"
     sprite: {fileID: 21300000, guid: 7f86c2df66c49064f9839576d9fd0c09, type: 3}
-  - name: "\u672C"
-    sprite: {fileID: 21300000, guid: 7f86c2df66c49064f9839576d9fd0c09, type: 3}
+  - name: "\u30BF\u30D0\u30B9\u30B3"
+    sprite: {fileID: 21300000, guid: d896c207d48304c49a4d0f4521e8671f, type: 3}
+  - name: "\u6C34\u9244\u7832"
+    sprite: {fileID: 21300000, guid: d648221bfd5884f40ab9900b42b3fdea, type: 3}

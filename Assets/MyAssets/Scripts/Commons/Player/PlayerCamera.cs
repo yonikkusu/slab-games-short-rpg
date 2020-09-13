@@ -17,11 +17,6 @@ public class PlayerCamera : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        // プレイヤーの位置をセットする(データがないならデバッグ用に作成する)
-        if(PlayerData.Instance.CurrentData == null) {
-            PlayerData.Instance.Create("デバッグプレイヤー");
-        }
-        var playerData = PlayerData.Instance.CurrentData;
     }
 
     //--------------------------------------------------------------------------/

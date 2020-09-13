@@ -42,4 +42,6 @@ public enum ItemID
 {
     Key,
     Book,
+    Tabasco,
+    WaterGun,
 }

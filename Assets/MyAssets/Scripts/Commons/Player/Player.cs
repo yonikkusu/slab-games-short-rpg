@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rigidBody = default;
     [SerializeField] private Animator anim = default;
-    [SerializeField] private ItemPanel itemPanel = default;
 
     /// <summary>現在のシーン</summary>
     private MapSceneBase mapScene;
@@ -72,12 +71,6 @@ public class Player : MonoBehaviour
                     break;
             }
         }
-
-        // アイテム使用キーが押された場合
-        if(Input.GetKeyDown(KeyCode.I)) {
-            PlayerData.Instance.ItemManager.UseItem(itemPanel.CurrentItemIndex);
-            itemPanel.UpdateItemList();
-        }
     }
 
     //--------------------------------------------------------------------------/
@@ -92,18 +85,6 @@ public class Player : MonoBehaviour
         playerModel = new PlayerModel(startPosition, startDirection);
         transform.position = MapSceneBase.OffScreenPos + startPosition;
         move(startDirection, startPosition);
-    }
-
-    //--------------------------------------------------------------------------/
-    /// <summary>
-    /// アイテムを所持品に追加する
-    /// </summary>
-    /// <param name="itemId">追加するアイテムID</param>
-    //--------------------------------------------------------------------------/
-    public void AddItem(int itemId)
-    {
-        PlayerData.Instance.AddItem((ItemID)itemId);
-        itemPanel.UpdateItemList();
     }
 
     //--------------------------------------------------------------------------/

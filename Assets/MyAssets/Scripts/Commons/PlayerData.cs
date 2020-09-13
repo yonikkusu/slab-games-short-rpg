@@ -7,6 +7,8 @@
 //--------------------------------------------------------------------------/
 public class PlayerData : SingletonMonoBehaviour<PlayerData>
 {
+    [SerializeField] ItemPanel itemPanel;
+
     /// <summary>現在使っているプレイヤーデータ</summary>
     public SaveData CurrentData { get; private set; }
     /// <summary>フラグマネージャー</summary>
@@ -95,12 +97,9 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
 
     //--------------------------------------------------------------------------/
     /// <summary>
-    /// 指定されたファイル番号のセーブデータを取得する
+    /// プレイヤーデータに獲得アイテムを追加する
     /// </summary>
-    /// <param name="index">セーブファイル番号</param>
+    /// <param name="itemId">獲得したアイテムID</param>
     //--------------------------------------------------------------------------/
-    public void AddItem(ItemID itemId)
-    {
-        ItemManager.AddItem(itemId);
-    }
+    public void AddItem(ItemID itemId) => ItemManager.AddItem(itemId);
 }

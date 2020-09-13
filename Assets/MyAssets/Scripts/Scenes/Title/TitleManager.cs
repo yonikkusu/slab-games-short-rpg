@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UniRx.Async;
 
 //--------------------------------------------------------------------------/
 /// <summary>
@@ -18,8 +19,8 @@ public class TitleManager : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Start()
     {
-        // メニューボタンを非表示にする
-        DisplayManager.Instance.SetActiveMenu(false);
+        // インゲームで使う表示物を非表示にする
+        DisplayManager.Instance.HideInGameDisplayObjects();
 
         // スタートボタンタップ時
         startButton.onClick.AddListener(() => {
@@ -34,5 +35,8 @@ public class TitleManager : MonoBehaviour
 
         // 最初はスタートメニューを閉じておく
         startMenuPanel.gameObject.SetActive(false);
+
+        // 画面フェードイン
+        DisplayManager.Instance.FadeInDisplayAsync().Forget();
     }
 }

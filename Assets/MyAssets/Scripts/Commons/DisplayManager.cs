@@ -10,7 +10,23 @@ using UniRx.Async;
 public class DisplayManager : SingletonMonoBehaviour<DisplayManager>
 {
     [SerializeField] private Image fadeImage = default;
-    [SerializeField] private GameObject menuObject = default;
+    [SerializeField] private Menu menu = default;
+    [SerializeField] private ItemPanel itemPanel = default;
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// 起動時処理
+    /// </summary>
+    //--------------------------------------------------------------------------/
+    protected override void Awake()
+    {
+        base.Awake();
+
+        // 各オブジェクトの表示状態を初期化
+        fadeImage.gameObject.SetActive(true);
+        menu.gameObject.SetActive(false);
+        itemPanel.gameObject.SetActive(false);
+    }
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -52,9 +68,25 @@ public class DisplayManager : SingletonMonoBehaviour<DisplayManager>
 
     //--------------------------------------------------------------------------/
     /// <summary>
-    /// メニューの表示/非表示を切り替える
+    /// インゲームで使う表示物を表示する
     /// </summary>
-    /// <param name="value">表示するならtrue、非表示ならfalse</param>
     //--------------------------------------------------------------------------/
-    public void SetActiveMenu(bool value) => menuObject.SetActive(value);
+    public void ShowInGameDisplayObjects()
+    {
+        menu.Initialize();
+        itemPanel.Initialize();
+        menu.gameObject.SetActive(true);
+        itemPanel.gameObject.SetActive(true);
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// インゲームで使う表示物を非表示にする
+    /// </summary>
+    //--------------------------------------------------------------------------/
+    public void HideInGameDisplayObjects()
+    {
+        menu.gameObject.SetActive(false);
+        itemPanel.gameObject.SetActive(false);
+    }
 }

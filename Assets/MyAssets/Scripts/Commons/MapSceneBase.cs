@@ -24,8 +24,13 @@ public class MapSceneBase : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Awake()
     {
-        // メニューボタンを表示する
-        DisplayManager.Instance.SetActiveMenu(true);
+        // プレイヤーデータがないならデバッグ用に作成する
+        if(PlayerData.Instance.CurrentData == null) {
+            PlayerData.Instance.Create("デバッグプレイヤー");
+        }
+
+        // インゲームで使う表示物を表示する
+        DisplayManager.Instance.ShowInGameDisplayObjects();
 
         // シーン上に配置されてるマップイベントを全て取得する
         mapEvents = FindObjectsOfType<MapEvent>();
@@ -50,10 +55,6 @@ public class MapSceneBase : MonoBehaviour
 
         // 画面フェードイン
         DisplayManager.Instance.FadeInDisplayAsync().Forget();
-
-#if DEBUG_LOG
-        Debug.Log($"位置({checkedPosition.x}, {checkedPosition.y})");
-#endif
     }
 
     //--------------------------------------------------------------------------/

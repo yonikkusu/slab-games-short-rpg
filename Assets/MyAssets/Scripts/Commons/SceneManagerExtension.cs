@@ -59,7 +59,7 @@ public enum SceneName
     GuestRoom2,
     GuestRoom3,
     GuestRoom4,
-    BedRoom,
+    Bedroom,
     Study,
     KidsRoom,
     Corridor1F,

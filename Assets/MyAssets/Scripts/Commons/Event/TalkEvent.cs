@@ -10,7 +10,17 @@ using Fungus;
 public class TalkEvent : MapEvent
 {
     [SerializeField] private string message = default;
-    [SerializeField] private Flowchart flowchart = default;
+    private Flowchart flowchart;
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// 起動時処理
+    /// </summary>
+    //--------------------------------------------------------------------------/
+    void Awake()
+    {
+        flowchart = FindObjectOfType<Flowchart>();
+    }
 
     //--------------------------------------------------------------------------/
     /// <summary>
