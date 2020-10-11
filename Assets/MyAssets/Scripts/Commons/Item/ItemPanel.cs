@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// アイテムパネル
 /// </summary>
 //--------------------------------------------------------------------------/
-public class ItemPanel : MonoBehaviour
+public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
 {
     // 所持可能アイテム上限
     private const int MaxItemNum = 8;
@@ -17,15 +17,7 @@ public class ItemPanel : MonoBehaviour
     /// <summary>選択中アイテムインデックス</summary>
     public int CurrentItemIndex { get; private set; }
 
-    //--------------------------------------------------------------------------/
-    /// <summary>
-    /// 起動時処理
-    /// </summary>
-    //--------------------------------------------------------------------------/
-    void Start()
-    {
-        UpdateItemList();
-    }
+    private bool initialized;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -34,6 +26,8 @@ public class ItemPanel : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Update()
     {
+        if(!initialized) return;
+
         // マウスのホイールで選択中アイテムを切り替える
         var wheelValue = Input.GetAxis("Mouse ScrollWheel");
         if(wheelValue > 0f) {
@@ -67,6 +61,7 @@ public class ItemPanel : MonoBehaviour
     public void Initialize()
     {
         UpdateItemList();
+        initialized = true;
     }
 
     //--------------------------------------------------------------------------/
@@ -77,6 +72,8 @@ public class ItemPanel : MonoBehaviour
     //--------------------------------------------------------------------------/
     public void AddItem(int itemId)
     {
+        if(!initialized) return;
+
         PlayerData.Instance.AddItem((ItemID)itemId);
         UpdateItemList();
     }
@@ -88,6 +85,8 @@ public class ItemPanel : MonoBehaviour
     //--------------------------------------------------------------------------/
     public void UpdateItemList()
     {
+        if(!initialized) return;
+
         var possessionItemList = PlayerData.Instance.ItemManager?.PossessionItemList;
 
         if(possessionItemList == null) return;
