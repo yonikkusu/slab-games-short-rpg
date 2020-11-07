@@ -24,9 +24,12 @@ public class ItemDataList : ScriptableObject
 [Serializable]
 public class ItemData
 {
+    [SerializeField] private ItemID id = ItemID.None;
     [SerializeField] private string name = default;
     [SerializeField] private Sprite sprite = default;
 
+    /// <summary>アイテムID</summary>
+    public ItemID ID => id;
     /// <summary>アイテム名</summary>
     public string Name => name;
     /// <summary>アイテム画像</summary>
@@ -40,6 +43,7 @@ public class ItemData
 //--------------------------------------------------------------------------/
 public enum ItemID
 {
+    None,
     Key,
     Book,
     Tabasco,
