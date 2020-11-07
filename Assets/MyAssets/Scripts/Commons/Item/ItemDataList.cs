@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 //--------------------------------------------------------------------------/
@@ -12,8 +13,17 @@ public class ItemDataList : ScriptableObject
 {
     [SerializeField] private List<ItemData> itemList = new List<ItemData>();
 
-    /// <summary>アイテム一覧</summary>
-    public List<ItemData> ItemList => itemList;
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// データを取得する
+    /// </summary>
+    /// <param name="id">取得したいアイテムのアイテムID</param>
+    /// <returns>アイテム情報</returns>
+    //--------------------------------------------------------------------------/
+    public ItemData Get(ItemID id)
+    {
+        return itemList.FirstOrDefault(item => item.ID == id);
+    }
 }
 
 //--------------------------------------------------------------------------/

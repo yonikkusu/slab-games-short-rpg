@@ -24,7 +24,7 @@ public class ItemManager
     public ItemManager(int[] itemIds = null)
     {
         itemDataList = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList");
-        PossessionItemList = itemIds?.Select(itemId => itemDataList.ItemList[itemId]).ToList() ?? new List<ItemData>();
+        PossessionItemList = itemIds?.Select(itemId => itemDataList.Get((ItemID)itemId)).ToList() ?? new List<ItemData>();
     }
 
     //--------------------------------------------------------------------------/
@@ -42,16 +42,13 @@ public class ItemManager
 
     //--------------------------------------------------------------------------/
     /// <summary>
-    /// アイテムリストを取得する
+    /// 所持アイテムのIDリストを取得する
     /// </summary>
     /// <returns></returns>
     //--------------------------------------------------------------------------/
     public int[] GetItemIdList()
     {
-        return itemDataList.ItemList
-            .Select((item, index) => new { Item = item, Index = index })
-            .Where(item => PossessionItemList.Any(possessionItem => possessionItem == item.Item))
-            .Select(item => item.Index).ToArray(); 
+        return PossessionItemList.Select(possessionItem => (int)possessionItem.ID).ToArray();
     }
 
     //--------------------------------------------------------------------------/
@@ -62,6 +59,11 @@ public class ItemManager
     //--------------------------------------------------------------------------/
     public void AddItem(ItemID itemId)
     {
-        PossessionItemList.Add(itemDataList.ItemList[(int)itemId]);
+        var item = itemDataList.Get(itemId);
+        if(item == null) {
+            DebugLogger.LogError($"{itemId}に対応するアイテム情報がないので、所持アイテムを追加できませんでした。");
+            return;
+        }
+        PossessionItemList.Add(item);
     }
 }
