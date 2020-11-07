@@ -7,8 +7,6 @@
 //--------------------------------------------------------------------------/
 public class PlayerData : SingletonMonoBehaviour<PlayerData>
 {
-    [SerializeField] ItemPanel itemPanel;
-
     /// <summary>現在使っているプレイヤーデータ</summary>
     public SaveData CurrentData { get; private set; }
     /// <summary>フラグマネージャー</summary>
