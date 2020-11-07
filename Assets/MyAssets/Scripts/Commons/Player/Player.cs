@@ -54,22 +54,7 @@ public class Player : MonoBehaviour
 
         // 調べるイベントチェック
         if(Input.GetKeyDown(KeyCode.Return)) {
-            switch(playerModel.CurrentDirection) {
-                case DIRECTION.LEFT:
-                    mapScene.CheckInspectEvents(new Vector2(transform.position.x - 1, transform.position.y));
-                    break;
-                case DIRECTION.RIGHT:
-                    mapScene.CheckInspectEvents(new Vector2(transform.position.x + 1, transform.position.y));
-                    break;
-                case DIRECTION.UP:
-                    mapScene.CheckInspectEvents(new Vector2(transform.position.x, transform.position.y + 1));
-                    break;
-                case DIRECTION.DOWN:
-                    mapScene.CheckInspectEvents(new Vector2(transform.position.x, transform.position.y - 1));
-                    break;
-                default:
-                    break;
-            }
+            mapScene.CheckInspectEvents(getOneSquareAheadPosition());
         }
     }
 
@@ -169,6 +154,24 @@ public class Player : MonoBehaviour
         if(directionVector == Vector2.down) return DIRECTION.DOWN;
 
         return DIRECTION.NONE;
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// プレイヤーが向いてる方向の1マス先の位置を取得する
+    /// </summary>
+    //--------------------------------------------------------------------------/
+    private Vector2 getOneSquareAheadPosition()
+    {
+        switch(playerModel.CurrentDirection) {
+            case DIRECTION.LEFT: return new Vector2(transform.position.x - 1, transform.position.y);
+            case DIRECTION.RIGHT: return new Vector2(transform.position.x + 1, transform.position.y);
+            case DIRECTION.UP: return new Vector2(transform.position.x, transform.position.y + 1);
+            case DIRECTION.DOWN: return new Vector2(transform.position.x, transform.position.y - 1);
+            default:
+                DebugLogger.Log("存在しない方向を調べようとしています。");
+                return default;
+        }
     }
 
     //--------------------------------------------------------------------------/
