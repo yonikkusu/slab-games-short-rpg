@@ -20,4 +20,26 @@ public class DebugLogger
     {
         Debug.Log(message);
     }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// 警告ログを表示する
+    /// </summary>
+    /// <param name="message">表示内容</param>
+    //--------------------------------------------------------------------------/
+    public static void LogWarning(object message)
+    {
+        Debug.LogWarning(message);
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// エラーログを表示する
+    /// </summary>
+    /// <param name="message">表示内容</param>
+    //--------------------------------------------------------------------------/
+    public static void LogError(object message)
+    {
+        Debug.LogError(message);
+    }
 }

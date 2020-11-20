@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 //--------------------------------------------------------------------------/
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 /// アイテムパネル
 /// </summary>
 //--------------------------------------------------------------------------/
-public class ItemPanel : MonoBehaviour
+public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
 {
     // 所持可能アイテム上限
     private const int MaxItemNum = 8;
@@ -14,18 +15,11 @@ public class ItemPanel : MonoBehaviour
     [SerializeField] private Image[] itemImageList = default;
     [SerializeField] private Image selectFrame = default;
 
-    /// <summary>選択中アイテムインデックス</summary>
-    public int CurrentItemIndex { get; private set; }
-
-    //--------------------------------------------------------------------------/
-    /// <summary>
-    /// 起動時処理
-    /// </summary>
-    //--------------------------------------------------------------------------/
-    void Start()
-    {
-        UpdateItemList();
-    }
+    /// <summary>選択中アイテムのID</summary>
+    public ItemData SelectedItem => itemList[selectedItemIndex];
+    private ItemData[] itemList;
+    private int selectedItemIndex;
+    private bool initialized;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -34,28 +28,24 @@ public class ItemPanel : MonoBehaviour
     //--------------------------------------------------------------------------/
     void Update()
     {
+        if(!initialized) return;
+
         // マウスのホイールで選択中アイテムを切り替える
         var wheelValue = Input.GetAxis("Mouse ScrollWheel");
         if(wheelValue > 0f) {
-            moveCursor(CurrentItemIndex - 1);
+            moveCursor(selectedItemIndex - 1);
         } else if(wheelValue < 0f) {
-            moveCursor(CurrentItemIndex + 1);
+            moveCursor(selectedItemIndex + 1);
         }
 
         // 選択中カーソルを移動する
         void moveCursor(int index)
         {
-           CurrentItemIndex = index < 0 ? MaxItemNum - 1 : 
+           selectedItemIndex = index < 0 ? MaxItemNum - 1 : 
                               index >= MaxItemNum ? 0 :
                               index;
-           selectFrame.transform.SetParent(itemImageList[CurrentItemIndex].transform);
+           selectFrame.transform.SetParent(itemImageList[selectedItemIndex].transform);
            selectFrame.transform.localPosition = new Vector3();
-        }
-
-        // アイテム使用キーが押された場合
-        if(Input.GetKeyDown(KeyCode.I)) {
-            PlayerData.Instance.ItemManager.UseItem(CurrentItemIndex);
-            UpdateItemList();
         }
     }
 
@@ -66,7 +56,9 @@ public class ItemPanel : MonoBehaviour
     //--------------------------------------------------------------------------/
     public void Initialize()
     {
+        itemList = new ItemData[MaxItemNum];
         UpdateItemList();
+        initialized = true;
     }
 
     //--------------------------------------------------------------------------/
@@ -77,7 +69,9 @@ public class ItemPanel : MonoBehaviour
     //--------------------------------------------------------------------------/
     public void AddItem(int itemId)
     {
-        PlayerData.Instance.AddItem((ItemID)itemId);
+        if(!initialized) return;
+
+        PlayerData.Instance.ItemManager.AddItem((ItemID)itemId);
         UpdateItemList();
     }
 
@@ -88,6 +82,8 @@ public class ItemPanel : MonoBehaviour
     //--------------------------------------------------------------------------/
     public void UpdateItemList()
     {
+        if(!initialized) return;
+
         var possessionItemList = PlayerData.Instance.ItemManager?.PossessionItemList;
 
         if(possessionItemList == null) return;
@@ -96,9 +92,13 @@ public class ItemPanel : MonoBehaviour
         foreach(var itemImage in itemImageList) {
             itemImage.sprite = null;
         }
+        for(var i = 0; i < itemList.Length; i++) {
+            itemList[i] = null;
+        }
 
-        // 所持アイテムの画像をセット
+        // 所持アイテムのデータと画像をセット
         for(var i = 0; i < possessionItemList.Count; i++) {
+            itemList[i] = possessionItemList[i];
             itemImageList[i].sprite = possessionItemList[i].Sprite;
         }
     }

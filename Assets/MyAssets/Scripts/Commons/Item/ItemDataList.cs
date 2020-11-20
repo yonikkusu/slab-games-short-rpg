@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 //--------------------------------------------------------------------------/
@@ -12,8 +13,17 @@ public class ItemDataList : ScriptableObject
 {
     [SerializeField] private List<ItemData> itemList = new List<ItemData>();
 
-    /// <summary>アイテム一覧</summary>
-    public List<ItemData> ItemList => itemList;
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// データを取得する
+    /// </summary>
+    /// <param name="id">取得したいアイテムのアイテムID</param>
+    /// <returns>アイテム情報</returns>
+    //--------------------------------------------------------------------------/
+    public ItemData Get(ItemID id)
+    {
+        return itemList.FirstOrDefault(item => item.ID == id);
+    }
 }
 
 //--------------------------------------------------------------------------/
@@ -24,9 +34,12 @@ public class ItemDataList : ScriptableObject
 [Serializable]
 public class ItemData
 {
+    [SerializeField] private ItemID id = ItemID.None;
     [SerializeField] private string name = default;
     [SerializeField] private Sprite sprite = default;
 
+    /// <summary>アイテムID</summary>
+    public ItemID ID => id;
     /// <summary>アイテム名</summary>
     public string Name => name;
     /// <summary>アイテム画像</summary>
@@ -40,6 +53,7 @@ public class ItemData
 //--------------------------------------------------------------------------/
 public enum ItemID
 {
+    None,
     Key,
     Book,
     Tabasco,

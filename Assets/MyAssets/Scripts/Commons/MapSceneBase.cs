@@ -32,8 +32,8 @@ public class MapSceneBase : MonoBehaviour
         // インゲームで使う表示物を表示する
         DisplayManager.Instance.ShowInGameDisplayObjects();
 
-        // シーン上に配置されてるマップイベントを全て取得する
-        mapEvents = FindObjectsOfType<MapEvent>();
+        // 各マップイベントの初期化
+        initializeMapEvents();
 
         // 初期化完了まで一旦画面外に退避させる
         defaultTransformPos = transform.position;
@@ -55,6 +55,24 @@ public class MapSceneBase : MonoBehaviour
 
         // 画面フェードイン
         DisplayManager.Instance.FadeInDisplayAsync().Forget();
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// 各マップイベントの初期化
+    /// </summary>
+    //--------------------------------------------------------------------------/
+    private void initializeMapEvents()
+    {
+        // シーン上に配置されてるマップイベントを全て取得する
+        mapEvents = FindObjectsOfType<MapEvent>();
+
+        // 扉イベントの初期化
+        foreach(var mapEvent in mapEvents) {
+            var openEvent = mapEvent as OpenEvent;
+            if(openEvent == null) continue;
+            openEvent.Initialize();
+        }
     }
 
     //--------------------------------------------------------------------------/
@@ -86,6 +104,23 @@ public class MapSceneBase : MonoBehaviour
 #endif
         foreach(var mapEvent in mapEvents) {
             mapEvent.CheckFloorEvent(playerModel);
+        }
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// アイテム使用イベントを発動させるかチェックする
+    /// </summary>
+    /// <param name="checkedPosition">使用する位置</param>
+    /// <param name="usedItemId">使用するアイテムのID</param>
+    //--------------------------------------------------------------------------/
+    public void CheckUseItemEvents(Vector2 checkedPosition, ItemID usedItemId)
+    {
+#if DEBUG_LOG
+        Debug.Log($"使用する位置({checkedPosition.x}, {checkedPosition.y})");
+#endif
+        foreach(var mapEvent in mapEvents) {
+            mapEvent.CheckUseItemEvent(checkedPosition, usedItemId);
         }
     }
 }
