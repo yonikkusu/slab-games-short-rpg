@@ -53,7 +53,7 @@ public class FlagManager
         if(switchFlagDictionay.ContainsKey(key.ToString())) {
             return switchFlagDictionay[key.ToString()];
         }
-        Debug.Log($"key({key})に対応する値ありません。");
+        Debug.Log($"key({key})に対応する値がなかったので、デフォルト値(false)を返しました。");
         return false;
     }
 
@@ -114,7 +114,7 @@ public class FlagManager
         if(countFlagDictionay.ContainsKey(key.ToString())) {
             return countFlagDictionay[key.ToString()];
         }
-        Debug.Log($"key({key})に対応する値ありません。");
+        Debug.Log($"key({key})に対応する値がなかったので、デフォルト値(0)を返しました。");
         return 0;
     }
 
@@ -157,7 +157,8 @@ public class FlagManager
 //--------------------------------------------------------------------------/
 public enum SwitchFlagKey
 {
-    Switch1,
+    None,
+    SwitchDoorCorridor1FKitchen,
 }
 
 //--------------------------------------------------------------------------/

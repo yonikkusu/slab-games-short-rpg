@@ -56,6 +56,11 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Return)) {
             mapScene.CheckInspectEvents(getOneSquareAheadPosition());
         }
+
+        // アイテム使用イベントチェック
+        if(Input.GetKeyDown(KeyCode.I)) {
+            mapScene.CheckUseItemEvents(getOneSquareAheadPosition(), ItemPanel.Instance.SelectedItem?.ID ?? ItemID.None);
+        }
     }
 
     //--------------------------------------------------------------------------/

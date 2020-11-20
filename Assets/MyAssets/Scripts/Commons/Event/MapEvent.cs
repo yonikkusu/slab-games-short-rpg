@@ -7,7 +7,7 @@
 //--------------------------------------------------------------------------/
 public class MapEvent : MonoBehaviour
 {
-    [SerializeField] private Vector2 eventCoord = default;
+    [SerializeField] protected Vector2 eventCoord = default;
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -37,6 +37,20 @@ public class MapEvent : MonoBehaviour
 
     //--------------------------------------------------------------------------/
     /// <summary>
+    /// アイテム使用イベントを発動させるかチェックする
+    /// </summary>
+    /// <param name="checkedPosition">使用する位置</param>
+    /// <param name="usedItemId">使用するアイテムのID</param>
+    //--------------------------------------------------------------------------/
+    public void CheckUseItemEvent(Vector2 checkedPosition, ItemID usedItemId)
+    {
+        if(isSamePosition(checkedPosition)) {
+            onUsedItem(usedItemId);
+        }
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
     /// 調べられた時の処理(継承先で中身を定義する)
     /// </summary>
     //--------------------------------------------------------------------------/
@@ -49,6 +63,14 @@ public class MapEvent : MonoBehaviour
     /// <param name="playerModel">プレイヤー情報</param>
     //--------------------------------------------------------------------------/
     protected virtual void onStepped(IReadOnlyPlayerModel playerModel) { }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// アイテム使用時の処理(継承先で中身を定義する)
+    /// </summary>
+    /// <param name="usedItemId">使用するアイテムのID</param>
+    //--------------------------------------------------------------------------/
+    protected virtual void onUsedItem(ItemID usedItemId) { }
 
     //--------------------------------------------------------------------------/
     /// <summary>

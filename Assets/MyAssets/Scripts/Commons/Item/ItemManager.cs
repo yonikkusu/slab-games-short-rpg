@@ -31,12 +31,16 @@ public class ItemManager
     /// <summary>
     /// アイテムを使用する
     /// </summary>
-    /// <param name="index">使用するアイテムのIndex</param>
+    /// <param name="index">使用するアイテムのID</param>
     //--------------------------------------------------------------------------/
-    public void UseItem(int index)
+    public void UseItem(ItemID itemId)
     {
-        var item = PossessionItemList[index];
-        Debug.Log($"{item.Name}を使用した");
+        var item = PossessionItemList.FirstOrDefault(i => i.ID == itemId);
+        if(item == null) {
+            DebugLogger.LogError($"所持アイテムに{itemId}がないのでアイテムを使用できませんでした。");
+            return;
+        }
+        DebugLogger.Log($"{item.Name}を使用した");
         PossessionItemList.Remove(item);
     }
 
