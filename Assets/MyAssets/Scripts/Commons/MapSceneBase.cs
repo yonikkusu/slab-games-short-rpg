@@ -67,11 +67,9 @@ public class MapSceneBase : MonoBehaviour
         // シーン上に配置されてるマップイベントを全て取得する
         mapEvents = FindObjectsOfType<MapEvent>();
 
-        // 扉イベントの初期化
+        // マップイベントの初期化
         foreach(var mapEvent in mapEvents) {
-            var openEvent = mapEvent as OpenEvent;
-            if(openEvent == null) continue;
-            openEvent.Initialize();
+            mapEvent.Initialize();
         }
     }
 
