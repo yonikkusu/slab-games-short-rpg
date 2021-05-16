@@ -21,8 +21,8 @@ public class OpenEvent : MapEvent
     protected override void onUsedItem(ItemID usedItemId)
     {
         if(usedItemId == keyItemId) {
-            var deleteTilePosition = new Vector3Int((int)eventCoord.x, (int)eventCoord.y, 0);
             // TODO: そのうちSetTileでタイル削除できるようにする
+            // var deleteTilePosition = getCurrentCenterPosition();
             // objectMap.SetTile(deleteTilePosition, null);
             objectMap.gameObject.SetActive(false);
             PlayerData.Instance.FlagManager.SetSwitch(objectKey, true);
@@ -39,8 +39,9 @@ public class OpenEvent : MapEvent
     /// 扉オブジェクトの初期化
     /// </summary>
     //--------------------------------------------------------------------------/
-    public void Initialize()
+    public override void Initialize()
     {
+        base.Initialize();
         var isOpenDoor = PlayerData.Instance.FlagManager.GetSwitch(objectKey);
         objectMap.gameObject.SetActive(!isOpenDoor);
     }

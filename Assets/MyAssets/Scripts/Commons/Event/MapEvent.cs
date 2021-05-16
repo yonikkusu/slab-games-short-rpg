@@ -7,7 +7,17 @@
 //--------------------------------------------------------------------------/
 public class MapEvent : MonoBehaviour
 {
-    [SerializeField] protected Vector2 eventCoord = default;
+    private RectTransform rectTransform;
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// 起動時処理
+    /// </summary>
+    //--------------------------------------------------------------------------/
+    public virtual void Initialize()
+    {
+        rectTransform = GetComponent<RectTransform>();
+    }
 
     //--------------------------------------------------------------------------/
     /// <summary>
@@ -74,6 +84,17 @@ public class MapEvent : MonoBehaviour
 
     //--------------------------------------------------------------------------/
     /// <summary>
+    /// 現在のMapEventの中心座標を取得する
+    /// </summary>
+    /// <param name="usedItemId">使用するアイテムのID</param>
+    //--------------------------------------------------------------------------/
+    protected Vector2 getCurrentCenterPosition()
+    {
+        return rectTransform.CenterPosition();
+    }
+
+    //--------------------------------------------------------------------------/
+    /// <summary>
     /// 指定した座標に対応するイベントがあるか
     /// </summary>
     /// <param name="position">座標</param>
@@ -81,6 +102,8 @@ public class MapEvent : MonoBehaviour
     //--------------------------------------------------------------------------/
     private bool isSamePosition(Vector2 position)
     {
+        var eventCoord = getCurrentCenterPosition();
+
         if(eventCoord.x - 0.5 <= position.x && position.x <= eventCoord.x + 0.5 && 
            eventCoord.y - 0.5 <= position.y && position.y <= eventCoord.y + 0.5) {
             return true;
