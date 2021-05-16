@@ -165,7 +165,7 @@ MonoBehaviour:
   eventCoord: {x: 20.5, y: -3.5}
   sceneName: 3
   destinationCoord: {x: 20.5, y: -3.5}
-  playerDirection: 2
+  playerDirection: 0
 --- !u!114 &77375022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,7 +347,7 @@ MonoBehaviour:
   eventCoord: {x: 0.5, y: -3.5}
   sceneName: 3
   destinationCoord: {x: 0.5, y: -3.5}
-  playerDirection: 2
+  playerDirection: 0
 --- !u!114 &181626147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
   eventCoord: {x: 21.5, y: -3.5}
   sceneName: 3
   destinationCoord: {x: 21.5, y: -3.5}
-  playerDirection: 2
+  playerDirection: 0
 --- !u!114 &181941819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,7 +839,7 @@ MonoBehaviour:
   eventCoord: {x: 28.5, y: 10.5}
   sceneName: 17
   destinationCoord: {x: -3.5, y: -4.5}
-  playerDirection: 2
+  playerDirection: 0
 --- !u!114 &587375802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,7 +930,7 @@ MonoBehaviour:
   eventCoord: {x: 11.5, y: 1.5}
   sceneName: 18
   destinationCoord: {x: 12.5, y: 0.5}
-  playerDirection: 2
+  playerDirection: 0
 --- !u!114 &703514184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,7 +1068,7 @@ MonoBehaviour:
   eventCoord: {x: 22.5, y: -3.5}
   sceneName: 3
   destinationCoord: {x: 22.5, y: -3.5}
-  playerDirection: 2
+  playerDirection: 0
 --- !u!114 &731876374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3897,7 +3897,7 @@ MonoBehaviour:
   eventCoord: {x: 37.5, y: 4.5}
   sceneName: 14
   destinationCoord: {x: -1.5, y: 2.5}
-  playerDirection: 3
+  playerDirection: 0
 --- !u!114 &1370553145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3988,7 +3988,7 @@ MonoBehaviour:
   eventCoord: {x: 27.5, y: -9.5}
   sceneName: 16
   destinationCoord: {x: -6.5, y: 1.5}
-  playerDirection: 1
+  playerDirection: 0
 --- !u!114 &1392286375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4079,7 +4079,7 @@ MonoBehaviour:
   eventCoord: {x: 27.5, y: 1.5}
   sceneName: 12
   destinationCoord: {x: -5.5, y: 1.5}
-  playerDirection: 1
+  playerDirection: 0
 --- !u!114 &1423302870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8978,7 +8978,7 @@ MonoBehaviour:
   eventCoord: {x: -0.5, y: -3.5}
   sceneName: 3
   destinationCoord: {x: -0.5, y: -3.5}
-  playerDirection: 2
+  playerDirection: 0
 --- !u!114 &1530280367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9069,7 +9069,7 @@ MonoBehaviour:
   eventCoord: {x: -1.5, y: -3.5}
   sceneName: 3
   destinationCoord: {x: -1.5, y: -3.5}
-  playerDirection: 2
+  playerDirection: 0
 --- !u!114 &1630954809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9578,7 +9578,7 @@ MonoBehaviour:
   eventCoord: {x: 10.5, y: 1.5}
   sceneName: 18
   destinationCoord: {x: 11.5, y: 0.5}
-  playerDirection: 2
+  playerDirection: 0
 --- !u!114 &1870324489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10251,3 +10251,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1803528882}
+  bgm: 1

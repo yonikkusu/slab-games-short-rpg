@@ -549,7 +549,7 @@ MonoBehaviour:
   eventCoord: {x: -3.5, y: -5.5}
   sceneName: 11
   destinationCoord: {x: 28.5, y: 9.5}
-  playerDirection: 3
+  playerDirection: 0
 --- !u!114 &95777505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1228,6 +1228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 10017619}
+  bgm: 1
 --- !u!4 &724206301
 Transform:
   m_ObjectHideFlags: 0
