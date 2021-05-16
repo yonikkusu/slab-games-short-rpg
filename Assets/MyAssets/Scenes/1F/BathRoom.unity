@@ -1185,7 +1185,7 @@ MonoBehaviour:
   eventCoord: {x: -2.5, y: 5.5}
   sceneName: 12
   destinationCoord: {x: -2.5, y: -0.5}
-  playerDirection: 2
+  playerDirection: 0
 --- !u!114 &882966861
 MonoBehaviour:
   m_ObjectHideFlags: 0
