@@ -32,8 +32,10 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         if(bgmSource.isPlaying && bgmName == currentBgmName) return;
 
         StopBgm();
-        bgmSource.volume = volume;
-        bgmSource.PlayOneShot(bgmClips[(int)bgmName]);
+        if(bgmName != Bgm.None) {
+            bgmSource.volume = volume;
+            bgmSource.PlayOneShot(bgmClips[(int)bgmName]);
+        }
         currentBgmName = bgmName;
     }
 
@@ -106,6 +108,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 //--------------------------------------------------------------------------/
 public enum Bgm
 {
+    None = -1,
     Title,
     House,
 }
