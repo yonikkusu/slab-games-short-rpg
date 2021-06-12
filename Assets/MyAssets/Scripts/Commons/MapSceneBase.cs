@@ -11,7 +11,7 @@ public class MapSceneBase : MonoBehaviour
     public static readonly Vector3 OffScreenPos = new Vector3(0f, 5000f, 0f);
 
     [SerializeField] private Player player = default;
-    [SerializeField] private Bgm bgm = Bgm.Title;
+    [SerializeField] private Bgm bgm = Bgm.None;
 
     private MapEvent[] mapEvents;
     private Vector3 defaultTransformPos;
@@ -29,13 +29,11 @@ public class MapSceneBase : MonoBehaviour
         // インゲームで使う表示物を表示する
         DisplayManager.Instance.ShowInGameDisplayObjects();
 
-        // 各マップイベントの初期化
-        initializeMapEvents();
-
         // 初期化完了まで一旦画面外に退避させる
         defaultTransformPos = transform.position;
         transform.position = OffScreenPos;
 
+        initializeMapEvents();
         initializePlayer();
 
         // 画面位置をもとに戻す
