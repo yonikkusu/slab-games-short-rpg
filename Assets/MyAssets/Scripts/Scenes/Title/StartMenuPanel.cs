@@ -25,9 +25,9 @@ public class StartMenuPanel : MonoBehaviour
             SoundManager.Instance.PlaySe(Se.Tap);
             // プレイヤーデータ作成
             PlayerData.Instance.Create("マサタカ");
-            // TODO: 物語の最初の画面へ遷移
+            // 物語の最初の画面へ遷移
             var parameter = new MapSceneParameter(PlayerData.Instance.CurrentData.PlayerPosition, Player.DIRECTION.DOWN);
-            SceneManagerExtension.LoadSceneAsync(SceneName.GuestRoom1, parameter).Forget();
+            SceneManagerExtension.LoadSceneAsync(SceneName.Dining, parameter).Forget();
         });
 
         // コンテニューボタン
