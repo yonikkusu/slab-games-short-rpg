@@ -1,23 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// 扉を開ける イベント
 /// </summary>
-//--------------------------------------------------------------------------/
 public class OpenEvent : MapEvent
 {
     [SerializeField] private Tilemap objectMap = default;
     [SerializeField] private SwitchFlagKey objectKey = SwitchFlagKey.None;
     [SerializeField] private ItemID keyItemId = ItemID.None;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// アイテム使用時の処理
     /// </summary>
     /// <param name="usedItemId">使用するアイテムのID</param>
-    //--------------------------------------------------------------------------/
     protected override void onUsedItem(ItemID usedItemId)
     {
         if(usedItemId == keyItemId) {
@@ -34,11 +30,9 @@ public class OpenEvent : MapEvent
         }
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 扉オブジェクトの初期化
     /// </summary>
-    //--------------------------------------------------------------------------/
     public override void Initialize()
     {
         base.Initialize();

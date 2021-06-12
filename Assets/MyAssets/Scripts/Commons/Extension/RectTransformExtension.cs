@@ -1,17 +1,13 @@
 ﻿using UnityEngine;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// RectTransform 拡張
 /// </summary>
-//--------------------------------------------------------------------------/
 public static class RectTransformExtension
 {
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 中心座標を取得する
     /// </summary>
-    //--------------------------------------------------------------------------/
     public static Vector2 CenterPosition(this RectTransform self)
     {
         var position = self.position;

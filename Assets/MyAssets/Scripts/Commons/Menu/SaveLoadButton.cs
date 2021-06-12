@@ -3,11 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx.Async;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// セーブロードボタン
 /// </summary>
-//--------------------------------------------------------------------------/
 public class SaveLoadButton : MonoBehaviour
 {
     [SerializeField] private Button button = default;
@@ -18,11 +16,9 @@ public class SaveLoadButton : MonoBehaviour
     private int index;
     private SaveLoadPanelType type;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 起動時処理
     /// </summary>
-    //--------------------------------------------------------------------------/
     void Start()
     {
         button.onClick.AddListener(() => {
@@ -41,32 +37,26 @@ public class SaveLoadButton : MonoBehaviour
         });
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// データを設定する
     /// </summary>
     /// <param name="index">セーブファイル番号</param>
-    //--------------------------------------------------------------------------/
     public void SetData(int index)
     {
         this.index = index;
         updateView(PlayerData.Instance.GetSaveData(index));
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// ボタンタイプを設定する
     /// </summary>
     /// <param name="type">ボタンタイプ</param>
-    //--------------------------------------------------------------------------/
     public void SetButtonType(SaveLoadPanelType type) => this.type = type;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 表示更新
     /// </summary>
     /// <param name="playData">表示するセーブデータ</param>
-    //--------------------------------------------------------------------------/
     private void updateView(SaveData saveData)
     {
         // データがないなら表示をリセットする

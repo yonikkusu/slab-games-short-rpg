@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// プレイヤーデータ
 /// </summary>
-//--------------------------------------------------------------------------/
 public class PlayerData : SingletonMonoBehaviour<PlayerData>
 {
     /// <summary>現在使っているプレイヤーデータ</summary>
@@ -14,12 +12,10 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
     /// <summary>アイテムマネージャー</summary>
     public ItemManager ItemManager { get; private set; }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// プレイヤーデータを生成する
     /// </summary>
     /// <param name="name">プレイヤー名</param>
-    //--------------------------------------------------------------------------/
     public void Create(string name)
     {
         CurrentData = new SaveData(name);
@@ -27,12 +23,10 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
         ItemManager = new ItemManager();
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// プレイヤーデータをセーブする
     /// </summary>
     /// <param name="saveFileIndex">セーブするファイル番号</param>
-    //--------------------------------------------------------------------------/
     public void Save(int saveFileIndex)
     {
         // プレイヤーデータがないなら何もしない
@@ -58,12 +52,10 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
         SaveManager.Instance.Save();
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// プレイヤーデータをロードする
     /// </summary>
     /// <param name="loadFileIndex">ロードするファイル番号</param>
-    //--------------------------------------------------------------------------/
     public void Load(int loadFileIndex)
     {
         // 該当データがないなら何もしない
@@ -79,12 +71,10 @@ public class PlayerData : SingletonMonoBehaviour<PlayerData>
         ItemManager = new ItemManager(CurrentData.ItemIds);
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 指定されたファイル番号のセーブデータを取得する
     /// </summary>
     /// <param name="index">セーブファイル番号</param>
-    //--------------------------------------------------------------------------/
     public SaveData GetSaveData(int index)
     {
         // 該当データがないならnullを返す

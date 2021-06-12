@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using UniRx.Async;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// サウンドマネージャー
 /// Prefab上でbgmClips, seClipsにBGM,SEを登録して使う
 /// TODO: AudioClipを追加する度にPrefabをいじらなくていいようにしたい
 /// </summary>
-//--------------------------------------------------------------------------/
 public class SoundManager : SingletonMonoBehaviour<SoundManager>
 {
     ///<summary>デフォルトBGM音量</summary>
@@ -19,13 +17,11 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     [SerializeField] private AudioClip[] seClips = default;
 
     private Bgm currentBgmName;
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// BGMを再生する
     /// </summary>
     /// <param name="bgmName">BGM ID</param>
     /// <param name="volume">音量</param>
-    //--------------------------------------------------------------------------/
     public void PlayBgm(Bgm bgmName, float volume = DefaultBgmVolume)
     {
         // 鳴っているBGMが同じなら何もしない
@@ -39,22 +35,18 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         currentBgmName = bgmName;
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// BGMを停止する
     /// </summary>
-    //--------------------------------------------------------------------------/
     public void StopBgm()
     {
         bgmSource.Stop();
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// BGMをフェードアウトする
     /// </summary>
     /// <param name="frame">フェードさせるフレーム数</param>
-    //--------------------------------------------------------------------------/
     public async UniTask FadeOutBgmAsync(int frame = 10)
     {
         // BGMが鳴ってないなら何もしない
@@ -69,12 +61,10 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         StopBgm();
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// BGMをフェードインする
     /// </summary>
     /// <param name="frame">フェードさせるフレーム数</param>
-    //--------------------------------------------------------------------------/
     public async UniTask FadeInBgmAsync(int frame = 10)
     {
         // BGMが鳴ってるなら何もしない
@@ -89,23 +79,19 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         bgmSource.volume = DefaultBgmVolume;
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// SEを再生する
     /// </summary>
     /// <param name="seName">SE名</param>
-    //--------------------------------------------------------------------------/
     public void PlaySe(Se seName)
     {
         seSource.PlayOneShot(seClips[(int)seName]);
     }
 }
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// BGM名
 /// </summary>
-//--------------------------------------------------------------------------/
 public enum Bgm
 {
     None = -1,
@@ -113,11 +99,9 @@ public enum Bgm
     House,
 }
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// SE名
 /// </summary>
-//--------------------------------------------------------------------------/
 public enum Se
 {
     Tap,

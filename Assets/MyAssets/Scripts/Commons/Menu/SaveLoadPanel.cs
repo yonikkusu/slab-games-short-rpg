@@ -1,22 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// セーブロードパネル
 /// </summary>
-//--------------------------------------------------------------------------/
 public class SaveLoadPanel : MonoBehaviour
 {
     [SerializeField] private Button closeButton = default;
     [SerializeField] private Text information = default;
     [SerializeField] private SaveLoadButton[] saveLoadButtons = default;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 起動時処理
     /// </summary>
-    //--------------------------------------------------------------------------/
     void Start()
     {
         closeButton.onClick.AddListener(() => {
@@ -28,12 +24,10 @@ public class SaveLoadPanel : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// パネルを表示する
     /// </summary>
     /// <param name="type">表示タイプ</param>
-    //--------------------------------------------------------------------------/
     public void Show(SaveLoadPanelType type)
     {
         if(type == SaveLoadPanelType.Save) {
@@ -51,11 +45,9 @@ public class SaveLoadPanel : MonoBehaviour
     }
 }
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// セーブロードパネルの表示タイプ
 /// </summary>
-//--------------------------------------------------------------------------/
 public enum SaveLoadPanelType
 {
     Save,

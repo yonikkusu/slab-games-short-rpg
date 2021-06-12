@@ -2,22 +2,18 @@
 using UnityEngine.UI;
 using UniRx.Async;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// スタートメニューパネル
 /// </summary>
-//--------------------------------------------------------------------------/
 public class StartMenuPanel : MonoBehaviour
 {
     [SerializeField] private Button newGameButton = default;
     [SerializeField] private Button continueButton = default;
     [SerializeField] private SaveLoadPanel saveLoadPanel = default;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 起動時処理
     /// </summary>
-    //--------------------------------------------------------------------------/
     void Start()
     {
         // ニューゲームボタン
