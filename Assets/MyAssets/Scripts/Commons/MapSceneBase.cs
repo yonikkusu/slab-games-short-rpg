@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UniRx;
 using UniRx.Async;
 
 /// <summary>
@@ -73,13 +74,17 @@ public class MapSceneBase : MonoBehaviour
         } else {
             player.Initialize(new Vector2(0.5f, 0.5f), Player.DIRECTION.DOWN);
         }
+        // 購読処理
+        player.OnInspect.Subscribe(checkInspectEvents).AddTo(this);
+        player.OnUseItem.Subscribe(values => checkUseItemEvents(values.checkedPosition, values.usedItemId)).AddTo(this);
+        player.OnMoved.Subscribe(checkFloorEvents).AddTo(this);
     }
 
     /// <summary>
     /// 調べるイベントを発動させるかチェックする
     /// </summary>
     /// <param name="checkedPosition">調べた位置</param>
-    public void CheckInspectEvents(Vector2 checkedPosition)
+    private void checkInspectEvents(Vector2 checkedPosition)
     {
 #if DEBUG_LOG
         Debug.Log($"調べた位置({checkedPosition.x}, {checkedPosition.y})");
@@ -93,7 +98,7 @@ public class MapSceneBase : MonoBehaviour
     /// 床イベントを発動させるかチェックする
     /// </summary>
     /// <param name="playerModel">プレイヤー情報</param>
-    public void CheckFloorEvents(IReadOnlyPlayerModel playerModel)
+    private void checkFloorEvents(IReadOnlyPlayerModel playerModel)
     {
 #if DEBUG_LOG
         Debug.Log($"踏んだ位置({playerModel.CurrentPosition.x}, {playerModel.CurrentPosition.y})");
@@ -108,7 +113,7 @@ public class MapSceneBase : MonoBehaviour
     /// </summary>
     /// <param name="checkedPosition">使用する位置</param>
     /// <param name="usedItemId">使用するアイテムのID</param>
-    public void CheckUseItemEvents(Vector2 checkedPosition, ItemID usedItemId)
+    private void checkUseItemEvents(Vector2 checkedPosition, ItemID usedItemId)
     {
 #if DEBUG_LOG
         Debug.Log($"使用する位置({checkedPosition.x}, {checkedPosition.y})");
