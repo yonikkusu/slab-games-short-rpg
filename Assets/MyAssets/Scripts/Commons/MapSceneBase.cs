@@ -76,7 +76,7 @@ public class MapSceneBase : MonoBehaviour
             player.Initialize(new Vector2(0.5f, 0.5f), Player.DIRECTION.DOWN);
         }
         // 購読処理
-        player.OnInspect.Subscribe(checkInspectEvents).AddTo(this);
+        player.OnInspect.Subscribe(checkedPosition => checkInspectEventsAsync(checkedPosition).Forget()).AddTo(this);
         player.OnUseItem.Subscribe(values => checkUseItemEvents(values.checkedPosition, values.usedItemId)).AddTo(this);
         player.OnMoved.Subscribe(checkFloorEvents).AddTo(this);
     }
@@ -85,13 +85,14 @@ public class MapSceneBase : MonoBehaviour
     /// 調べるイベントを発動させるかチェックする
     /// </summary>
     /// <param name="checkedPosition">調べた位置</param>
-    private void checkInspectEvents(Vector2 checkedPosition)
+    /// <returns>UniTask</returns>
+    private async UniTask checkInspectEventsAsync(Vector2 checkedPosition)
     {
 #if DEBUG_LOG
         Debug.Log($"調べた位置({checkedPosition.x}, {checkedPosition.y})");
 #endif
         foreach(var mapEvent in mapEvents) {
-            mapEvent.CheckInspectEvent(checkedPosition);
+            await mapEvent.CheckInspectEventAync(checkedPosition);
         }
     }
 

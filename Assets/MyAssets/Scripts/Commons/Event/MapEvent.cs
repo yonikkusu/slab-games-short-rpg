@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UniRx.Async;
 
 /// <summary>
 /// マップイベント
@@ -19,10 +20,11 @@ public abstract class MapEvent : MonoBehaviour
     /// 調べるイベントを発動させるかチェックする
     /// </summary>
     /// <param name="checkedPosition">調べた位置</param>
-    public void CheckInspectEvent(Vector2 checkedPosition)
+    /// <returns>UniTask</returns>
+    public async UniTask CheckInspectEventAync(Vector2 checkedPosition)
     {
         if(isSamePosition(checkedPosition)) {
-            onInspected();
+            await onInspectedAsync();
         }
     }
 
@@ -52,7 +54,8 @@ public abstract class MapEvent : MonoBehaviour
     /// <summary>
     /// 調べられた時の処理(継承先で中身を定義する)
     /// </summary>
-    protected virtual void onInspected() { }
+    /// <returns>UniTask</returns>
+    protected virtual async UniTask onInspectedAsync() { }
 
     /// <summary>
     /// 踏まれた時の処理(継承先で中身を定義する)

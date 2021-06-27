@@ -7566,6 +7566,8 @@ GameObject:
   - component: {fileID: 7833211427470754697}
   - component: {fileID: 3707610273946765672}
   - component: {fileID: 5016190157968340462}
+  - component: {fileID: 14468491174867510}
+  - component: {fileID: 7389944543187094784}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -7614,9 +7616,9 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 8893789977242568878}
+  - {fileID: 8014630009808711317}
   selectedCommands:
-  - {fileID: 7314135368590084122}
+  - {fileID: 7389944543187094784}
   variables:
   - {fileID: 3544445437607326059}
   - {fileID: 4110109552813980922}
@@ -7713,6 +7715,7 @@ MonoBehaviour:
   - {fileID: 8673738664758223047}
   - {fileID: 7490399220302836968}
   - {fileID: 8827535656976332373}
+  - {fileID: 14468491174867510}
 --- !u!114 &3016052627485546504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8048,7 +8051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 49.021973
+    x: 50.120872
     y: 324.19778
     width: 122.52749
     height: 40
@@ -8063,6 +8066,7 @@ MonoBehaviour:
   - {fileID: 5765180852511328035}
   - {fileID: 4504184126960534253}
   - {fileID: 2055513881008884454}
+  - {fileID: 7389944543187094784}
 --- !u!114 &1022792252151727794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9515,7 +9519,7 @@ MonoBehaviour:
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
-  itemId: 18
+  itemId: 100
   blockName: AutoEvent_Opening_2
   description: 
   eventHandler: {fileID: 3220828348282387358}
@@ -9988,6 +9992,40 @@ MonoBehaviour:
   soundClip: {fileID: 0}
   volume: 1
   waitUntilFinished: 1
+--- !u!114 &14468491174867510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6984103042024444841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a200dbd67304446a3019434503338a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 101
+  indentLevel: 1
+  targetObject: {fileID: 6984103042024444841}
+  methodName: FinishAdv
+  delay: 0
+--- !u!114 &7389944543187094784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6984103042024444841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a200dbd67304446a3019434503338a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 102
+  indentLevel: 1
+  targetObject: {fileID: 6984103042024444841}
+  methodName: FinishAdv
+  delay: 0
 --- !u!1 &6986861316463968071
 GameObject:
   m_ObjectHideFlags: 0
