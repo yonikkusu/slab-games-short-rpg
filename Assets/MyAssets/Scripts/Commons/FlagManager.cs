@@ -128,6 +128,29 @@ public class FlagManager
         }
     }
     #endregion
+
+    #region AutoEventSwitchFlag
+    /// <summary>
+    /// 自動イベント用スイッチの値をONにする
+    /// </summary>
+    /// <param name="id">自動イベントID</param>
+    public void SetAutoEventSwitchOn(AutoEventId id)
+    {
+        var key = $"{SwitchFlagKey.SwitchAutoEvent}_{id}";
+        switchFlagDictionay[key] = true;
+    }
+
+    /// <summary>
+    /// 自動イベント用スイッチの値があるか調べる
+    /// </summary>
+    /// <param name="id">自動イベントID</param>
+    /// <returns>キーがあればtrue</returns>
+    public bool HasAutoEventSwitch(AutoEventId id)
+    {
+        var key = $"{SwitchFlagKey.SwitchAutoEvent}_{id}";
+        return switchFlagDictionay.ContainsKey(key);
+    }
+    #endregion
 }
 
 /// <summary>
@@ -137,6 +160,7 @@ public enum SwitchFlagKey
 {
     None,
     SwitchDoorCorridor1FKitchen,
+    SwitchAutoEvent,
 }
 
 /// <summary>

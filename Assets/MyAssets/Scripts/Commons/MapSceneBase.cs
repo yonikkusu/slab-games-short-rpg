@@ -44,6 +44,9 @@ public class MapSceneBase : MonoBehaviour
 
         // 画面フェードイン
         DisplayManager.Instance.FadeInDisplayAsync().Forget();
+
+        // 自動イベントチェック
+        checkAutoEventsAsync().Forget();
     }
 
     /// <summary>
@@ -118,6 +121,18 @@ public class MapSceneBase : MonoBehaviour
 #endif
         foreach(var mapEvent in mapEvents) {
             mapEvent.CheckUseItemEvent(checkedPosition, usedItemId);
+        }
+    }
+
+    /// <summary>
+    /// 自動イベントを発動させるかチェックする
+    /// </summary>
+    private async UniTaskVoid checkAutoEventsAsync()
+    {
+        foreach(var mapEvent in mapEvents) {
+            var autoEvent = mapEvent as AutoEvent;
+            if(autoEvent == null) continue;
+            await autoEvent.CheckAutoEventAsync();
         }
     }
 }
