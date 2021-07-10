@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UniRx;
 using UniRx.Async;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// プレイヤー管理クラス
 /// </summary>
-//--------------------------------------------------------------------------/
 public class Player : MonoBehaviour
 {
     /// <summary> 移動アニメーションのフレーム数(2の累乗にする必要がある)</summary>
@@ -23,8 +23,15 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D rigidBody = default;
     [SerializeField] private Animator anim = default;
 
-    /// <summary>現在のシーン</summary>
-    private MapSceneBase mapScene;
+    /// <summary>プレイヤーが調べるを行った通知(調べた座標を渡す)</summary>
+    public IObservable<Vector2> OnInspect => onInspectSubject;
+    private Subject<Vector2> onInspectSubject = new Subject<Vector2>();
+    /// <summary>プレイヤーがアイテムを使った通知(使った座標とアイテムIDを渡す)</summary>
+    public IObservable<(Vector2 checkedPosition, ItemID usedItemId)> OnUseItem => onUseItemSubject;
+    private Subject<(Vector2 checkedPosition, ItemID usedItemId)> onUseItemSubject = new Subject<(Vector2 checkedPosition, ItemID usedItemId)>();
+    /// <summary>プレイヤー移動後通知(移動後のプレイヤー情報を渡す)</summary>
+    public IObservable<PlayerModel> OnMoved => onMovedSubject;
+    private Subject<PlayerModel> onMovedSubject = new Subject<PlayerModel>();
 
     // プレイヤー情報
     private PlayerModel playerModel;
@@ -32,21 +39,9 @@ public class Player : MonoBehaviour
     // 移動処理中か
     private bool isMoving;
 
-    //--------------------------------------------------------------------------/
-    /// <summary>
-    /// 起動時処理
-    /// </summary>
-    //--------------------------------------------------------------------------/
-    void Awake()
-    {
-        mapScene = FindObjectOfType<MapSceneBase>();
-    }
-
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// アップデート処理
     /// </summary>
-    //--------------------------------------------------------------------------/
     void Update()
     {
         // キャラクターの移動チェック
@@ -54,22 +49,20 @@ public class Player : MonoBehaviour
 
         // 調べるイベントチェック
         if(Input.GetKeyDown(KeyCode.Return)) {
-            mapScene.CheckInspectEvents(getOneSquareAheadPosition());
+            onInspectSubject.OnNext(getOneSquareAheadPosition());
         }
 
         // アイテム使用イベントチェック
         if(Input.GetKeyDown(KeyCode.I)) {
-            mapScene.CheckUseItemEvents(getOneSquareAheadPosition(), ItemPanel.Instance.SelectedItem?.ID ?? ItemID.None);
+            onUseItemSubject.OnNext((getOneSquareAheadPosition(), ItemPanel.Instance.SelectedItem?.ID ?? ItemID.None));
         }
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="startPosition">初期位置</param>
     /// <param name="startDirection">初期方向</param>
-    //--------------------------------------------------------------------------/
     public void Initialize(Vector3 startPosition, DIRECTION startDirection)
     {
         playerModel = new PlayerModel(startPosition, startDirection);
@@ -77,12 +70,10 @@ public class Player : MonoBehaviour
         move(startDirection, startPosition);
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 移動可能なら移動する
     /// </summary>
     /// <param name="direction">方向Vector</param>
-    //--------------------------------------------------------------------------/
     private async UniTask checkMoveAsync()
     {
         // 移動中またはシーン移動中なら何もしない
@@ -109,7 +100,7 @@ public class Player : MonoBehaviour
         }
 
         // 床イベントチェック
-        mapScene.CheckFloorEvents(playerModel);
+        onMovedSubject.OnNext(playerModel);
 
         // 移動中フラグを下ろす
         isMoving = false;
@@ -131,12 +122,10 @@ public class Player : MonoBehaviour
     }
 
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 入力データから方向ベクトルを取得する
     /// </summary>
     /// <returns>方向Vector</returns>
-    //--------------------------------------------------------------------------/
     private Vector2 getDirectionVector()
     {
         var x = Input.GetAxisRaw("Horizontal");
@@ -144,13 +133,11 @@ public class Player : MonoBehaviour
         return new Vector2(x, y).normalized;
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 移動方向を取得する(斜めは無効)
     /// </summary>
     /// <<param name="directionVector">移動ベクトル</param>
     /// <returns>移動方向</returns>
-    //--------------------------------------------------------------------------/
     private DIRECTION getDirection(Vector2 directionVector)
     {
         if(directionVector == Vector2.left) return DIRECTION.LEFT;
@@ -161,11 +148,9 @@ public class Player : MonoBehaviour
         return DIRECTION.NONE;
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// プレイヤーが向いてる方向の1マス先の位置を取得する
     /// </summary>
-    //--------------------------------------------------------------------------/
     private Vector2 getOneSquareAheadPosition()
     {
         switch(playerModel.CurrentDirection) {
@@ -179,13 +164,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 移動する
     /// </summary>
     /// <param name="direction">移動方向</param>
     /// <param name="movePosition">移動座標</param>
-    //--------------------------------------------------------------------------/
     private void move(DIRECTION direction, Vector2 movePosition)
     {
         moveAnimation(direction);
@@ -193,12 +176,10 @@ public class Player : MonoBehaviour
         playerModel.UpdatePosition(movePosition);
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 移動アニメーションを行う
     /// </summary>
     /// <param name="direction">移動方向</param>
-    //--------------------------------------------------------------------------/
     private void moveAnimation(DIRECTION direction)
     {
         playerModel.UpdateDirection(direction);

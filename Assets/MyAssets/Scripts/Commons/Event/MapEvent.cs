@@ -1,43 +1,37 @@
 ﻿using UnityEngine;
+using UniRx.Async;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// マップイベント
 /// </summary>
-//--------------------------------------------------------------------------/
-public class MapEvent : MonoBehaviour
+public abstract class MapEvent : MonoBehaviour
 {
     private RectTransform rectTransform;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 起動時処理
     /// </summary>
-    //--------------------------------------------------------------------------/
     public virtual void Initialize()
     {
         rectTransform = GetComponent<RectTransform>();
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 調べるイベントを発動させるかチェックする
     /// </summary>
     /// <param name="checkedPosition">調べた位置</param>
-    //--------------------------------------------------------------------------/
-    public void CheckInspectEvent(Vector2 checkedPosition)
+    /// <returns>UniTask</returns>
+    public async UniTask CheckInspectEventAync(Vector2 checkedPosition)
     {
         if(isSamePosition(checkedPosition)) {
-            onInspected();
+            await onInspectedAsync();
         }
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 床イベントを発動させるかチェックする
     /// </summary>
     /// <param name="playerModel">プレイヤー情報</param>
-    //--------------------------------------------------------------------------/
     public void CheckFloorEvent(IReadOnlyPlayerModel playerModel)
     {
         if(isSamePosition(playerModel.CurrentPosition)) {
@@ -45,13 +39,11 @@ public class MapEvent : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// アイテム使用イベントを発動させるかチェックする
     /// </summary>
     /// <param name="checkedPosition">使用する位置</param>
     /// <param name="usedItemId">使用するアイテムのID</param>
-    //--------------------------------------------------------------------------/
     public void CheckUseItemEvent(Vector2 checkedPosition, ItemID usedItemId)
     {
         if(isSamePosition(checkedPosition)) {
@@ -59,47 +51,38 @@ public class MapEvent : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 調べられた時の処理(継承先で中身を定義する)
     /// </summary>
-    //--------------------------------------------------------------------------/
-    protected virtual void onInspected() { }
+    /// <returns>UniTask</returns>
+    protected virtual async UniTask onInspectedAsync() { }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 踏まれた時の処理(継承先で中身を定義する)
     /// </summary>
     /// <param name="playerModel">プレイヤー情報</param>
-    //--------------------------------------------------------------------------/
     protected virtual void onStepped(IReadOnlyPlayerModel playerModel) { }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// アイテム使用時の処理(継承先で中身を定義する)
     /// </summary>
     /// <param name="usedItemId">使用するアイテムのID</param>
-    //--------------------------------------------------------------------------/
     protected virtual void onUsedItem(ItemID usedItemId) { }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 現在のMapEventの中心座標を取得する
     /// </summary>
     /// <param name="usedItemId">使用するアイテムのID</param>
-    //--------------------------------------------------------------------------/
     protected Vector2 getCurrentCenterPosition()
     {
         return rectTransform.CenterPosition();
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 指定した座標に対応するイベントがあるか
     /// </summary>
     /// <param name="position">座標</param>
     /// <returns>あればtrue</returns>
-    //--------------------------------------------------------------------------/
     private bool isSamePosition(Vector2 position)
     {
         var eventCoord = getCurrentCenterPosition();

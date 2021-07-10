@@ -1,17 +1,13 @@
 ﻿using UnityEngine;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// ゲーム中に常に存在させるオブジェクトの初期化クラス
 /// </summary>
-//--------------------------------------------------------------------------/
 public class RuntimeInitializer
 {
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 各マネージャーをDontDestroyObjectとして生成する
     /// </summary>
-    //--------------------------------------------------------------------------/
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void InitializeBeforeSceneLoad()
     {

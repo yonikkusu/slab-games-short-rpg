@@ -1,11 +1,9 @@
 ﻿using UnityEngine.SceneManagement;
 using UniRx.Async;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// シーンマネージャー 拡張
 /// </summary>
-//--------------------------------------------------------------------------/
 public class SceneManagerExtension
 {
     /// <summary>シーンパラメータ</summary>
@@ -14,13 +12,11 @@ public class SceneManagerExtension
     /// <summary>シーン遷移中か</summary>
     public static bool IsMoving;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// シーンを読み込む
     /// </summary>
     /// <param name="scene">読み込むシーン名</param>
     /// <param name="parameter">読み込み時に使うパラメータ</param>
-    //--------------------------------------------------------------------------/
     public static async UniTask LoadSceneAsync(SceneName scene, MapSceneParameter paramter = null)
     {
         IsMoving = true;
@@ -32,11 +28,9 @@ public class SceneManagerExtension
         IsMoving = false;
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// アクティブなシーンを取得する
     /// </summary>
-    //--------------------------------------------------------------------------/
     public static SceneName GetCurrentSceneName()
     {
         var scene = SceneManager.GetActiveScene();
@@ -44,11 +38,9 @@ public class SceneManagerExtension
     }
 }
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// シーン名
 /// </summary>
-//--------------------------------------------------------------------------/
 public enum SceneName
 {
     None,

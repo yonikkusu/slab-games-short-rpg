@@ -2,11 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// アイテムパネル
 /// </summary>
-//--------------------------------------------------------------------------/
 public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
 {
     // 所持可能アイテム上限
@@ -21,11 +19,9 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
     private int selectedItemIndex;
     private bool initialized;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// アップデート処理
     /// </summary>
-    //--------------------------------------------------------------------------/
     void Update()
     {
         if(!initialized) return;
@@ -49,11 +45,9 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
         }
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 初期化
     /// </summary>
-    //--------------------------------------------------------------------------/
     public void Initialize()
     {
         itemList = new ItemData[MaxItemNum];
@@ -61,12 +55,10 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
         initialized = true;
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// アイテムを所持品に追加する
     /// </summary>
     /// <param name="itemId">追加するアイテムID</param>
-    //--------------------------------------------------------------------------/
     public void AddItem(int itemId)
     {
         if(!initialized) return;
@@ -75,11 +67,9 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
         UpdateItemList();
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// アイテムリストを更新する
     /// </summary>
-    //--------------------------------------------------------------------------/
     public void UpdateItemList()
     {
         if(!initialized) return;

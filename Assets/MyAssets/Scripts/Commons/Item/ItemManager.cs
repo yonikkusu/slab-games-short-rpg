@@ -2,11 +2,9 @@
 using System.Linq;
 using UnityEngine;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// アイテム マネージャー
 /// </summary>
-//--------------------------------------------------------------------------/
 public class ItemManager
 {
     /// <summary>所持アイテムリスト</summary>
@@ -15,24 +13,20 @@ public class ItemManager
     // アイテムデータ一覧
     private ItemDataList itemDataList;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="itemIds">所持アイテムIDリスト</param>
-    //--------------------------------------------------------------------------/
     public ItemManager(int[] itemIds = null)
     {
         itemDataList = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList");
         PossessionItemList = itemIds?.Select(itemId => itemDataList.Get((ItemID)itemId)).ToList() ?? new List<ItemData>();
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// アイテムを使用する
     /// </summary>
     /// <param name="index">使用するアイテムのID</param>
-    //--------------------------------------------------------------------------/
     public void UseItem(ItemID itemId)
     {
         var item = PossessionItemList.FirstOrDefault(i => i.ID == itemId);
@@ -44,23 +38,19 @@ public class ItemManager
         PossessionItemList.Remove(item);
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 所持アイテムのIDリストを取得する
     /// </summary>
     /// <returns></returns>
-    //--------------------------------------------------------------------------/
     public int[] GetItemIdList()
     {
         return PossessionItemList.Select(possessionItem => (int)possessionItem.ID).ToArray();
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// アイテムを所持アイテムリストに追加する
     /// </summary>
     /// <param name="itemId">追加するアイテムのID</param>
-    //--------------------------------------------------------------------------/
     public void AddItem(ItemID itemId)
     {
         var item = itemDataList.Get(itemId);

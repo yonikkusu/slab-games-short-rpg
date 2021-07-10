@@ -1,27 +1,24 @@
 ﻿using UnityEngine;
+using UniRx;
 using UniRx.Async;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// マップシーン基底クラス
 /// </summary>
-//--------------------------------------------------------------------------/
 public class MapSceneBase : MonoBehaviour
 {
     /// <summary>画面外座標</summary>
     public static readonly Vector3 OffScreenPos = new Vector3(0f, 5000f, 0f);
 
     [SerializeField] private Player player = default;
-    [SerializeField] private Bgm bgm = Bgm.Title;
+    [SerializeField] private Bgm bgm = Bgm.None;
 
     private MapEvent[] mapEvents;
     private Vector3 defaultTransformPos;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 起動時処理
     /// </summary>
-    //--------------------------------------------------------------------------/
     void Awake()
     {
         // プレイヤーデータがないならデバッグ用に作成する
@@ -32,20 +29,12 @@ public class MapSceneBase : MonoBehaviour
         // インゲームで使う表示物を表示する
         DisplayManager.Instance.ShowInGameDisplayObjects();
 
-        // 各マップイベントの初期化
-        initializeMapEvents();
-
         // 初期化完了まで一旦画面外に退避させる
         defaultTransformPos = transform.position;
         transform.position = OffScreenPos;
-        
-        // プレイヤーの初期位置設定
-        var parameter = SceneManagerExtension.SceneParameter;
-        if(parameter != null) {
-            player.Initialize(parameter.StartPosition, parameter.StartDirection);
-        } else {
-            player.Initialize(new Vector2(0.5f, 0.5f), Player.DIRECTION.DOWN);
-        }
+
+        initializeMapEvents();
+        initializePlayer();
 
         // 画面位置をもとに戻す
         transform.position = defaultTransformPos;
@@ -55,13 +44,14 @@ public class MapSceneBase : MonoBehaviour
 
         // 画面フェードイン
         DisplayManager.Instance.FadeInDisplayAsync().Forget();
+
+        // 自動イベントチェック
+        checkAutoEventsAsync().Forget();
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 各マップイベントの初期化
     /// </summary>
-    //--------------------------------------------------------------------------/
     private void initializeMapEvents()
     {
         // シーン上に配置されてるマップイベントを全て取得する
@@ -73,29 +63,44 @@ public class MapSceneBase : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------/
+    /// <summary>
+    /// プレイヤー初期化
+    /// </summary>
+    private void initializePlayer()
+    {
+        // 初期位置設定
+        var parameter = SceneManagerExtension.SceneParameter;
+        if(parameter != null) {
+            player.Initialize(parameter.StartPosition, parameter.StartDirection);
+        } else {
+            player.Initialize(new Vector2(0.5f, 0.5f), Player.DIRECTION.DOWN);
+        }
+        // 購読処理
+        player.OnInspect.Subscribe(checkedPosition => checkInspectEventsAsync(checkedPosition).Forget()).AddTo(this);
+        player.OnUseItem.Subscribe(values => checkUseItemEvents(values.checkedPosition, values.usedItemId)).AddTo(this);
+        player.OnMoved.Subscribe(checkFloorEvents).AddTo(this);
+    }
+
     /// <summary>
     /// 調べるイベントを発動させるかチェックする
     /// </summary>
     /// <param name="checkedPosition">調べた位置</param>
-    //--------------------------------------------------------------------------/
-    public void CheckInspectEvents(Vector2 checkedPosition)
+    /// <returns>UniTask</returns>
+    private async UniTask checkInspectEventsAsync(Vector2 checkedPosition)
     {
 #if DEBUG_LOG
         Debug.Log($"調べた位置({checkedPosition.x}, {checkedPosition.y})");
 #endif
         foreach(var mapEvent in mapEvents) {
-            mapEvent.CheckInspectEvent(checkedPosition);
+            await mapEvent.CheckInspectEventAync(checkedPosition);
         }
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 床イベントを発動させるかチェックする
     /// </summary>
     /// <param name="playerModel">プレイヤー情報</param>
-    //--------------------------------------------------------------------------/
-    public void CheckFloorEvents(IReadOnlyPlayerModel playerModel)
+    private void checkFloorEvents(IReadOnlyPlayerModel playerModel)
     {
 #if DEBUG_LOG
         Debug.Log($"踏んだ位置({playerModel.CurrentPosition.x}, {playerModel.CurrentPosition.y})");
@@ -105,14 +110,12 @@ public class MapSceneBase : MonoBehaviour
         }
     }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// アイテム使用イベントを発動させるかチェックする
     /// </summary>
     /// <param name="checkedPosition">使用する位置</param>
     /// <param name="usedItemId">使用するアイテムのID</param>
-    //--------------------------------------------------------------------------/
-    public void CheckUseItemEvents(Vector2 checkedPosition, ItemID usedItemId)
+    private void checkUseItemEvents(Vector2 checkedPosition, ItemID usedItemId)
     {
 #if DEBUG_LOG
         Debug.Log($"使用する位置({checkedPosition.x}, {checkedPosition.y})");
@@ -121,13 +124,23 @@ public class MapSceneBase : MonoBehaviour
             mapEvent.CheckUseItemEvent(checkedPosition, usedItemId);
         }
     }
+
+    /// <summary>
+    /// 自動イベントを発動させるかチェックする
+    /// </summary>
+    private async UniTaskVoid checkAutoEventsAsync()
+    {
+        foreach(var mapEvent in mapEvents) {
+            var autoEvent = mapEvent as AutoEvent;
+            if(autoEvent == null) continue;
+            await autoEvent.CheckAutoEventAsync();
+        }
+    }
 }
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// マップシーン読み込み時に使うパラメータ
 /// </summary>
-//--------------------------------------------------------------------------/
 public class MapSceneParameter
 {
     /// <summary>プレイヤーの初期位置</summary>
@@ -135,13 +148,11 @@ public class MapSceneParameter
     /// <summary>プレイヤーの初期方向</summary>
     public Player.DIRECTION StartDirection { get; private set; }
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="position">プレイヤーの初期位置</param>
     /// <param name="direction">プレイヤーの初期方向</param>
-    //--------------------------------------------------------------------------/
     public MapSceneParameter(Vector2 position, Player.DIRECTION direction)
     {
         StartPosition = position;

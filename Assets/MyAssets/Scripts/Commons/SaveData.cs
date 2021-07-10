@@ -1,11 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// セーブデータ
 /// </summary>
-//--------------------------------------------------------------------------/
 [Serializable]
 public class SaveData
 {
@@ -36,12 +34,10 @@ public class SaveData
     /// <summary>プレイヤーの座標</summary>
     public Vector2 PlayerPosition => new Vector2(PlayerPositionX, PlayerPositionY);
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="name">プレイヤー名</param>
-    //--------------------------------------------------------------------------/
     public SaveData(string name = "")
     {
         Name = name;
@@ -57,11 +53,9 @@ public class SaveData
     }
 }
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// スイッチフラグ
 /// </summary>
-//--------------------------------------------------------------------------/
 [Serializable]
 public struct SwitchFlag
 {
@@ -70,13 +64,11 @@ public struct SwitchFlag
     /// <summary>値</summary>
     [SerializeField] public bool Value;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="key">キー</param>
     /// <param name="value">セットする値</param>
-    //--------------------------------------------------------------------------/
     public SwitchFlag(string key, bool value)
     {
         Key = key;
@@ -84,11 +76,9 @@ public struct SwitchFlag
     }
 }
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// カウントフラグ
 /// </summary>
-//--------------------------------------------------------------------------/
 [Serializable]
 public struct CountFlag
 {
@@ -97,13 +87,11 @@ public struct CountFlag
     /// <summary>値</summary>
     [SerializeField] public int Value;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="key">キー</param>
     /// <param name="value">セットする値</param>
-    //--------------------------------------------------------------------------/
     public CountFlag(string key, int value)
     {
         Key = key;

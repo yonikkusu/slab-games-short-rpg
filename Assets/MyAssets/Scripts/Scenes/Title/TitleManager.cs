@@ -2,21 +2,17 @@
 using UnityEngine.UI;
 using UniRx.Async;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// タイトルマネージャー
 /// </summary>
-//--------------------------------------------------------------------------/
 public class TitleManager : MonoBehaviour
 {
     [SerializeField] private Button startButton = default;
     [SerializeField] private StartMenuPanel startMenuPanel = default;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 起動時処理
     /// </summary>
-    //--------------------------------------------------------------------------/
     void Start()
     {
         // インゲームで使う表示物を非表示にする

@@ -2,20 +2,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-//--------------------------------------------------------------------------/
 /// <summary>
 /// テスト画面マネージャー
 /// </summary>
-//--------------------------------------------------------------------------/
 public class TestManager : MonoBehaviour
 {
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// テスト用セーブデータ
     /// NOTE: SerializeFieldを付ける or publicにしないとJsonに変換できない
     ///       (=SetClassでセーブ出来ない)ので注意
     /// </summary>
-    //--------------------------------------------------------------------------/
     public class TestSaveData
     {
         /// <summary>テスト用bool値</summary>
@@ -27,7 +23,6 @@ public class TestManager : MonoBehaviour
         /// <summary>テスト用string値</summary>
         public string StringData;
 
-        //--------------------------------------------------------------------------/
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -35,7 +30,6 @@ public class TestManager : MonoBehaviour
         /// <param name="intData">int値</param>
         /// <param name="floatData">float値</param>
         /// <param name="stringData">string値</param>
-        //--------------------------------------------------------------------------/
         public TestSaveData(bool boolData = false, int intData = 0, float floatData = 0f, string stringData = "")
         {
             BoolData = boolData;
@@ -51,11 +45,9 @@ public class TestManager : MonoBehaviour
     [SerializeField] private Text playerDataText = default;
     [SerializeField] private TextAsset playerData = default;
 
-    //--------------------------------------------------------------------------/
     /// <summary>
     /// 起動時処理
     /// </summary>
-    //--------------------------------------------------------------------------/
     void Start()
     {
         // セーブボタン
