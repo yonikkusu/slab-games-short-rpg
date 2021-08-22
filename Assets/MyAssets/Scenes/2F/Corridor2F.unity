@@ -162,7 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 22.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: 22.5, y: -4.5}
   playerDirection: 0
@@ -253,7 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -5.5, y: -1.5}
   sceneName: 6
   destinationCoord: {x: 2.5, y: -1.5}
   playerDirection: 0
@@ -434,7 +432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -0.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: -0.5, y: -4.5}
   playerDirection: 0
@@ -525,7 +522,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 20.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: 20.5, y: -4.5}
   playerDirection: 0
@@ -597,7 +593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -5.5, y: 5.5}
   sceneName: 5
   destinationCoord: {x: 2.5, y: -1.5}
   playerDirection: 0
@@ -707,7 +702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 21.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: 21.5, y: -4.5}
   playerDirection: 0
@@ -798,7 +792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -1.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: -1.5, y: -4.5}
   playerDirection: 0
@@ -3518,7 +3511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 28.5, y: 9.5}
   sceneName: 10
   destinationCoord: {x: -0.5, y: -4.5}
   playerDirection: 0
@@ -3609,7 +3601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 26.5, y: -9.5}
   sceneName: 9
   destinationCoord: {x: -3.5, y: -1.5}
   playerDirection: 0
@@ -3700,7 +3691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 26.5, y: -0.5}
   sceneName: 8
   destinationCoord: {x: -3.5, y: -2.5}
   playerDirection: 0
@@ -6998,7 +6988,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 0.5, y: -4.5}
   sceneName: 11
   destinationCoord: {x: 0.5, y: -4.5}
   playerDirection: 0
@@ -7184,7 +7173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -5.5, y: -8.5}
   sceneName: 7
   destinationCoord: {x: 2.5, y: -1.5}
   playerDirection: 0
@@ -8125,7 +8113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -5.5, y: 12.5}
   sceneName: 4
   destinationCoord: {x: 2.5, y: -1.5}
   playerDirection: 0
@@ -8176,4 +8163,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1803528882}
-  bgm: 1
+  bgm: -1

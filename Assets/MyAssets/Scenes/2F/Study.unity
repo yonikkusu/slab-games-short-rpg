@@ -617,7 +617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -4.5, y: -1.5}
   sceneName: 3
   destinationCoord: {x: 25.5, y: -9.5}
   playerDirection: 0
@@ -707,7 +706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 64319685}
-  bgm: 1
+  bgm: -1
 --- !u!4 &1022482053
 Transform:
   m_ObjectHideFlags: 0
@@ -3376,7 +3375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -0.5, y: 2.5}
   sceneName: 8
   destinationCoord: {x: -0.5, y: -4.5}
   playerDirection: 0
