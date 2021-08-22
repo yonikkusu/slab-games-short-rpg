@@ -1704,6 +1704,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1494367464}
+  bgm: -1
+  mapEvents:
+  - {fileID: 607732180}
+  - {fileID: 1287756392}
+  - {fileID: 411453832}
 --- !u!4 &238475812
 Transform:
   m_ObjectHideFlags: 0
@@ -1771,7 +1776,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 5.5, y: -7.5}
   sceneName: 11
   destinationCoord: {x: -5.5, y: -8.5}
   playerDirection: 1
@@ -1862,7 +1866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 1.5, y: 9.5}
   sceneName: 19
   destinationCoord: {x: 1.5, y: -3.5}
   playerDirection: 2
@@ -6766,7 +6769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 5.5, y: 5.5}
   sceneName: 11
   destinationCoord: {x: -5.5, y: 3.5}
   playerDirection: 1

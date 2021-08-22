@@ -163,6 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gettingItemId: 3
+  triggerOpenEventId: 0
+  deactiveObjects: []
 --- !u!114 &77410264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1361,6 +1363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gettingItemId: 1
+  triggerOpenEventId: 0
+  deactiveObjects: []
 --- !u!114 &1042812372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3069,6 +3073,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gettingItemId: 4
+  triggerOpenEventId: 0
+  deactiveObjects: []
 --- !u!114 &1266285053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4095,6 +4101,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 334829882}
   bgm: -1
+  mapEvents:
+  - {fileID: 882966860}
+  - {fileID: 1266285052}
+  - {fileID: 1042812371}
+  - {fileID: 77410263}
 --- !u!4 &1824183129
 Transform:
   m_ObjectHideFlags: 0

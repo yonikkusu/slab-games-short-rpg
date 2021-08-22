@@ -1111,6 +1111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 433666611}
   bgm: -1
+  mapEvents:
+  - {fileID: 402138685}
 --- !u!4 &1258894751
 Transform:
   m_ObjectHideFlags: 0

@@ -12,8 +12,8 @@ public class MapSceneBase : MonoBehaviour
 
     [SerializeField] private Player player = default;
     [SerializeField] private Bgm bgm = Bgm.None;
+    [SerializeField] MapEvent[] mapEvents = default;
 
-    private MapEvent[] mapEvents;
     private Vector3 defaultTransformPos;
 
     /// <summary>
@@ -56,9 +56,6 @@ public class MapSceneBase : MonoBehaviour
     /// </summary>
     private void initializeMapEvents()
     {
-        // シーン上に配置されてるマップイベントを全て取得する
-        mapEvents = FindObjectsOfType<MapEvent>();
-
         // マップイベントの初期化
         foreach(var mapEvent in mapEvents) {
             mapEvent.Initialize();

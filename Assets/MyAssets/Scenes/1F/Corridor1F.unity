@@ -10237,3 +10237,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1803528882}
   bgm: -1
+  mapEvents:
+  - {fileID: 1370553144}
+  - {fileID: 1423302869}
+  - {fileID: 1392286374}
+  - {fileID: 153177673}
+  - {fileID: 1013236474}
+  - {fileID: 1680946393}
+  - {fileID: 587375801}
+  - {fileID: 1630954808}
+  - {fileID: 1530280366}
+  - {fileID: 181626146}
+  - {fileID: 77375021}
+  - {fileID: 181941818}
+  - {fileID: 731876373}
+  - {fileID: 1870324488}
+  - {fileID: 703514183}
