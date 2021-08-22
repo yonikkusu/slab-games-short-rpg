@@ -151,6 +151,29 @@ public class FlagManager
         return switchFlagDictionay.ContainsKey(key);
     }
     #endregion
+
+    #region ItemEventSwitchFlag
+    /// <summary>
+    /// アイテム獲得イベント用スイッチの値をONにする
+    /// </summary>
+    /// <param name="id">アイテムID</param>
+    public void SetItemEventSwitchOn(ItemID id)
+    {
+        var key = $"{SwitchFlagKey.SwitchItemEvent}_{id}";
+        switchFlagDictionay[key] = true;
+    }
+
+    /// <summary>
+    /// アイテム獲得イベント用スイッチの値があるか調べる
+    /// </summary>
+    /// <param name="id">アイテムID</param>
+    /// <returns>キーがあればtrue</returns>
+    public bool HasItemEventSwitch(ItemID id)
+    {
+        var key = $"{SwitchFlagKey.SwitchItemEvent}_{id}";
+        return switchFlagDictionay.ContainsKey(key);
+    }
+    #endregion
 }
 
 /// <summary>
@@ -161,6 +184,7 @@ public enum SwitchFlagKey
     None,
     SwitchDoorCorridor1FKitchen,
     SwitchAutoEvent,
+    SwitchItemEvent,
 }
 
 /// <summary>

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 /// <summary>
 /// アイテムパネル
@@ -12,6 +12,8 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
 
     [SerializeField] private Image[] itemImageList = default;
     [SerializeField] private Image selectFrame = default;
+    [SerializeField] private ItemSynthesisPresenter synthesisPresenter;
+    [SerializeField] private Button synthesisButton;
 
     /// <summary>選択中アイテムのID</summary>
     public ItemData SelectedItem => itemList[selectedItemIndex];
@@ -53,6 +55,8 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
         itemList = new ItemData[MaxItemNum];
         UpdateItemList();
         initialized = true;
+        synthesisPresenter.Initialize();
+        synthesisButton.OnClickAsObservable().Subscribe(_ => synthesisPresenter.Show()).AddTo(this);
     }
 
     /// <summary>
