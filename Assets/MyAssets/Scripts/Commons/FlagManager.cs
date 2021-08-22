@@ -174,6 +174,30 @@ public class FlagManager
         return switchFlagDictionay.ContainsKey(key);
     }
     #endregion
+    
+    #region OpenEventSwitchFlag
+    /// <summary>
+    /// OpenEvent用スイッチの値をONにする
+    /// </summary>
+    /// <param name="id">OpenEventId</param>
+    public void SetOpenEventSwitchOn(OpenEventId id)
+    {
+        var key = $"{SwitchFlagKey.SwitchOpenEvent}_{id}";
+        switchFlagDictionay[key] = true;
+    }
+
+    /// <summary>
+    /// OpenEvent用スイッチの値があるか調べる
+    /// </summary>
+    /// <param name="id">OpenEventId</param>
+    /// <returns>キーがあればtrue</returns>
+    public bool HasOpenEventSwitch(OpenEventId id)
+    {
+        if(id == OpenEventId.None) return true;
+        var key = $"{SwitchFlagKey.SwitchOpenEvent}_{id}";
+        return switchFlagDictionay.ContainsKey(key);
+    }
+    #endregion
 }
 
 /// <summary>
@@ -182,9 +206,9 @@ public class FlagManager
 public enum SwitchFlagKey
 {
     None,
-    SwitchDoorCorridor1FKitchen,
     SwitchAutoEvent,
     SwitchItemEvent,
+    SwitchOpenEvent,
 }
 
 /// <summary>

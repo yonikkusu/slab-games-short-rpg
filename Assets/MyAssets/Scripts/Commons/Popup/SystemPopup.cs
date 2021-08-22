@@ -63,8 +63,8 @@ public class SystemPopup : MonoBehaviour
     /// <returns>UniTaskVoid</returns>
     private async UniTaskVoid waitKeyInputAsync(CancellationToken cancellationToken)
     {
-        // NOTE: 1秒間は入力をブロック
-        await UniTask.Delay(1000, cancellationToken: cancellationToken);
+        // NOTE: 0.1秒間は入力をブロック
+        await UniTask.Delay(100, cancellationToken: cancellationToken);
         await UniTask.WaitUntil(() => Input.GetKey(KeyCode.Return), cancellationToken: cancellationToken);
         source?.TrySetResult();
     }
