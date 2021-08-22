@@ -24,6 +24,8 @@ public class MapSceneBase : MonoBehaviour
         // プレイヤーデータがないならデバッグ用に作成する
         if(PlayerData.Instance.CurrentData == null) {
             PlayerData.Instance.Create("デバッグプレイヤー");
+            // NOTE: デバッグではOPをスキップ
+            PlayerData.Instance.FlagManager.SetAutoEventSwitchOn(AutoEventId.Opening);
         }
 
         // インゲームで使う表示物を表示する
