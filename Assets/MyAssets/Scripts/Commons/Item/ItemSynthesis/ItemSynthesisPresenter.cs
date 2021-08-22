@@ -6,7 +6,7 @@ using UniRx;
 /// </summary>
 public class ItemSynthesisPresenter : MonoBehaviour
 {
-    [SerializeField] private ItemSynthesisView view;
+    [SerializeField] private ItemSynthesisView view = default;
 
     private ItemSynthesisModel model;
 

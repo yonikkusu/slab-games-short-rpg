@@ -8,7 +8,7 @@ using Fungus;
 /// </summary>
 public class FlowchartHelper : SingletonMonoBehaviour<FlowchartHelper>
 {
-    [SerializeField] private Flowchart flowchart;
+    [SerializeField] private Flowchart flowchart = default;
     private UniTaskCompletionSource source;
 
     /// <summary>

@@ -12,8 +12,8 @@ public class MapSceneBase : MonoBehaviour
 
     [SerializeField] private Player player = default;
     [SerializeField] private Bgm bgm = Bgm.None;
+    [SerializeField] MapEvent[] mapEvents = default;
 
-    private MapEvent[] mapEvents;
     private Vector3 defaultTransformPos;
 
     /// <summary>
@@ -24,6 +24,8 @@ public class MapSceneBase : MonoBehaviour
         // プレイヤーデータがないならデバッグ用に作成する
         if(PlayerData.Instance.CurrentData == null) {
             PlayerData.Instance.Create("デバッグプレイヤー");
+            // NOTE: デバッグではOPをスキップ
+            PlayerData.Instance.FlagManager.SetAutoEventSwitchOn(AutoEventId.Opening);
         }
 
         // インゲームで使う表示物を表示する
@@ -54,9 +56,6 @@ public class MapSceneBase : MonoBehaviour
     /// </summary>
     private void initializeMapEvents()
     {
-        // シーン上に配置されてるマップイベントを全て取得する
-        mapEvents = FindObjectsOfType<MapEvent>();
-
         // マップイベントの初期化
         foreach(var mapEvent in mapEvents) {
             mapEvent.Initialize();
@@ -77,7 +76,7 @@ public class MapSceneBase : MonoBehaviour
         }
         // 購読処理
         player.OnInspect.Subscribe(checkedPosition => checkInspectEventsAsync(checkedPosition).Forget()).AddTo(this);
-        player.OnUseItem.Subscribe(values => checkUseItemEvents(values.checkedPosition, values.usedItemId)).AddTo(this);
+        player.OnUseItem.Subscribe(values => checkUseItemEventsAsync(values.checkedPosition, values.usedItemId).Forget()).AddTo(this);
         player.OnMoved.Subscribe(checkFloorEvents).AddTo(this);
     }
 
@@ -115,13 +114,13 @@ public class MapSceneBase : MonoBehaviour
     /// </summary>
     /// <param name="checkedPosition">使用する位置</param>
     /// <param name="usedItemId">使用するアイテムのID</param>
-    private void checkUseItemEvents(Vector2 checkedPosition, ItemID usedItemId)
+    private async UniTask checkUseItemEventsAsync(Vector2 checkedPosition, ItemID usedItemId)
     {
 #if DEBUG_LOG
         Debug.Log($"使用する位置({checkedPosition.x}, {checkedPosition.y})");
 #endif
         foreach(var mapEvent in mapEvents) {
-            mapEvent.CheckUseItemEvent(checkedPosition, usedItemId);
+            await mapEvent.CheckUseItemEventAsync(checkedPosition, usedItemId);
         }
     }
 

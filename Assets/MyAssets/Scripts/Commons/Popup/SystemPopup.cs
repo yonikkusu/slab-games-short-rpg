@@ -9,9 +9,9 @@ using UnityEngine.UI;
 /// </summary>
 public class SystemPopup : MonoBehaviour
 {
-    [SerializeField] private GameObject popupObject;
-    [SerializeField] private Button closeBackgroundButton;
-    [SerializeField] private Text messageText;
+    [SerializeField] private GameObject popupObject = default;
+    [SerializeField] private Button closeBackgroundButton = default;
+    [SerializeField] private Text messageText = default;
 
     private UniTaskCompletionSource source;
     private CancellationTokenSource cancellationTokenSource;
@@ -63,8 +63,8 @@ public class SystemPopup : MonoBehaviour
     /// <returns>UniTaskVoid</returns>
     private async UniTaskVoid waitKeyInputAsync(CancellationToken cancellationToken)
     {
-        // NOTE: 1秒間は入力をブロック
-        await UniTask.Delay(1000, cancellationToken: cancellationToken);
+        // NOTE: 0.1秒間は入力をブロック
+        await UniTask.Delay(100, cancellationToken: cancellationToken);
         await UniTask.WaitUntil(() => Input.GetKey(KeyCode.Return), cancellationToken: cancellationToken);
         source?.TrySetResult();
     }

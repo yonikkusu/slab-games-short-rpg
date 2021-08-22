@@ -162,9 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 20.5, y: -3.5}
   sceneName: 3
-  destinationCoord: {x: 20.5, y: -3.5}
+  destinationCoord: {x: 20.5, y: -2.5}
   playerDirection: 0
 --- !u!114 &77375022
 MonoBehaviour:
@@ -238,7 +237,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -7, y: 12}
+  m_AnchoredPosition: {x: -6, y: 12}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &153177673
@@ -253,9 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -6.5, y: 12.5}
   sceneName: 19
-  destinationCoord: {x: 4.5, y: 0.5}
+  destinationCoord: {x: 3.5, y: 0.5}
   playerDirection: 0
 --- !u!114 &153177674
 MonoBehaviour:
@@ -344,9 +342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 0.5, y: -3.5}
   sceneName: 3
-  destinationCoord: {x: 0.5, y: -3.5}
+  destinationCoord: {x: 0.5, y: -2.5}
   playerDirection: 0
 --- !u!114 &181626147
 MonoBehaviour:
@@ -435,9 +432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 21.5, y: -3.5}
   sceneName: 3
-  destinationCoord: {x: 21.5, y: -3.5}
+  destinationCoord: {x: 21.5, y: -2.5}
   playerDirection: 0
 --- !u!114 &181941819
 MonoBehaviour:
@@ -821,7 +817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 28, y: 10}
+  m_AnchoredPosition: {x: 28, y: 9}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &587375801
@@ -836,9 +832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 28.5, y: 10.5}
   sceneName: 17
-  destinationCoord: {x: -3.5, y: -4.5}
+  destinationCoord: {x: -3.5, y: -3.5}
   playerDirection: 0
 --- !u!114 &587375802
 MonoBehaviour:
@@ -912,7 +907,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 11, y: 1}
+  m_AnchoredPosition: {x: 11, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &703514183
@@ -927,9 +922,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 11.5, y: 1.5}
   sceneName: 18
-  destinationCoord: {x: 12.5, y: 0.5}
+  destinationCoord: {x: 12.5, y: 1.5}
   playerDirection: 0
 --- !u!114 &703514184
 MonoBehaviour:
@@ -1065,9 +1059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 22.5, y: -3.5}
   sceneName: 3
-  destinationCoord: {x: 22.5, y: -3.5}
+  destinationCoord: {x: 22.5, y: -2.5}
   playerDirection: 0
 --- !u!114 &731876374
 MonoBehaviour:
@@ -1141,7 +1134,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -7, y: 3}
+  m_AnchoredPosition: {x: -6, y: 3}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1013236474
@@ -1156,9 +1149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -6.5, y: 3.5}
   sceneName: 15
-  destinationCoord: {x: 4.5, y: 5.5}
+  destinationCoord: {x: 3.5, y: 5.5}
   playerDirection: 0
 --- !u!114 &1013236475
 MonoBehaviour:
@@ -3879,7 +3871,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 37, y: 4}
+  m_AnchoredPosition: {x: 37, y: 5}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1370553144
@@ -3894,9 +3886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 37.5, y: 4.5}
   sceneName: 14
-  destinationCoord: {x: -1.5, y: 2.5}
+  destinationCoord: {x: -1.5, y: 1.5}
   playerDirection: 0
 --- !u!114 &1370553145
 MonoBehaviour:
@@ -3970,7 +3961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 27, y: -10}
+  m_AnchoredPosition: {x: 26, y: -10}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1392286374
@@ -3985,9 +3976,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 27.5, y: -9.5}
   sceneName: 16
-  destinationCoord: {x: -6.5, y: 1.5}
+  destinationCoord: {x: -5.5, y: 1.5}
   playerDirection: 0
 --- !u!114 &1392286375
 MonoBehaviour:
@@ -4061,7 +4051,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 27, y: 1}
+  m_AnchoredPosition: {x: 26, y: 1}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1423302869
@@ -4076,9 +4066,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 27.5, y: 1.5}
   sceneName: 12
-  destinationCoord: {x: -5.5, y: 1.5}
+  destinationCoord: {x: -4.5, y: 1.5}
   playerDirection: 0
 --- !u!114 &1423302870
 MonoBehaviour:
@@ -8975,9 +8964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -0.5, y: -3.5}
   sceneName: 3
-  destinationCoord: {x: -0.5, y: -3.5}
+  destinationCoord: {x: -0.5, y: -2.5}
   playerDirection: 0
 --- !u!114 &1530280367
 MonoBehaviour:
@@ -9066,9 +9054,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -1.5, y: -3.5}
   sceneName: 3
-  destinationCoord: {x: -1.5, y: -3.5}
+  destinationCoord: {x: -1.5, y: -2.5}
   playerDirection: 0
 --- !u!114 &1630954809
 MonoBehaviour:
@@ -9142,7 +9129,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -7, y: -9}
+  m_AnchoredPosition: {x: -6, y: -9}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1680946393
@@ -9157,9 +9144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -6.5, y: -8.5}
   sceneName: 15
-  destinationCoord: {x: 4.5, y: -7.5}
+  destinationCoord: {x: 3.5, y: -7.5}
   playerDirection: 0
 --- !u!114 &1680946394
 MonoBehaviour:
@@ -9560,7 +9546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10, y: 1}
+  m_AnchoredPosition: {x: 10, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1870324488
@@ -9575,9 +9561,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: 10.5, y: 1.5}
   sceneName: 18
-  destinationCoord: {x: 11.5, y: 0.5}
+  destinationCoord: {x: 11.5, y: 1.5}
   playerDirection: 0
 --- !u!114 &1870324489
 MonoBehaviour:
@@ -10251,4 +10236,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1803528882}
-  bgm: 1
+  bgm: -1
+  mapEvents:
+  - {fileID: 1370553144}
+  - {fileID: 1423302869}
+  - {fileID: 1392286374}
+  - {fileID: 153177673}
+  - {fileID: 1013236474}
+  - {fileID: 1680946393}
+  - {fileID: 587375801}
+  - {fileID: 1630954808}
+  - {fileID: 1530280366}
+  - {fileID: 181626146}
+  - {fileID: 77375021}
+  - {fileID: 181941818}
+  - {fileID: 731876373}
+  - {fileID: 1870324488}
+  - {fileID: 703514183}

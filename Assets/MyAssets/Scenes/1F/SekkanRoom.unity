@@ -142,6 +142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1874982422}
+  bgm: -1
+  mapEvents:
+  - {fileID: 2020295547}
 --- !u!4 &361492382
 Transform:
   m_ObjectHideFlags: 0
@@ -2600,7 +2603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -8, y: 1}
+  m_AnchoredPosition: {x: -7, y: 1}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2020295547
@@ -2615,9 +2618,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -7.5, y: 1.5}
   sceneName: 11
-  destinationCoord: {x: 26.5, y: -9.5}
+  destinationCoord: {x: 25.5, y: -9.5}
   playerDirection: 0
 --- !u!114 &2020295548
 MonoBehaviour:

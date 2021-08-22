@@ -163,6 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gettingItemId: 3
+  triggerOpenEventId: 0
+  deactiveObjects: []
 --- !u!114 &77410264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1255,7 +1257,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -3, y: 5}
+  m_AnchoredPosition: {x: -3, y: 4}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &882966860
@@ -1271,7 +1273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: 12
-  destinationCoord: {x: -2.5, y: -0.5}
+  destinationCoord: {x: -2.5, y: 0.5}
   playerDirection: 0
 --- !u!114 &882966861
 MonoBehaviour:
@@ -1361,6 +1363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gettingItemId: 1
+  triggerOpenEventId: 0
+  deactiveObjects: []
 --- !u!114 &1042812372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3069,6 +3073,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gettingItemId: 4
+  triggerOpenEventId: 0
+  deactiveObjects: []
 --- !u!114 &1266285053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4095,6 +4101,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 334829882}
   bgm: -1
+  mapEvents:
+  - {fileID: 882966860}
+  - {fileID: 1266285052}
+  - {fileID: 1042812371}
+  - {fileID: 77410263}
 --- !u!4 &1824183129
 Transform:
   m_ObjectHideFlags: 0

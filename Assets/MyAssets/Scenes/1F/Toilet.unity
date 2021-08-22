@@ -261,7 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aac7abdcd76ff479f6732ad88dbde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCoord: {x: -1.5, y: 4.5}
   sceneName: 11
   destinationCoord: {x: 37.5, y: 5.5}
   playerDirection: 0
@@ -1111,7 +1110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 433666611}
-  bgm: 1
+  bgm: -1
+  mapEvents:
+  - {fileID: 402138685}
 --- !u!4 &1258894751
 Transform:
   m_ObjectHideFlags: 0
