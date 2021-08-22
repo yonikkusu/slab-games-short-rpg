@@ -6,7 +6,7 @@ using UniRx.Async;
 /// </summary>
 public class AutoEventOpening : AutoEvent
 {
-    [SerializeField] private GameObject[] otherCharacters;
+    [SerializeField] private GameObject[] otherCharacters = default;
 
     protected override AutoEventId autoEventId => AutoEventId.Opening;
 

@@ -5,7 +5,7 @@
 /// </summary>
 public class PopupCreator : SingletonMonoBehaviour<PopupCreator>
 {
-    [SerializeField] private SystemPopup systemPopup;
+    [SerializeField] private SystemPopup systemPopup = default;
 
     /// <summary>
     /// ポップアップを生成する

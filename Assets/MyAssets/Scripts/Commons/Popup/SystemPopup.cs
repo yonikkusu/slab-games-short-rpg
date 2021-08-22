@@ -9,9 +9,9 @@ using UnityEngine.UI;
 /// </summary>
 public class SystemPopup : MonoBehaviour
 {
-    [SerializeField] private GameObject popupObject;
-    [SerializeField] private Button closeBackgroundButton;
-    [SerializeField] private Text messageText;
+    [SerializeField] private GameObject popupObject = default;
+    [SerializeField] private Button closeBackgroundButton = default;
+    [SerializeField] private Text messageText = default;
 
     private UniTaskCompletionSource source;
     private CancellationTokenSource cancellationTokenSource;

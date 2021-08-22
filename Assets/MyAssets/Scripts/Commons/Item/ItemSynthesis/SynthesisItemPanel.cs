@@ -9,7 +9,7 @@ using UniRx;
 /// </summary>
 public class SynthesisItemPanel : MonoBehaviour
 {
-    [SerializeField] private SynthesisItemPanelNode[] nodes;
+    [SerializeField] private SynthesisItemPanelNode[] nodes = default;
 
     /// <summary>アイテムボタンタップ通知(リストのIndexを通知)</summary>
     public IObservable<int?> OnTapItemButton => Observable.Merge(nodes.Select(node => node.OnTapButton));

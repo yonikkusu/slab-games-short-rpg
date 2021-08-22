@@ -8,13 +8,13 @@ using UniRx;
 /// </summary>
 public class ItemSynthesisView : MonoBehaviour
 {
-    [SerializeField] private SynthesisItemIcon materialItemIcon1;
-    [SerializeField] private SynthesisItemIcon materialItemIcon2;
-    [SerializeField] private Image resultItemImage;
-    [SerializeField] private SynthesisItemPanel itemPanel;
-    [SerializeField] private Button cancelButton;
-    [SerializeField] private Button decideButton;
-    [SerializeField] private Text descriptionText;
+    [SerializeField] private SynthesisItemIcon materialItemIcon1 = default;
+    [SerializeField] private SynthesisItemIcon materialItemIcon2 = default;
+    [SerializeField] private Image resultItemImage = default;
+    [SerializeField] private SynthesisItemPanel itemPanel = default;
+    [SerializeField] private Button cancelButton = default;
+    [SerializeField] private Button decideButton = default;
+    [SerializeField] private Text descriptionText = default;
 
     /// <summary>素材アイテム1ボタンタップ通知</summary>
     public IObservable<Unit> OnTapMaterialItem1Button => materialItemIcon1.OnTapDeleteButton;

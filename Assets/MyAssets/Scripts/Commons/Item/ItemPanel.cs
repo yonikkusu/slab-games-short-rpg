@@ -12,8 +12,8 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
 
     [SerializeField] private Image[] itemImageList = default;
     [SerializeField] private Image selectFrame = default;
-    [SerializeField] private ItemSynthesisPresenter synthesisPresenter;
-    [SerializeField] private Button synthesisButton;
+    [SerializeField] private ItemSynthesisPresenter synthesisPresenter = default;
+    [SerializeField] private Button synthesisButton = default;
 
     /// <summary>選択中アイテムのID</summary>
     public ItemData SelectedItem => itemList[selectedItemIndex];
