@@ -79,7 +79,7 @@ public class MapSceneBase : MonoBehaviour
         }
         // 購読処理
         player.OnInspect.Subscribe(checkedPosition => checkInspectEventsAsync(checkedPosition).Forget()).AddTo(this);
-        player.OnUseItem.Subscribe(values => checkUseItemEvents(values.checkedPosition, values.usedItemId)).AddTo(this);
+        player.OnUseItem.Subscribe(values => checkUseItemEventsAsync(values.checkedPosition, values.usedItemId).Forget()).AddTo(this);
         player.OnMoved.Subscribe(checkFloorEvents).AddTo(this);
     }
 
@@ -117,13 +117,13 @@ public class MapSceneBase : MonoBehaviour
     /// </summary>
     /// <param name="checkedPosition">使用する位置</param>
     /// <param name="usedItemId">使用するアイテムのID</param>
-    private void checkUseItemEvents(Vector2 checkedPosition, ItemID usedItemId)
+    private async UniTask checkUseItemEventsAsync(Vector2 checkedPosition, ItemID usedItemId)
     {
 #if DEBUG_LOG
         Debug.Log($"使用する位置({checkedPosition.x}, {checkedPosition.y})");
 #endif
         foreach(var mapEvent in mapEvents) {
-            mapEvent.CheckUseItemEvent(checkedPosition, usedItemId);
+            await mapEvent.CheckUseItemEventAsync(checkedPosition, usedItemId);
         }
     }
 

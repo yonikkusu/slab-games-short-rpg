@@ -44,10 +44,11 @@ public abstract class MapEvent : MonoBehaviour
     /// </summary>
     /// <param name="checkedPosition">使用する位置</param>
     /// <param name="usedItemId">使用するアイテムのID</param>
-    public void CheckUseItemEvent(Vector2 checkedPosition, ItemID usedItemId)
+    /// <returns>UniTask</returns>
+    public async UniTask CheckUseItemEventAsync(Vector2 checkedPosition, ItemID usedItemId)
     {
         if(isSamePosition(checkedPosition)) {
-            onUsedItem(usedItemId);
+            await onUsedItemAsync(usedItemId);
         }
     }
 
@@ -67,7 +68,8 @@ public abstract class MapEvent : MonoBehaviour
     /// アイテム使用時の処理(継承先で中身を定義する)
     /// </summary>
     /// <param name="usedItemId">使用するアイテムのID</param>
-    protected virtual void onUsedItem(ItemID usedItemId) { }
+    /// <returns>UniTask</returns>
+    protected virtual async UniTask onUsedItemAsync(ItemID usedItemId) { }
 
     /// <summary>
     /// 現在のMapEventの中心座標を取得する
