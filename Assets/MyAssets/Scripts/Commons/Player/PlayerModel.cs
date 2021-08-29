@@ -9,14 +9,14 @@ public class PlayerModel : IReadOnlyPlayerModel
     public Vector2 CurrentPosition { get; private set; }
 
     /// <summary>現在の向き</summary>
-    public Player.DIRECTION CurrentDirection { get; private set; }
+    public PLAYER_DIRECTION CurrentDirection { get; private set; }
 
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="position">位置</param>
     /// <param name="direction">向き</param>
-    public PlayerModel(Vector2 position, Player.DIRECTION direction)
+    public PlayerModel(Vector2 position, PLAYER_DIRECTION direction)
     {
         CurrentPosition = position;
         CurrentDirection = direction;
@@ -32,5 +32,5 @@ public class PlayerModel : IReadOnlyPlayerModel
     /// 向き情報を更新
     /// </summary>
     /// <param name="direction">向き</param>
-    public void UpdateDirection(Player.DIRECTION direction) => CurrentDirection = direction;
+    public void UpdateDirection(PLAYER_DIRECTION direction) => CurrentDirection = direction;
 }

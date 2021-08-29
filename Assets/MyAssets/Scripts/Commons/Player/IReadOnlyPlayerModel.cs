@@ -9,5 +9,5 @@ public interface IReadOnlyPlayerModel
     Vector2 CurrentPosition { get; }
 
     /// <summary>現在の向き</summary>
-    Player.DIRECTION CurrentDirection { get; }
+    PLAYER_DIRECTION CurrentDirection { get; }
 }

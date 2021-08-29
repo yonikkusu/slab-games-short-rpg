@@ -22,7 +22,7 @@ public class StartMenuPanel : MonoBehaviour
             // プレイヤーデータ作成
             PlayerData.Instance.Create("マサタカ");
             // 物語の最初の画面へ遷移
-            var parameter = new MapSceneParameter(PlayerData.Instance.CurrentData.PlayerPosition, Player.DIRECTION.DOWN);
+            var parameter = new MapSceneParameter(PlayerData.Instance.CurrentData.PlayerPosition, PLAYER_DIRECTION.DOWN);
             SceneManagerExtension.LoadSceneAsync(SceneName.Dining, parameter).Forget();
         });
 
