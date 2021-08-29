@@ -14,38 +14,13 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
     [SerializeField] private Image selectFrame = default;
     [SerializeField] private ItemSynthesisPresenter synthesisPresenter = default;
     [SerializeField] private Button synthesisButton = default;
+    [SerializeField] private ItemPanelInput itemPanelInput = default;
 
     /// <summary>選択中アイテムのID</summary>
     public ItemData SelectedItem => itemList[selectedItemIndex];
     private ItemData[] itemList;
     private int selectedItemIndex;
-    private bool initialized;
-
-    /// <summary>
-    /// アップデート処理
-    /// </summary>
-    void Update()
-    {
-        if(!initialized) return;
-
-        // マウスのホイールで選択中アイテムを切り替える
-        var wheelValue = Input.GetAxis("Mouse ScrollWheel");
-        if(wheelValue > 0f) {
-            moveCursor(selectedItemIndex - 1);
-        } else if(wheelValue < 0f) {
-            moveCursor(selectedItemIndex + 1);
-        }
-
-        // 選択中カーソルを移動する
-        void moveCursor(int index)
-        {
-           selectedItemIndex = index < 0 ? MaxItemNum - 1 : 
-                              index >= MaxItemNum ? 0 :
-                              index;
-           selectFrame.transform.SetParent(itemImageList[selectedItemIndex].transform);
-           selectFrame.transform.localPosition = new Vector3();
-        }
-    }
+    private bool isFirstInitialized;
 
     /// <summary>
     /// 初期化
@@ -54,9 +29,12 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
     {
         itemList = new ItemData[MaxItemNum];
         UpdateItemList();
-        initialized = true;
-        synthesisPresenter.Initialize();
-        synthesisButton.OnClickAsObservable().Subscribe(_ => synthesisPresenter.Show()).AddTo(this);
+        if(!isFirstInitialized) {
+            synthesisPresenter.Initialize();
+            synthesisButton.OnClickAsObservable().Subscribe(_ => synthesisPresenter.Show()).AddTo(this);
+            itemPanelInput.OnWheelValueChanged.Subscribe(moveCursor).AddTo(this);
+            isFirstInitialized = true;
+        }
     }
 
     /// <summary>
@@ -65,7 +43,7 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
     /// <param name="itemId">追加するアイテムID</param>
     public void AddItem(int itemId)
     {
-        if(!initialized) return;
+        if(!isFirstInitialized) return;
 
         PlayerData.Instance.ItemManager.AddItem((ItemID)itemId);
         UpdateItemList();
@@ -76,7 +54,7 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
     /// </summary>
     public void UpdateItemList()
     {
-        if(!initialized) return;
+        if(!isFirstInitialized) return;
 
         var possessionItemList = PlayerData.Instance.ItemManager?.PossessionItemList;
 
@@ -95,5 +73,22 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
             itemList[i] = possessionItemList[i];
             itemImageList[i].sprite = possessionItemList[i].Sprite;
         }
+    }
+
+    /// <summary>
+    /// 選択中カーソルを移動する
+    /// </summary>
+    /// <param name="wheelValue">マウスホイールの移動量</param>
+    void moveCursor(float wheelValue)
+    {
+        if(!isFirstInitialized) return;
+        if(wheelValue == 0) return;
+
+        var index = wheelValue > 0f ? selectedItemIndex - 1 : selectedItemIndex + 1;
+        selectedItemIndex = index < 0 ? MaxItemNum - 1 : 
+                            index >= MaxItemNum ? 0 :
+                            index;
+        selectFrame.transform.SetParent(itemImageList[selectedItemIndex].transform);
+        selectFrame.transform.localPosition = new Vector3();
     }
 }
