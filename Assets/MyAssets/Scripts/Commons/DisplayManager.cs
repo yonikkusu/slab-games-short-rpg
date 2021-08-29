@@ -63,6 +63,7 @@ public class DisplayManager : SingletonMonoBehaviour<DisplayManager>
     /// </summary>
     public void ShowInGameDisplayObjects()
     {
+        InputService.Instance.ChangeMode(InputMode.Normal);
         menu.Initialize();
         itemPanel.Initialize();
         menu.gameObject.SetActive(true);
@@ -74,6 +75,7 @@ public class DisplayManager : SingletonMonoBehaviour<DisplayManager>
     /// </summary>
     public void HideInGameDisplayObjects()
     {
+        InputService.Instance.ChangeMode(InputMode.None);
         menu.gameObject.SetActive(false);
         itemPanel.gameObject.SetActive(false);
     }

@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rigidBody = default;
     [SerializeField] private Animator anim = default;
+    [SerializeField] private PlayerInput playerInput = default;
 
     /// <summary>プレイヤーが調べるを行った通知(調べた座標を渡す)</summary>
     public IObservable<Vector2> OnInspect => onInspectSubject;
@@ -31,25 +32,6 @@ public class Player : MonoBehaviour
     private bool isMoving;
 
     /// <summary>
-    /// アップデート処理
-    /// </summary>
-    void Update()
-    {
-        // キャラクターの移動チェック
-        checkMoveAsync().Forget();
-
-        // 調べるイベントチェック
-        if(Input.GetKeyDown(KeyCode.Return)) {
-            onInspectSubject.OnNext(getOneSquareAheadPosition());
-        }
-
-        // アイテム使用イベントチェック
-        if(Input.GetKeyDown(KeyCode.I)) {
-            onUseItemSubject.OnNext((getOneSquareAheadPosition(), ItemPanel.Instance.SelectedItem?.ID ?? ItemID.None));
-        }
-    }
-
-    /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="startPosition">初期位置</param>
@@ -58,27 +40,26 @@ public class Player : MonoBehaviour
     {
         playerModel = new PlayerModel(startPosition, startDirection);
         transform.position = MapSceneBase.OffScreenPos + startPosition;
+        playerInput.OnMovePlayer.Subscribe(direction => checkMoveAsync(direction).Forget()).AddTo(this);
+        playerInput.OnInspectKeyDown.Subscribe(_ => onInspectSubject.OnNext(getOneSquareAheadPosition())).AddTo(this);
+        playerInput.OnUseItemKeyDown
+            .Subscribe(_ => onUseItemSubject.OnNext((getOneSquareAheadPosition(), ItemPanel.Instance.SelectedItem?.ID ?? ItemID.None)))
+            .AddTo(this);
         move(startDirection, startPosition);
     }
 
     /// <summary>
     /// 移動可能なら移動する
     /// </summary>
-    /// <param name="direction">方向Vector</param>
-    private async UniTask checkMoveAsync()
+    /// <param name="directionVector">プレイヤーの移動方向ベクター</param>
+    private async UniTask checkMoveAsync(Vector2 directionVector)
     {
         // 移動中またはシーン移動中なら何もしない
         if(isMoving || SceneManagerExtension.IsMoving) return;
 
-        // 入力データから移動方向を求める
-        var directionVector = getDirectionVector();
-        var direction = getDirection(directionVector);
-
-        // 移動キーが押されてないなら何もしない
-        if(direction == DIRECTION.NONE) return;
-
         // 移動処理
         isMoving = true;
+        var direction = getDirection(directionVector);
         var movedPosition = rigidBody.position + directionVector;
         var prevPosition = rigidBody.position;
         var i = 0;
@@ -110,18 +91,6 @@ public class Player : MonoBehaviour
             if(direction == PLAYER_DIRECTION.DOWN) return currentPosition.y <= movedPosition.y;
             return false;
         }
-    }
-
-
-    /// <summary>
-    /// 入力データから方向ベクトルを取得する
-    /// </summary>
-    /// <returns>方向Vector</returns>
-    private Vector2 getDirectionVector()
-    {
-        var x = Input.GetAxisRaw("Horizontal");
-        var y = Input.GetAxisRaw("Vertical");
-        return new Vector2(x, y).normalized;
     }
 
     /// <summary>
