@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 移動可能なら移動する
     /// </summary>
-    /// <param name="directionVector">プレイヤーの移動方向</param>
+    /// <param name="direction">プレイヤーの移動方向</param>
     private async UniTask checkMoveAsync(PLAYER_DIRECTION direction)
     {
         // 移動中またはシーン移動中なら何もしない
