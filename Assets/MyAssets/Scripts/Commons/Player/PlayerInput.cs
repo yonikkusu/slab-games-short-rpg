@@ -10,9 +10,9 @@ public class PlayerInput : InputBase
     /// <summary>使用する入力モード</summary>
     protected override InputMode usedMode => InputMode.Normal;
 
-    /// <summary>プレイヤー移動通知(移動方向ベクターを通知)</summary>
-    public IObservable<Vector2> OnMovePlayer => onMovePlayerSubject;
-    private Subject<Vector2> onMovePlayerSubject = new Subject<Vector2>();
+    /// <summary>プレイヤー移動通知(移動方向を通知)</summary>
+    public IObservable<PLAYER_DIRECTION> OnMovePlayer => onMovePlayerSubject;
+    private Subject<PLAYER_DIRECTION> onMovePlayerSubject = new Subject<PLAYER_DIRECTION>();
     /// <summary>調べるキー入力通知</summary>
     public IObservable<Unit> OnInspectKeyDown => onInspectKeyDownSubject;
     private Subject<Unit> onInspectKeyDownSubject = new Subject<Unit>();
@@ -26,9 +26,9 @@ public class PlayerInput : InputBase
     protected override void checkInput()
     {
         // 移動チェック
-        var playerDirectionVector = getDirectionVector();
-        if(playerDirectionVector != Vector2.zero) {
-            onMovePlayerSubject.OnNext(playerDirectionVector);
+        var playerDirection = getDirection();
+        if(playerDirection != PLAYER_DIRECTION.NONE) {
+            onMovePlayerSubject.OnNext(playerDirection);
         }
         // 調べるイベントチェック
         if(Input.GetKeyDown(KeyCode.Return)) {
@@ -41,13 +41,18 @@ public class PlayerInput : InputBase
     }
 
     /// <summary>
-    /// 移動方向ベクターを取得する(斜めは無効)
+    /// 移動方向を取得する(斜めは無効)
     /// </summary>
-    /// <returns>移動方向ベクター</returns>
-    private Vector2 getDirectionVector()
+    /// <returns>移動方向</returns>
+    private PLAYER_DIRECTION getDirection()
     {
         var x = Input.GetAxisRaw("Horizontal");
         var y = Input.GetAxisRaw("Vertical");
-        return new Vector2(x, y).normalized;
+        var directionVector = new Vector2(x, y).normalized;
+        if(directionVector == Vector2.left) return PLAYER_DIRECTION.LEFT;
+        if(directionVector == Vector2.right) return PLAYER_DIRECTION.RIGHT;
+        if(directionVector == Vector2.up) return PLAYER_DIRECTION.UP;
+        if(directionVector == Vector2.down) return PLAYER_DIRECTION.DOWN;
+        return PLAYER_DIRECTION.NONE;
     }
 }

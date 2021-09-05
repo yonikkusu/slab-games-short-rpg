@@ -48,15 +48,15 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 移動可能なら移動する
     /// </summary>
-    /// <param name="directionVector">プレイヤーの移動方向ベクター</param>
-    private async UniTask checkMoveAsync(Vector2 directionVector)
+    /// <param name="directionVector">プレイヤーの移動方向</param>
+    private async UniTask checkMoveAsync(PLAYER_DIRECTION direction)
     {
         // 移動中またはシーン移動中なら何もしない
         if(playerModel.IsMoving || SceneManagerExtension.IsMoving) return;
 
         // 移動処理
         playerModel.UpdateIsMoving(isMoving: true);
-        var direction = getDirection(directionVector);
+        var directionVector = direction.ToVector2();
         var movedPosition = rigidBody.position + directionVector;
         var prevPosition = rigidBody.position;
         while(true) {
@@ -86,21 +86,6 @@ public class Player : MonoBehaviour
             if(direction == PLAYER_DIRECTION.DOWN) return currentPosition.y <= movedPosition.y;
             return false;
         }
-    }
-
-    /// <summary>
-    /// 移動方向を取得する(斜めは無効)
-    /// </summary>
-    /// <<param name="directionVector">移動ベクトル</param>
-    /// <returns>移動方向</returns>
-    private PLAYER_DIRECTION getDirection(Vector2 directionVector)
-    {
-        if(directionVector == Vector2.left) return PLAYER_DIRECTION.LEFT;
-        if(directionVector == Vector2.right) return PLAYER_DIRECTION.RIGHT;
-        if(directionVector == Vector2.up) return PLAYER_DIRECTION.UP;
-        if(directionVector == Vector2.down) return PLAYER_DIRECTION.DOWN;
-
-        return PLAYER_DIRECTION.NONE;
     }
 
     /// <summary>
@@ -157,12 +142,3 @@ public class Player : MonoBehaviour
         }
     }
 }
-
-/// <summary> プレイヤーの向き</summary>
-public enum PLAYER_DIRECTION {
-    NONE,
-    LEFT,
-    RIGHT,
-    UP,
-    DOWN,
-};
