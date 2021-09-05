@@ -59,13 +59,11 @@ public class Player : MonoBehaviour
         var direction = getDirection(directionVector);
         var movedPosition = rigidBody.position + directionVector;
         var prevPosition = rigidBody.position;
-        var i = 0;
         while(true) {
             move(direction, rigidBody.position + (directionVector / MOVE_ANIMATION_FRAME));
             await UniTask.DelayFrame(1);
             if(isFinishedMove()) break;
             prevPosition = rigidBody.position;
-            i++;
         }
 
         // 床イベントチェック
