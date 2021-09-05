@@ -28,9 +28,6 @@ public class Player : MonoBehaviour
     // プレイヤー情報
     private PlayerModel playerModel;
 
-    // 移動処理中か
-    private bool isMoving;
-
     /// <summary>
     /// 初期化
     /// </summary>
@@ -55,10 +52,10 @@ public class Player : MonoBehaviour
     private async UniTask checkMoveAsync(Vector2 directionVector)
     {
         // 移動中またはシーン移動中なら何もしない
-        if(isMoving || SceneManagerExtension.IsMoving) return;
+        if(playerModel.IsMoving || SceneManagerExtension.IsMoving) return;
 
         // 移動処理
-        isMoving = true;
+        playerModel.UpdateIsMoving(isMoving: true);
         var direction = getDirection(directionVector);
         var movedPosition = rigidBody.position + directionVector;
         var prevPosition = rigidBody.position;
@@ -75,7 +72,7 @@ public class Player : MonoBehaviour
         onMovedSubject.OnNext(playerModel);
 
         // 移動中フラグを下ろす
-        isMoving = false;
+        playerModel.UpdateIsMoving(isMoving: false);
 
         // 移動終了したか
         bool isFinishedMove()
