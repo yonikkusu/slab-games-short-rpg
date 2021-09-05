@@ -11,7 +11,7 @@ public class SystemPopup : MonoBehaviour
     [SerializeField] private GameObject popupObject = default;
     [SerializeField] private Button closeBackgroundButton = default;
     [SerializeField] private Text messageText = default;
-    [SerializeField] private SystemPopupInput systemPopupInput;
+    [SerializeField] private SystemPopupInput systemPopupInput = default;
 
     private UniTaskCompletionSource source;
 
