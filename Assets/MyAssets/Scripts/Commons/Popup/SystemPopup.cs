@@ -1,8 +1,7 @@
-﻿using System.Threading;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using UniRx;
 using UniRx.Async;
-using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// システムポップアップ
@@ -12,15 +11,16 @@ public class SystemPopup : MonoBehaviour
     [SerializeField] private GameObject popupObject = default;
     [SerializeField] private Button closeBackgroundButton = default;
     [SerializeField] private Text messageText = default;
+    [SerializeField] private SystemPopupInput systemPopupInput = default;
 
     private UniTaskCompletionSource source;
-    private CancellationTokenSource cancellationTokenSource;
 
     /// <summary>
     /// 起動時処理
     /// </summary>
     void Start()
     {
+        systemPopupInput.OnCloseKeyDown.Subscribe(_ => source?.TrySetResult()).AddTo(this);
         closeBackgroundButton.OnClickAsObservable()
             .Subscribe(_ => source?.TrySetResult())
             .AddTo(this);
@@ -35,8 +35,6 @@ public class SystemPopup : MonoBehaviour
     {
         initialize(message);
         show();
-        cancellationTokenSource = new CancellationTokenSource();
-        waitKeyInputAsync(cancellationTokenSource.Token).Forget();
         await waitHideAsync();
     }
 
@@ -44,7 +42,11 @@ public class SystemPopup : MonoBehaviour
     /// 初期化
     /// </summary>
     /// <param name="message">表示するメッセージ</param>
-    private void initialize(string message) => messageText.text = message;
+    private void initialize(string message)
+    {
+        InputService.Instance.ChangeMode(InputMode.SystemPopup);
+        messageText.text = message;
+    }
 
     /// <summary>
     /// ポップアップを表示する
@@ -57,19 +59,6 @@ public class SystemPopup : MonoBehaviour
     private void hide() => popupObject.gameObject.SetActive(false);
 
     /// <summary>
-    /// キー入力を待つ
-    /// </summary>
-    /// <param name="cancellationToken">キャンセル通知</param>
-    /// <returns>UniTaskVoid</returns>
-    private async UniTaskVoid waitKeyInputAsync(CancellationToken cancellationToken)
-    {
-        // NOTE: 0.1秒間は入力をブロック
-        await UniTask.Delay(100, cancellationToken: cancellationToken);
-        await UniTask.WaitUntil(() => Input.GetKey(KeyCode.Return), cancellationToken: cancellationToken);
-        source?.TrySetResult();
-    }
-
-    /// <summary>
     /// 閉じられるのを待つ
     /// </summary>
     /// <returns>UniTask</returns>
@@ -77,9 +66,8 @@ public class SystemPopup : MonoBehaviour
     {
         source = new UniTaskCompletionSource();
         await source.Task;
-        cancellationTokenSource.Cancel();
-        cancellationTokenSource.Dispose();
         source = null;
+        InputService.Instance.ChangeMode(InputMode.Normal);
         hide();
     }
 }

@@ -31,7 +31,7 @@ public class SaveLoadButton : MonoBehaviour
             // ロードならデータをロードして該当シーンに遷移
             else if(type == SaveLoadPanelType.Load) {
                 PlayerData.Instance.Load(index);
-                var parameter = new MapSceneParameter(PlayerData.Instance.CurrentData.PlayerPosition, Player.DIRECTION.DOWN);
+                var parameter = new MapSceneParameter(PlayerData.Instance.CurrentData.PlayerPosition, PLAYER_DIRECTION.DOWN);
                 SceneManagerExtension.LoadSceneAsync((SceneName)PlayerData.Instance.CurrentData.LastScene, parameter).Forget();
             }
         });

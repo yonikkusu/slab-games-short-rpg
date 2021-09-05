@@ -11,17 +11,9 @@ public class Player : MonoBehaviour
     /// <summary> 移動アニメーションのフレーム数(2の累乗にする必要がある)</summary>
     private const int MOVE_ANIMATION_FRAME = 4;
 
-    /// <summary> プレイヤーの向き</summary>
-    public enum DIRECTION {
-        NONE,
-        LEFT,
-        RIGHT,
-        UP,
-        DOWN,
-    };
-
     [SerializeField] private Rigidbody2D rigidBody = default;
     [SerializeField] private Animator anim = default;
+    [SerializeField] private PlayerInput playerInput = default;
 
     /// <summary>プレイヤーが調べるを行った通知(調べた座標を渡す)</summary>
     public IObservable<Vector2> OnInspect => onInspectSubject;
@@ -36,74 +28,49 @@ public class Player : MonoBehaviour
     // プレイヤー情報
     private PlayerModel playerModel;
 
-    // 移動処理中か
-    private bool isMoving;
-
-    /// <summary>
-    /// アップデート処理
-    /// </summary>
-    void Update()
-    {
-        // キャラクターの移動チェック
-        checkMoveAsync().Forget();
-
-        // 調べるイベントチェック
-        if(Input.GetKeyDown(KeyCode.Return)) {
-            onInspectSubject.OnNext(getOneSquareAheadPosition());
-        }
-
-        // アイテム使用イベントチェック
-        if(Input.GetKeyDown(KeyCode.I)) {
-            onUseItemSubject.OnNext((getOneSquareAheadPosition(), ItemPanel.Instance.SelectedItem?.ID ?? ItemID.None));
-        }
-    }
-
     /// <summary>
     /// 初期化
     /// </summary>
     /// <param name="startPosition">初期位置</param>
     /// <param name="startDirection">初期方向</param>
-    public void Initialize(Vector3 startPosition, DIRECTION startDirection)
+    public void Initialize(Vector3 startPosition, PLAYER_DIRECTION startDirection)
     {
         playerModel = new PlayerModel(startPosition, startDirection);
         transform.position = MapSceneBase.OffScreenPos + startPosition;
+        playerInput.OnMovePlayer.Subscribe(direction => checkMoveAsync(direction).Forget()).AddTo(this);
+        playerInput.OnInspectKeyDown.Subscribe(_ => onInspectSubject.OnNext(getOneSquareAheadPosition())).AddTo(this);
+        playerInput.OnUseItemKeyDown
+            .Subscribe(_ => onUseItemSubject.OnNext((getOneSquareAheadPosition(), ItemPanel.Instance.SelectedItem?.ID ?? ItemID.None)))
+            .AddTo(this);
         move(startDirection, startPosition);
     }
 
     /// <summary>
     /// 移動可能なら移動する
     /// </summary>
-    /// <param name="direction">方向Vector</param>
-    private async UniTask checkMoveAsync()
+    /// <param name="direction">プレイヤーの移動方向</param>
+    private async UniTask checkMoveAsync(PLAYER_DIRECTION direction)
     {
         // 移動中またはシーン移動中なら何もしない
-        if(isMoving || SceneManagerExtension.IsMoving) return;
-
-        // 入力データから移動方向を求める
-        var directionVector = getDirectionVector();
-        var direction = getDirection(directionVector);
-
-        // 移動キーが押されてないなら何もしない
-        if(direction == DIRECTION.NONE) return;
+        if(playerModel.IsMoving || SceneManagerExtension.IsMoving) return;
 
         // 移動処理
-        isMoving = true;
+        playerModel.UpdateIsMoving(isMoving: true);
+        var directionVector = direction.ToVector2();
         var movedPosition = rigidBody.position + directionVector;
         var prevPosition = rigidBody.position;
-        var i = 0;
         while(true) {
             move(direction, rigidBody.position + (directionVector / MOVE_ANIMATION_FRAME));
             await UniTask.DelayFrame(1);
             if(isFinishedMove()) break;
             prevPosition = rigidBody.position;
-            i++;
         }
 
         // 床イベントチェック
         onMovedSubject.OnNext(playerModel);
 
         // 移動中フラグを下ろす
-        isMoving = false;
+        playerModel.UpdateIsMoving(isMoving: false);
 
         // 移動終了したか
         bool isFinishedMove()
@@ -113,39 +80,12 @@ public class Player : MonoBehaviour
             if(float.Equals(prevPosition.x, currentPosition.x)
             && float.Equals(prevPosition.y, currentPosition.y)) return true;
             // 目的地よりも過ぎていた場合もtrue
-            if(direction == DIRECTION.LEFT) return currentPosition.x <= movedPosition.x;
-            if(direction == DIRECTION.RIGHT) return currentPosition.x >= movedPosition.x;
-            if(direction == DIRECTION.UP) return currentPosition.y >= movedPosition.y;
-            if(direction == DIRECTION.DOWN) return currentPosition.y <= movedPosition.y;
+            if(direction == PLAYER_DIRECTION.LEFT) return currentPosition.x <= movedPosition.x;
+            if(direction == PLAYER_DIRECTION.RIGHT) return currentPosition.x >= movedPosition.x;
+            if(direction == PLAYER_DIRECTION.UP) return currentPosition.y >= movedPosition.y;
+            if(direction == PLAYER_DIRECTION.DOWN) return currentPosition.y <= movedPosition.y;
             return false;
         }
-    }
-
-
-    /// <summary>
-    /// 入力データから方向ベクトルを取得する
-    /// </summary>
-    /// <returns>方向Vector</returns>
-    private Vector2 getDirectionVector()
-    {
-        var x = Input.GetAxisRaw("Horizontal");
-        var y = Input.GetAxisRaw("Vertical");
-        return new Vector2(x, y).normalized;
-    }
-
-    /// <summary>
-    /// 移動方向を取得する(斜めは無効)
-    /// </summary>
-    /// <<param name="directionVector">移動ベクトル</param>
-    /// <returns>移動方向</returns>
-    private DIRECTION getDirection(Vector2 directionVector)
-    {
-        if(directionVector == Vector2.left) return DIRECTION.LEFT;
-        if(directionVector == Vector2.right) return DIRECTION.RIGHT;
-        if(directionVector == Vector2.up) return DIRECTION.UP;
-        if(directionVector == Vector2.down) return DIRECTION.DOWN;
-
-        return DIRECTION.NONE;
     }
 
     /// <summary>
@@ -154,10 +94,10 @@ public class Player : MonoBehaviour
     private Vector2 getOneSquareAheadPosition()
     {
         switch(playerModel.CurrentDirection) {
-            case DIRECTION.LEFT: return new Vector2(transform.position.x - 1, transform.position.y);
-            case DIRECTION.RIGHT: return new Vector2(transform.position.x + 1, transform.position.y);
-            case DIRECTION.UP: return new Vector2(transform.position.x, transform.position.y + 1);
-            case DIRECTION.DOWN: return new Vector2(transform.position.x, transform.position.y - 1);
+            case PLAYER_DIRECTION.LEFT: return new Vector2(transform.position.x - 1, transform.position.y);
+            case PLAYER_DIRECTION.RIGHT: return new Vector2(transform.position.x + 1, transform.position.y);
+            case PLAYER_DIRECTION.UP: return new Vector2(transform.position.x, transform.position.y + 1);
+            case PLAYER_DIRECTION.DOWN: return new Vector2(transform.position.x, transform.position.y - 1);
             default:
                 DebugLogger.Log("存在しない方向を調べようとしています。");
                 return default;
@@ -169,7 +109,7 @@ public class Player : MonoBehaviour
     /// </summary>
     /// <param name="direction">移動方向</param>
     /// <param name="movePosition">移動座標</param>
-    private void move(DIRECTION direction, Vector2 movePosition)
+    private void move(PLAYER_DIRECTION direction, Vector2 movePosition)
     {
         moveAnimation(direction);
         rigidBody.MovePosition(movePosition);
@@ -180,21 +120,21 @@ public class Player : MonoBehaviour
     /// 移動アニメーションを行う
     /// </summary>
     /// <param name="direction">移動方向</param>
-    private void moveAnimation(DIRECTION direction)
+    private void moveAnimation(PLAYER_DIRECTION direction)
     {
         playerModel.UpdateDirection(direction);
 
         switch(direction) {
-            case DIRECTION.LEFT:
+            case PLAYER_DIRECTION.LEFT:
                 anim.SetTrigger("left");
                 break;
-            case DIRECTION.RIGHT:
+            case PLAYER_DIRECTION.RIGHT:
                 anim.SetTrigger("right");
                 break;
-            case DIRECTION.UP:
+            case PLAYER_DIRECTION.UP:
                 anim.SetTrigger("up");
                 break;
-            case DIRECTION.DOWN:
+            case PLAYER_DIRECTION.DOWN:
                 anim.SetTrigger("down");
                 break;
             default:

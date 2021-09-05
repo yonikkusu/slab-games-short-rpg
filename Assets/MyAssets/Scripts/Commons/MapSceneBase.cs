@@ -72,7 +72,7 @@ public class MapSceneBase : MonoBehaviour
         if(parameter != null) {
             player.Initialize(parameter.StartPosition, parameter.StartDirection);
         } else {
-            player.Initialize(new Vector2(0.5f, 0.5f), Player.DIRECTION.DOWN);
+            player.Initialize(new Vector2(0.5f, 0.5f), PLAYER_DIRECTION.DOWN);
         }
         // 購読処理
         player.OnInspect.Subscribe(checkedPosition => checkInspectEventsAsync(checkedPosition).Forget()).AddTo(this);
@@ -145,14 +145,14 @@ public class MapSceneParameter
     /// <summary>プレイヤーの初期位置</summary>
     public Vector2 StartPosition { get; private set; }
     /// <summary>プレイヤーの初期方向</summary>
-    public Player.DIRECTION StartDirection { get; private set; }
+    public PLAYER_DIRECTION StartDirection { get; private set; }
 
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="position">プレイヤーの初期位置</param>
     /// <param name="direction">プレイヤーの初期方向</param>
-    public MapSceneParameter(Vector2 position, Player.DIRECTION direction)
+    public MapSceneParameter(Vector2 position, PLAYER_DIRECTION direction)
     {
         StartPosition = position;
         StartDirection = direction;
