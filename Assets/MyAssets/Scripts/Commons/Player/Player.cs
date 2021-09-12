@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 {
     /// <summary> 移動アニメーションのフレーム数(2の累乗にする必要がある)</summary>
     private const int MOVE_ANIMATION_FRAME = 4;
+    private const int POSITION_VECTOR_PRECISION = 100;
 
     [SerializeField] private Rigidbody2D rigidBody = default;
     [SerializeField] private Animator anim = default;
@@ -57,12 +58,13 @@ public class Player : MonoBehaviour
         // 移動処理
         playerModel.UpdateIsMoving(isMoving: true);
         var directionVector = direction.ToVector2();
-        var movedPosition = rigidBody.position + directionVector;
+        var movedPositionInt = Vector2Int.FloorToInt((rigidBody.position + directionVector) * POSITION_VECTOR_PRECISION);
         var prevPosition = rigidBody.position;
         while(true) {
             move(direction, rigidBody.position + (directionVector / MOVE_ANIMATION_FRAME));
             await UniTask.DelayFrame(1);
-            if(isFinishedMove()) break;
+            var currentPosition = rigidBody.position;
+            if(isFinishedMove(direction, currentPosition, prevPosition, movedPositionInt)) break;
             prevPosition = rigidBody.position;
         }
 
@@ -71,21 +73,28 @@ public class Player : MonoBehaviour
 
         // 移動中フラグを下ろす
         playerModel.UpdateIsMoving(isMoving: false);
+    }
 
-        // 移動終了したか
-        bool isFinishedMove()
-        {
-            var currentPosition = rigidBody.position;
-            // 目的地についたらtrue
-            if(float.Equals(prevPosition.x, currentPosition.x)
-            && float.Equals(prevPosition.y, currentPosition.y)) return true;
-            // 目的地よりも過ぎていた場合もtrue
-            if(direction == PLAYER_DIRECTION.LEFT) return currentPosition.x <= movedPosition.x;
-            if(direction == PLAYER_DIRECTION.RIGHT) return currentPosition.x >= movedPosition.x;
-            if(direction == PLAYER_DIRECTION.UP) return currentPosition.y >= movedPosition.y;
-            if(direction == PLAYER_DIRECTION.DOWN) return currentPosition.y <= movedPosition.y;
-            return false;
-        }
+    /// <summary>
+    /// 移動終了したか
+    /// </summary>
+    /// <param name="direction">プレイヤーの移動方向</param>
+    /// <param name="currentPosition">現在位置</param>
+    /// <param name="prevPosition">1フレーム前の位置</param>
+    /// <param name="movedPositionInt">移動終了位置</param>
+    /// <returns>移動終了ならtrue</returns>
+    private bool isFinishedMove(PLAYER_DIRECTION direction, Vector2 currentPosition, Vector2 prevPosition, Vector2Int movedPositionInt)
+    {
+        var currentPositionInt = Vector2Int.FloorToInt(currentPosition * POSITION_VECTOR_PRECISION);
+        var prevPositionInt = Vector2Int.FloorToInt(prevPosition * POSITION_VECTOR_PRECISION);
+        // 目的地についたらtrue
+        if(currentPositionInt == prevPositionInt) return true;
+        // 目的地よりも過ぎていた場合もtrue
+        if(direction == PLAYER_DIRECTION.LEFT) return currentPositionInt.x <= movedPositionInt.x;
+        if(direction == PLAYER_DIRECTION.RIGHT) return currentPositionInt.x >= movedPositionInt.x;
+        if(direction == PLAYER_DIRECTION.UP) return currentPositionInt.y >= movedPositionInt.y;
+        if(direction == PLAYER_DIRECTION.DOWN) return currentPositionInt.y <= movedPositionInt.y;
+        return false;
     }
 
     /// <summary>
