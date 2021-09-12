@@ -58,15 +58,8 @@ public class Player : MonoBehaviour
         // 移動処理
         playerModel.UpdateIsMoving(isMoving: true);
         var directionVector = direction.ToVector2();
-        var movedPositionInt = Vector2Int.FloorToInt((rigidBody.position + directionVector) * POSITION_VECTOR_PRECISION);
-        var prevPosition = rigidBody.position;
-        while(true) {
-            move(direction, rigidBody.position + (directionVector / MOVE_ANIMATION_FRAME));
-            await UniTask.DelayFrame(1);
-            var currentPosition = rigidBody.position;
-            if(isFinishedMove(direction, currentPosition, prevPosition, movedPositionInt)) break;
-            prevPosition = rigidBody.position;
-        }
+        move(direction, rigidBody.position + (directionVector / MOVE_ANIMATION_FRAME));
+        await UniTask.DelayFrame(1);
 
         // 床イベントチェック
         onMovedSubject.OnNext(playerModel);
