@@ -19,6 +19,7 @@ public class OpenEvent : MapEvent
     /// <returns>UniTask</returns>
     protected override async UniTask onUsedItemAsync(ItemID usedItemId)
     {
+        if(usedItemId == ItemID.None) return;
         if(PlayerData.Instance.FlagManager.HasOpenEventSwitch(openEventId)) return;
         if(usedItemId != keyItemId) {
             var popup = PopupCreator.Instance.CreatePopup();
