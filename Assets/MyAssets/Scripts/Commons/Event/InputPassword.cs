@@ -15,8 +15,8 @@ public class InputPassword : MapEvent
     {
         //Debug.Log("input password");
         PasswordPresenter.Instance.Initialize();
-        var password = PasswordPresenter.Instance.getPassword();
-        //PasswordPresenter.Instance.hide();
+        var password = await PasswordPresenter.Instance.getPassword();
+        PasswordPresenter.Instance.hide();
 
         Debug.Log(password.ToString());
     }

@@ -24,9 +24,8 @@ public class PasswordCtrlText : MonoBehaviour
     public IObservable<Unit> OnTapDownButton_3 => downButton[3].OnClickAsObservable();
 
     // Start is called before the first frame update
-    public void Initialize()
+    private void Start()
     {
-        Debug.Log("ctrlText initialize");
         OnTapUpButton_0.Subscribe(_ =>
         {
             text_num[0]++;
@@ -74,15 +73,20 @@ public class PasswordCtrlText : MonoBehaviour
             text_num[3]--;
             TextUpdate(3);
         }).AddTo(this);
-
+    }
+    public void Initialize()
+    {
+        Debug.Log("ctrlText initialize");
+        
         textInit(passwordText);
     }
 
     // Update is called once per frame
-    void TextUpdate(int target)
+    private void TextUpdate(int target)
     {
         text_num[target] = CtrlTextNum(text_num[target]);
         passwordText[target].text = text_num[target].ToString();
+        Debug.Log("test update: " + text_num[target]);
     }
 
     public void textInit(Text[] text )
@@ -91,6 +95,7 @@ public class PasswordCtrlText : MonoBehaviour
         {
             text_num[i] = 0;
             text[i].text = text_num[i].ToString();
+            text[i].rectTransform.sizeDelta = new Vector2(100, 100);
             text[i].fontSize = 80;
             text[i].alignment = TextAnchor.MiddleCenter;
         }
