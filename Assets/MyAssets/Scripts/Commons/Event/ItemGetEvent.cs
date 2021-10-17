@@ -52,7 +52,7 @@ public class ItemGetEvent : MapEvent
     {
         var itemDataList = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList");
         var itemData = itemDataList.Get(gettingItemId);
-        return $"「{itemData.Name}」を手に入れました。";
+        return MessageCreator.Create(MessageId.GetItem, itemData.Name);
     }
     /// <summary>
     /// 初期化
