@@ -10,6 +10,7 @@ public class OpenEvent : MapEvent
     [SerializeField] private GameObject[] deactiveObjects = default;
     [SerializeField] private GameObject[] activeObjects = default;
     [SerializeField] private OpenEventId openEventId = OpenEventId.None;
+    [SerializeField] private MessageId openMessageId = MessageId.OpenDoor;
     [SerializeField] private ItemID keyItemId = ItemID.None;
 
     /// <summary>
@@ -19,10 +20,11 @@ public class OpenEvent : MapEvent
     /// <returns>UniTask</returns>
     protected override async UniTask onUsedItemAsync(ItemID usedItemId)
     {
+        if(usedItemId == ItemID.None) return;
         if(PlayerData.Instance.FlagManager.HasOpenEventSwitch(openEventId)) return;
         if(usedItemId != keyItemId) {
             var popup = PopupCreator.Instance.CreatePopup();
-            await popup.ShowAsync($"{usedItemId}では開かないようだ。");
+            await popup.ShowAsync(MessageCreator.Create(MessageId.DontUseItem));
             return;
         }
         await openAsync(usedItemId);
@@ -48,7 +50,8 @@ public class OpenEvent : MapEvent
         PlayerData.Instance.ItemManager.UseItem(usedItemId);
         ItemPanel.Instance.UpdateItemList();
         var popup = PopupCreator.Instance.CreatePopup();
-        await popup.ShowAsync($"{usedItemId}を使って扉を開けた。");
+        var usedItemName = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList").Get(usedItemId).Name;
+        await popup.ShowAsync(MessageCreator.Create(openMessageId, usedItemName));
     }
 
     /// <summary>
