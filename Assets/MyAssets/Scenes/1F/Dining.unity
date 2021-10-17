@@ -1805,7 +1805,7 @@ MonoBehaviour:
   activeObjects:
   - {fileID: 106160410}
   openEventId: 1
-  openMessageId: 3
+  openMessageId: 4
   keyItemId: 4
 --- !u!114 &372463553
 MonoBehaviour:
@@ -5304,7 +5304,7 @@ MonoBehaviour:
   - {fileID: 237887}
   activeObjects: []
   openEventId: 2
-  openMessageId: 2
+  openMessageId: 3
   keyItemId: 1
 --- !u!114 &1654011049
 MonoBehaviour:
