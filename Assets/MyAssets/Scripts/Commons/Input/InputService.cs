@@ -37,4 +37,5 @@ public enum InputMode
     None = 0,
     Normal,
     SystemPopup,
+    InputPassword,
 }

@@ -29,6 +29,8 @@ public static class MessageCreator
             case MessageId.PutOutFire: return "「{0}」を使って火を消した。";
             case MessageId.CloseDoor: return "鍵が掛かってるようだ。";
             case MessageId.Fire: return "暖炉だ。炎の奥にキラリと光る物があるように見える。";
+            case MessageId.FindLock: return "南京錠だ。";
+            case MessageId.OpenLock: return "鍵が開いた。";
             default: return "";
         }
     }
@@ -46,4 +48,6 @@ public enum MessageId
     PutOutFire,
     CloseDoor,
     Fire,
+    FindLock,
+    OpenLock,
 }
