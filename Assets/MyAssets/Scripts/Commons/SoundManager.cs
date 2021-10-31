@@ -105,4 +105,5 @@ public enum Bgm
 public enum Se
 {
     Tap,
+    OpenDoor,
 }
