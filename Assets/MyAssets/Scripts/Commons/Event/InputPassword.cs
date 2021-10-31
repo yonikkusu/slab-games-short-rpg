@@ -13,11 +13,18 @@ public class InputPassword : MapEvent
     /// <returns>UniTask</returns>
     protected override async UniTask onInspectedAsync()
     {
+        var popup = PopupCreator.Instance.CreatePopup();
+        await popup.ShowAsync(MessageCreator.Create(MessageId.FindLock));
         //Debug.Log("input password");
         PasswordPresenter.Instance.Initialize();
         var password = await PasswordPresenter.Instance.getPassword();
+        
         PasswordPresenter.Instance.hide();
 
+        if( password == 0 )
+        {
+            await popup.ShowAsync(MessageCreator.Create(MessageId.OpenLock));
+        }
         Debug.Log(password.ToString());
     }
 
