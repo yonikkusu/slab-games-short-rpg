@@ -27,6 +27,8 @@ public static class MessageCreator
             case MessageId.DontUseItem: return "ここでは使えなさそうだ。";
             case MessageId.OpenDoor: return "「{0}」を使って扉を開けた。";
             case MessageId.PutOutFire: return "「{0}」を使って火を消した。";
+            case MessageId.CloseDoor: return "鍵が掛かってるようだ。";
+            case MessageId.Fire: return "暖炉だ。炎の奥にキラリと光る物があるように見える。";
             default: return "";
         }
     }
@@ -42,4 +44,6 @@ public enum MessageId
     DontUseItem,
     OpenDoor,
     PutOutFire,
+    CloseDoor,
+    Fire,
 }
