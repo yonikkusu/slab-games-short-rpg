@@ -45,9 +45,9 @@ public class ItemData
 /// </summary>
 public enum ItemID
 {
-    None,
-    Key,
-    Book,
-    Tabasco,
-    WaterGun,
+    None = 0,
+    Key = 1,
+    Book = 2,
+    Tabasco = 3,
+    WaterGun = 4,
 }
