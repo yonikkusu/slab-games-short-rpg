@@ -55,7 +55,7 @@ public enum SceneName
     Study,
     KidsRoom,
     Corridor1F,
-    DoressingRoom,
+    DressingRoom,
     BathRoom,
     Toilet,
     Dining,
