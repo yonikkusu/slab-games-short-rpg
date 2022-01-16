@@ -42,7 +42,7 @@ EditorBuildSettings:
     path: Assets/MyAssets/Scenes/1F/BathRoom.unity
     guid: f90647bab1d4193479658537da677673
   - enabled: 1
-    path: Assets/MyAssets/Scenes/1F/DoressingRoom.unity
+    path: Assets/MyAssets/Scenes/1F/DressingRoom.unity
     guid: e794c379e6782f745a0af607d5e70482
   - enabled: 1
     path: Assets/MyAssets/Scenes/1F/Toilet.unity
