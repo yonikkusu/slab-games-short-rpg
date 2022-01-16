@@ -28,3 +28,45 @@ MonoBehaviour:
   - id: 4
     name: "\u6C34\u9244\u7832"
     sprite: {fileID: 21300000, guid: d648221bfd5884f40ab9900b42b3fdea, type: 3}
+  - id: 5
+    name: "\u9577\u3044\u68D2"
+    sprite: {fileID: 21300000, guid: 07b2d0fba1916f8419c96e9aa920be3e, type: 3}
+  - id: 6
+    name: "\u811A\u7ACB"
+    sprite: {fileID: 21300000, guid: f3b0da52b046ed74a9e5d592bd7d960d, type: 3}
+  - id: 7
+    name: "\u6C5A\u308C\u305F\u5E03"
+    sprite: {fileID: 21300000, guid: 399bf6fd85e394b4fa375af89085809d, type: 3}
+  - id: 8
+    name: "\u6D17\u5264"
+    sprite: {fileID: 21300000, guid: f73b587cab9874f43bedac984799a296, type: 3}
+  - id: 9
+    name: "\u30C9\u30E9\u30A4\u30D0\u30FC"
+    sprite: {fileID: 21300000, guid: 2c5d8399b8478424eb1240bcc2ed84a7, type: 3}
+  - id: 10
+    name: "\u30E9\u30A4\u30BF\u30FC"
+    sprite: {fileID: 21300000, guid: a86493ed4ed13c74d9dd329733a92d5c, type: 3}
+  - id: 11
+    name: "\u30AA\u30A4\u30EB"
+    sprite: {fileID: 21300000, guid: e8c9309837fa5fc40be8af64c47dff08, type: 3}
+  - id: 12
+    name: "\u30B9\u30B3\u30C3\u30D7"
+    sprite: {fileID: 21300000, guid: 693aa1233dca286409ab8b75f39d0c87, type: 3}
+  - id: 13
+    name: "\u767D\u3044\u7D19"
+    sprite: {fileID: 21300000, guid: 6aeac10d8eed5344f90d1c8641f0e4ae, type: 3}
+  - id: 14
+    name: "\u8131\u8863\u6240\u306E\u9375"
+    sprite: {fileID: 21300000, guid: e5e4097c055b82e4abc31378bfaad7a9, type: 3}
+  - id: 15
+    name: "\u98A8\u5442\u5834\u306E\u9375"
+    sprite: {fileID: 21300000, guid: e5e4097c055b82e4abc31378bfaad7a9, type: 3}
+  - id: 16
+    name: "\u56F3\u66F8\u5BA4\u306E\u9375"
+    sprite: {fileID: 21300000, guid: e5e4097c055b82e4abc31378bfaad7a9, type: 3}
+  - id: 17
+    name: "\u6298\u6ABB\u90E8\u5C4B\u306E\u9375"
+    sprite: {fileID: 21300000, guid: e5e4097c055b82e4abc31378bfaad7a9, type: 3}
+  - id: 18
+    name: "\u5B50\u4F9B\u90E8\u5C4B\u306E\u9375"
+    sprite: {fileID: 21300000, guid: e5e4097c055b82e4abc31378bfaad7a9, type: 3}

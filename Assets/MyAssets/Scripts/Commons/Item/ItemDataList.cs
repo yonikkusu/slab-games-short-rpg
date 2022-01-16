@@ -46,8 +46,22 @@ public class ItemData
 public enum ItemID
 {
     None = 0,
-    Key = 1,
+    KitchenKey = 1,
     Book = 2,
     Tabasco = 3,
     WaterGun = 4,
+    LongStick = 5,
+    Stepladder = 6,
+    DirtyCloth = 7,
+    Detergent = 8,
+    Driver = 9,
+    Lighter = 10,
+    Oil = 11,
+    Shovel = 12,
+    WhitePaper = 13,
+    DressingRoomKey = 14,
+    BathRoomKey = 15,
+    LibraryKey = 16,
+    SekkanRoomKey = 17,
+    KidsRoomKey = 18,
 }
