@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 /// <summary>
 /// アイテム マネージャー
@@ -10,17 +9,13 @@ public class ItemManager
     /// <summary>所持アイテムリスト</summary>
     public List<ItemData> PossessionItemList { get; private set; }
 
-    // アイテムデータ一覧
-    private ItemDataList itemDataList;
-
     /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="itemIds">所持アイテムIDリスト</param>
     public ItemManager(int[] itemIds = null)
     {
-        itemDataList = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList");
-        PossessionItemList = itemIds?.Select(itemId => itemDataList.Get((ItemID)itemId)).ToList() ?? new List<ItemData>();
+        PossessionItemList = itemIds?.Select(itemId => MasterGetter.GetItemData((ItemID)itemId)).ToList() ?? new List<ItemData>();
     }
 
     /// <summary>
@@ -53,7 +48,7 @@ public class ItemManager
     /// <param name="itemId">追加するアイテムのID</param>
     public void AddItem(ItemID itemId)
     {
-        var item = itemDataList.Get(itemId);
+        var item = MasterGetter.GetItemData(itemId);
         if(item == null) {
             DebugLogger.LogError($"{itemId}に対応するアイテム情報がないので、所持アイテムを追加できませんでした。");
             return;

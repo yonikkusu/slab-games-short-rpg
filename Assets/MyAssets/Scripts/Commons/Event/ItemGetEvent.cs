@@ -50,8 +50,7 @@ public class ItemGetEvent : MapEvent
     /// <returns>表示メッセージ</returns>
     private string getMessage(ItemID itemId)
     {
-        var itemDataList = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList");
-        var itemData = itemDataList.Get(gettingItemId);
+        var itemData = MasterGetter.GetItemData(gettingItemId);
         return MessageCreator.Create(MessageId.GetItem, itemData.Name);
     }
     /// <summary>

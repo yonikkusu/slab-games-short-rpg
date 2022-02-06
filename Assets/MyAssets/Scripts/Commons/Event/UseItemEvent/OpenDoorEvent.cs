@@ -25,7 +25,7 @@ public class OpenDoorEvent : UseItemEvent
     {
         SoundManager.Instance.PlaySe(Se.OpenDoor);
         var popup = PopupCreator.Instance.CreatePopup();
-        var usedItemName = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList").Get(usedItemId).Name;
+        var usedItemName = MasterGetter.GetItemData(usedItemId).Name;
         await popup.ShowAsync(MessageCreator.Create(MessageId.OpenDoor, usedItemName));
     }
 }
