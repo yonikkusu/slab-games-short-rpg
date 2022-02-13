@@ -26,7 +26,7 @@ public class ItemGetEvent : MapEvent
         var popup = PopupCreator.Instance.CreatePopup();
         await popup.ShowAsync(getMessage(gettingItemId));
         PlayerData.Instance.ItemManager.AddItem(gettingItemId);
-        ItemPanel.Instance.UpdateItemList();
+        ItemPanel.Instance.RenderView();
     }
 
     /// <summary>

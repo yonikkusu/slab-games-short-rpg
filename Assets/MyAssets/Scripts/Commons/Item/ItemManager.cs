@@ -6,8 +6,13 @@ using System.Linq;
 /// </summary>
 public class ItemManager
 {
+    // 所持可能アイテム上限
+    public const int MaxItemNum = 8;
+
     /// <summary>所持アイテムリスト</summary>
     public List<ItemData> PossessionItemList { get; private set; }
+    /// <summary>選択中のアイテムIndex</summary>
+    public int SelectedItemIndex { get; private set; }
 
     /// <summary>
     /// コンストラクタ
@@ -16,6 +21,7 @@ public class ItemManager
     public ItemManager(int[] itemIds = null)
     {
         PossessionItemList = itemIds?.Select(itemId => MasterGetter.GetItemData((ItemID)itemId)).ToList() ?? new List<ItemData>();
+        SelectedItemIndex = 0;
     }
 
     /// <summary>
@@ -54,5 +60,27 @@ public class ItemManager
             return;
         }
         PossessionItemList.Add(item);
+    }
+
+    /// <summary>
+    /// 選択中のアイテムを更新する
+    /// </summary>
+    /// <param name="index">新しく選択するアイテムIndex</param>
+    public void UpdateSelectedItem(int index)
+    {
+        SelectedItemIndex =
+            index < 0 ? MaxItemNum - 1 : 
+            index >= MaxItemNum ? 0 :
+            index;
+    }
+
+    /// <summary>
+    /// 選択中のアイテムIDを取得する
+    /// </summary>
+    /// <returns>選択中のアイテムID</returns>
+    public ItemID GetSelectedItemId()
+    {
+        if(PossessionItemList.Count <= SelectedItemIndex) return ItemID.None;
+        return PossessionItemList[SelectedItemIndex].ID;
     }
 }

@@ -31,7 +31,7 @@ public class ItemSynthesisPresenter : MonoBehaviour
         view.OnTapDecideButton.Subscribe(_ => {
             synthesize(model);
             hide();
-            ItemPanel.Instance.UpdateItemList();
+            ItemPanel.Instance.RenderView();
         }).AddTo(this);
         hide();
     }
