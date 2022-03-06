@@ -11,6 +11,7 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
     [SerializeField] private ItemPanelNode itemPanelNodeBase = default;
     [SerializeField] private Transform nodeParent = default;
     [SerializeField] private Image selectFrame = default;
+    [SerializeField] private ItemDetailView itemDetailView;
     [SerializeField] private ItemSynthesisPresenter synthesisPresenter = default;
     [SerializeField] private Button synthesisButton = default;
     [SerializeField] private ItemPanelInput itemPanelInput = default;
@@ -22,6 +23,8 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
     /// </summary>
     void Start()
     {
+        createNodes();
+        moveSelectFrame(nodeIndex: PlayerData.Instance.ItemManager.SelectedItemIndex);
         itemPanelNodeBase.gameObject.SetActive(false);
         synthesisPresenter.Initialize();
         synthesisButton.OnClickAsObservable().Subscribe(_ => synthesisPresenter.Show()).AddTo(this);
@@ -29,30 +32,20 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
     }
 
     /// <summary>
-    /// 初期化
-    /// </summary>
-    public void Initialize()
-    {
-        createNodes();
-        moveSelectFrame(nodeIndex: 0);
-    }
-
-    /// <summary>
     /// Viewを更新する
     /// </summary>
     public void RenderView()
     {
-        nodeList?.ForEach(node => node.Initialize(ItemID.None));
         var possessionItemList = PlayerData.Instance.ItemManager?.PossessionItemList;
-        if(possessionItemList == null) return;
 
         for(var i = 0; i < nodeList.Count; i++) {
-            if((possessionItemList.Count - 1) < i) {
-                nodeList[i].Initialize(ItemID.None);
+            var maxNodeIndex = (possessionItemList?.Count - 1) ?? -1;
+            if(maxNodeIndex < i) {
+                nodeList[i].Initialize(i, ItemID.None);
                 continue;
             }
             var itemId = possessionItemList[i].ID;
-            nodeList[i].Initialize(itemId);
+            nodeList[i].Initialize(i, itemId);
         }
     }
 
@@ -65,7 +58,8 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
         nodeList = new List<ItemPanelNode>();
         for(var i = 0; i < ItemManager.MaxItemNum; i++) {
             var node = Instantiate(itemPanelNodeBase, parent: nodeParent);
-            node.Initialize(ItemID.None);
+            node.Initialize(i, ItemID.None);
+            node.OnTap.Subscribe(index => showItemDetailView(index)).AddTo(node);
             node.gameObject.SetActive(true);
             nodeList.Add(node);
         }
@@ -92,10 +86,23 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
     /// <param name="nodeIndex">ノードIndex</param>
     private void moveSelectFrame(int nodeIndex)
     {
-        var hasTargetNode = (nodeList.Count - 1) < nodeIndex;
+        var hasTargetNode = (nodeList.Count - 1) >= nodeIndex;
         selectFrame.gameObject.SetActive(hasTargetNode);
         if(!hasTargetNode) return;
         selectFrame.transform.SetParent(nodeList[nodeIndex].transform);
         selectFrame.transform.localPosition = new Vector3();
+    }
+
+    /// <summary>
+    /// アイテム詳細Viewを表示する
+    /// </summary>
+    /// <param name="index">ノードIndex</param>
+    private void showItemDetailView(int index)
+    {
+        var possessionItemList = PlayerData.Instance.ItemManager.PossessionItemList;
+        var hasTargetItem = (possessionItemList.Count - 1) >= index;
+        if(!hasTargetItem) return;
+        itemDetailView.Initialize(possessionItemList[index]);
+        itemDetailView.Show();
     }
 }
