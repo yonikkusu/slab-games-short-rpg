@@ -19,6 +19,11 @@ public class ItemGetEvent : MapEvent
         if(checkError(gettingItemId)) return;
         if(!PlayerData.Instance.FlagManager.HasOpenEventSwitch(triggerOpenEventId)) return;
         if(PlayerData.Instance.FlagManager.HasItemEventSwitch(gettingItemId)) return;
+        if(PlayerData.Instance.ItemManager.IsMaxItemOwnNum) {
+            var errorPopup = PopupCreator.Instance.CreatePopup();
+            await errorPopup.ShowAsync("これ以上アイテムを持てません。");
+            return;
+        }
         PlayerData.Instance.FlagManager.SetItemEventSwitchOn(gettingItemId);
         foreach(var deactiveObject in deactiveObjects) {
             deactiveObject.gameObject.SetActive(false);
@@ -26,7 +31,7 @@ public class ItemGetEvent : MapEvent
         var popup = PopupCreator.Instance.CreatePopup();
         await popup.ShowAsync(getMessage(gettingItemId));
         PlayerData.Instance.ItemManager.AddItem(gettingItemId);
-        ItemPanel.Instance.UpdateItemList();
+        ItemPanel.Instance.RenderView();
     }
 
     /// <summary>
@@ -50,8 +55,7 @@ public class ItemGetEvent : MapEvent
     /// <returns>表示メッセージ</returns>
     private string getMessage(ItemID itemId)
     {
-        var itemDataList = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList");
-        var itemData = itemDataList.Get(gettingItemId);
+        var itemData = MasterGetter.GetItemData(gettingItemId);
         return MessageCreator.Create(MessageId.GetItem, itemData.Name);
     }
     /// <summary>

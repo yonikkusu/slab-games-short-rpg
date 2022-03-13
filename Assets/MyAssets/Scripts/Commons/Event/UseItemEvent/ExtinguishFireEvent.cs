@@ -24,7 +24,7 @@ public class ExtinguishFireEvent : UseItemEvent
     protected override async UniTask usedItemAsync(ItemID usedItemId)
     {
         var popup = PopupCreator.Instance.CreatePopup();
-        var usedItemName = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList").Get(usedItemId).Name;
+        var usedItemName = MasterGetter.GetItemData(usedItemId).Name;
         await popup.ShowAsync(MessageCreator.Create(MessageId.PutOutFire, usedItemName));
     }
 }

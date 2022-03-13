@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         playerInput.OnMovePlayer.Subscribe(direction => checkMoveAsync(direction).Forget()).AddTo(this);
         playerInput.OnInspectKeyDown.Subscribe(_ => onInspectSubject.OnNext(getOneSquareAheadPosition())).AddTo(this);
         playerInput.OnUseItemKeyDown
-            .Subscribe(_ => onUseItemSubject.OnNext((getOneSquareAheadPosition(), ItemPanel.Instance.SelectedItem?.ID ?? ItemID.None)))
+            .Subscribe(_ => onUseItemSubject.OnNext((getOneSquareAheadPosition(), PlayerData.Instance.ItemManager.GetSelectedItemId())))
             .AddTo(this);
         move(startDirection, startPosition);
     }
