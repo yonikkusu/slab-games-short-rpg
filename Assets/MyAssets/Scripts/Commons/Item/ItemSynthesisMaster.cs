@@ -15,8 +15,7 @@ public static class ItemSynthesisMaster
     {
         var resultItemID = getResultItemID(materialItemID1, materialItemID2);
         if(resultItemID == ItemID.None) return null;
-        var itemDataList = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList");
-        return itemDataList.Get(resultItemID);
+        return MasterGetter.GetItemData(resultItemID);
     }
 
     /// <summary>

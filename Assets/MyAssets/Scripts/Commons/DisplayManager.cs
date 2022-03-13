@@ -65,7 +65,6 @@ public class DisplayManager : SingletonMonoBehaviour<DisplayManager>
     {
         InputService.Instance.ChangeMode(InputMode.Normal);
         menu.Initialize();
-        itemPanel.Initialize();
         menu.gameObject.SetActive(true);
         itemPanel.gameObject.SetActive(true);
     }

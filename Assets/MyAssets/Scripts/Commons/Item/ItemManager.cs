@@ -1,17 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 /// <summary>
 /// アイテム マネージャー
 /// </summary>
 public class ItemManager
 {
+    // 所持可能アイテム上限
+    public const int MaxItemNum = 8;
+
     /// <summary>所持アイテムリスト</summary>
     public List<ItemData> PossessionItemList { get; private set; }
-
-    // アイテムデータ一覧
-    private ItemDataList itemDataList;
+    /// <summary>選択中のアイテムIndex</summary>
+    public int SelectedItemIndex { get; private set; }
+    /// <summary>所持上限か</summary>
+    public bool IsMaxItemOwnNum => PossessionItemList?.Count >= MaxItemNum;
 
     /// <summary>
     /// コンストラクタ
@@ -19,8 +22,8 @@ public class ItemManager
     /// <param name="itemIds">所持アイテムIDリスト</param>
     public ItemManager(int[] itemIds = null)
     {
-        itemDataList = Resources.Load<ItemDataList>("ScriptableObjects/ItemDataList");
-        PossessionItemList = itemIds?.Select(itemId => itemDataList.Get((ItemID)itemId)).ToList() ?? new List<ItemData>();
+        PossessionItemList = itemIds?.Select(itemId => MasterGetter.GetItemData((ItemID)itemId)).ToList() ?? new List<ItemData>();
+        SelectedItemIndex = 0;
     }
 
     /// <summary>
@@ -53,11 +56,33 @@ public class ItemManager
     /// <param name="itemId">追加するアイテムのID</param>
     public void AddItem(ItemID itemId)
     {
-        var item = itemDataList.Get(itemId);
+        var item = MasterGetter.GetItemData(itemId);
         if(item == null) {
             DebugLogger.LogError($"{itemId}に対応するアイテム情報がないので、所持アイテムを追加できませんでした。");
             return;
         }
         PossessionItemList.Add(item);
+    }
+
+    /// <summary>
+    /// 選択中のアイテムを更新する
+    /// </summary>
+    /// <param name="index">新しく選択するアイテムIndex</param>
+    public void UpdateSelectedItem(int index)
+    {
+        SelectedItemIndex =
+            index < 0 ? MaxItemNum - 1 : 
+            index >= MaxItemNum ? 0 :
+            index;
+    }
+
+    /// <summary>
+    /// 選択中のアイテムIDを取得する
+    /// </summary>
+    /// <returns>選択中のアイテムID</returns>
+    public ItemID GetSelectedItemId()
+    {
+        if(PossessionItemList.Count <= SelectedItemIndex) return ItemID.None;
+        return PossessionItemList[SelectedItemIndex].ID;
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 
@@ -7,71 +8,60 @@ using UniRx;
 /// </summary>
 public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
 {
-    // 所持可能アイテム上限
-    private const int MaxItemNum = 8;
-
-    [SerializeField] private Image[] itemImageList = default;
+    [SerializeField] private ItemPanelNode itemPanelNodeBase = default;
+    [SerializeField] private Transform nodeParent = default;
     [SerializeField] private Image selectFrame = default;
+    [SerializeField] private ItemDetailView itemDetailView;
     [SerializeField] private ItemSynthesisPresenter synthesisPresenter = default;
     [SerializeField] private Button synthesisButton = default;
     [SerializeField] private ItemPanelInput itemPanelInput = default;
 
-    /// <summary>選択中アイテムのID</summary>
-    public ItemData SelectedItem => itemList[selectedItemIndex];
-    private ItemData[] itemList;
-    private int selectedItemIndex;
-    private bool isFirstInitialized;
+    private List<ItemPanelNode> nodeList;
 
     /// <summary>
-    /// 初期化
+    /// 起動時処理
     /// </summary>
-    public void Initialize()
+    void Start()
     {
-        itemList = new ItemData[MaxItemNum];
-        UpdateItemList();
-        if(!isFirstInitialized) {
-            synthesisPresenter.Initialize();
-            synthesisButton.OnClickAsObservable().Subscribe(_ => synthesisPresenter.Show()).AddTo(this);
-            itemPanelInput.OnWheelValueChanged.Subscribe(moveCursor).AddTo(this);
-            isFirstInitialized = true;
-        }
+        createNodes();
+        moveSelectFrame(nodeIndex: PlayerData.Instance.ItemManager.SelectedItemIndex);
+        itemPanelNodeBase.gameObject.SetActive(false);
+        synthesisPresenter.Initialize();
+        synthesisButton.OnClickAsObservable().Subscribe(_ => synthesisPresenter.Show()).AddTo(this);
+        itemPanelInput.OnWheelValueChanged.Subscribe(moveCursor).AddTo(this);
     }
 
     /// <summary>
-    /// アイテムを所持品に追加する
+    /// Viewを更新する
     /// </summary>
-    /// <param name="itemId">追加するアイテムID</param>
-    public void AddItem(int itemId)
+    public void RenderView()
     {
-        if(!isFirstInitialized) return;
-
-        PlayerData.Instance.ItemManager.AddItem((ItemID)itemId);
-        UpdateItemList();
-    }
-
-    /// <summary>
-    /// アイテムリストを更新する
-    /// </summary>
-    public void UpdateItemList()
-    {
-        if(!isFirstInitialized) return;
-
         var possessionItemList = PlayerData.Instance.ItemManager?.PossessionItemList;
 
-        if(possessionItemList == null) return;
-
-        // アイテム画像表示を一旦リセット
-        foreach(var itemImage in itemImageList) {
-            itemImage.sprite = null;
+        for(var i = 0; i < nodeList.Count; i++) {
+            var maxNodeIndex = (possessionItemList?.Count - 1) ?? -1;
+            if(maxNodeIndex < i) {
+                nodeList[i].Initialize(i, ItemID.None);
+                continue;
+            }
+            var itemId = possessionItemList[i].ID;
+            nodeList[i].Initialize(i, itemId);
         }
-        for(var i = 0; i < itemList.Length; i++) {
-            itemList[i] = null;
-        }
+    }
 
-        // 所持アイテムのデータと画像をセット
-        for(var i = 0; i < possessionItemList.Count; i++) {
-            itemList[i] = possessionItemList[i];
-            itemImageList[i].sprite = possessionItemList[i].Sprite;
+    /// <summary>
+    /// ノード生成
+    /// </summary>
+    private void createNodes()
+    {
+        nodeList?.ForEach(node => Destroy(node.gameObject));
+        nodeList = new List<ItemPanelNode>();
+        for(var i = 0; i < ItemManager.MaxItemNum; i++) {
+            var node = Instantiate(itemPanelNodeBase, parent: nodeParent);
+            node.Initialize(i, ItemID.None);
+            node.OnTap.Subscribe(index => showItemDetailView(index)).AddTo(node);
+            node.gameObject.SetActive(true);
+            nodeList.Add(node);
         }
     }
 
@@ -79,16 +69,40 @@ public class ItemPanel : SingletonMonoBehaviour<ItemPanel>
     /// 選択中カーソルを移動する
     /// </summary>
     /// <param name="wheelValue">マウスホイールの移動量</param>
-    void moveCursor(float wheelValue)
+    private void moveCursor(float wheelValue)
     {
-        if(!isFirstInitialized) return;
         if(wheelValue == 0) return;
+        var selectedItemIndex = PlayerData.Instance.ItemManager?.SelectedItemIndex;
+        if(!selectedItemIndex.HasValue) return;
+        var index = wheelValue > 0f ? selectedItemIndex.Value - 1 : selectedItemIndex.Value + 1;
+        PlayerData.Instance.ItemManager.UpdateSelectedItem(index);
+        var newIndex = PlayerData.Instance.ItemManager.SelectedItemIndex;
+        moveSelectFrame(newIndex);
+    }
 
-        var index = wheelValue > 0f ? selectedItemIndex - 1 : selectedItemIndex + 1;
-        selectedItemIndex = index < 0 ? MaxItemNum - 1 : 
-                            index >= MaxItemNum ? 0 :
-                            index;
-        selectFrame.transform.SetParent(itemImageList[selectedItemIndex].transform);
+    /// <summary>
+    /// 選択フレームを移動する
+    /// </summary>
+    /// <param name="nodeIndex">ノードIndex</param>
+    private void moveSelectFrame(int nodeIndex)
+    {
+        var hasTargetNode = (nodeList.Count - 1) >= nodeIndex;
+        selectFrame.gameObject.SetActive(hasTargetNode);
+        if(!hasTargetNode) return;
+        selectFrame.transform.SetParent(nodeList[nodeIndex].transform);
         selectFrame.transform.localPosition = new Vector3();
+    }
+
+    /// <summary>
+    /// アイテム詳細Viewを表示する
+    /// </summary>
+    /// <param name="index">ノードIndex</param>
+    private void showItemDetailView(int index)
+    {
+        var possessionItemList = PlayerData.Instance.ItemManager.PossessionItemList;
+        var hasTargetItem = (possessionItemList.Count - 1) >= index;
+        if(!hasTargetItem) return;
+        itemDetailView.Initialize(possessionItemList[index]);
+        itemDetailView.Show();
     }
 }

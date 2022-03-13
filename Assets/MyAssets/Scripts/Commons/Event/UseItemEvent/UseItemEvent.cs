@@ -90,6 +90,6 @@ public abstract class UseItemEvent : MapEvent
     private void updateItemModelAndView(ItemID usedItemId)
     {
         PlayerData.Instance.ItemManager.UseItem(usedItemId);
-        ItemPanel.Instance.UpdateItemList();
+        ItemPanel.Instance.RenderView();
     }
 }
