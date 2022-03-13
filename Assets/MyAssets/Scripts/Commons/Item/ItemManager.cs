@@ -13,6 +13,8 @@ public class ItemManager
     public List<ItemData> PossessionItemList { get; private set; }
     /// <summary>選択中のアイテムIndex</summary>
     public int SelectedItemIndex { get; private set; }
+    /// <summary>所持上限か</summary>
+    public bool IsMaxItemOwnNum => PossessionItemList?.Count >= MaxItemNum;
 
     /// <summary>
     /// コンストラクタ

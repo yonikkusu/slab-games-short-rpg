@@ -19,6 +19,11 @@ public class ItemGetEvent : MapEvent
         if(checkError(gettingItemId)) return;
         if(!PlayerData.Instance.FlagManager.HasOpenEventSwitch(triggerOpenEventId)) return;
         if(PlayerData.Instance.FlagManager.HasItemEventSwitch(gettingItemId)) return;
+        if(PlayerData.Instance.ItemManager.IsMaxItemOwnNum) {
+            var errorPopup = PopupCreator.Instance.CreatePopup();
+            await errorPopup.ShowAsync("これ以上アイテムを持てません。");
+            return;
+        }
         PlayerData.Instance.FlagManager.SetItemEventSwitchOn(gettingItemId);
         foreach(var deactiveObject in deactiveObjects) {
             deactiveObject.gameObject.SetActive(false);
